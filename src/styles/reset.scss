@@ -80,12 +80,6 @@ a {
   text-decoration: none;
 }
 
-/* Reset table border spacing */
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
 /* Reset image border */
 img {
   border-style: none;
@@ -93,19 +87,6 @@ img {
 
 /* Reset button styles */
 button {
-  background-color: transparent;
   cursor: pointer;
   padding: 0;
-}
-
-/* Reset input type styles */
-input[type="checkbox"],
-input[type="radio"] {
-  box-sizing: border-box;
-  padding: 0;
-}
-
-/* Reset textarea resize */
-textarea {
-  resize: none;
 }
