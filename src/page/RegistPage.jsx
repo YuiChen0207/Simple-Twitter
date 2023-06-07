@@ -1,4 +1,4 @@
-import { AuthInput } from '../cpmponent';
+import { AuthInput } from '../component';
 
 const RegistPage = () => {
   return (
