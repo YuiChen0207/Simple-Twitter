@@ -1,16 +1,19 @@
 // -- style
-import './Main.scss'
+import Navbar from "../component/Navbar";
 // -- component
 
 const Main = () => {
   return (
-    <div className="mainContainer">
+    <>
       <Navbar />
+      {/*
       <Headers />
       <Post />
       <Tweets />
-    </div>
-  )
-}
+      <PopularList>
+*/}
+    </>
+  );
+};
 
-export default Main
+export default Main;
