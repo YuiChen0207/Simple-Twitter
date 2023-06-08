@@ -1,0 +1,63 @@
+@import './base.scss';
+
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 69px;
+
+  .logo {
+    width: 45px;
+    height: 45px;
+  }
+
+  .title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 29px 0 40px 0;
+  }
+
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .btn {
+    font-size: 20px;
+    font-weight: 400;
+    color: white;
+    background-color: $primary-color;
+    padding: 8px 0;
+    width: 356px;
+    border-radius: 50px;
+    margin: 40px 0 22px 0;
+  }
+
+  .switchSec {
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 400;
+    padding-left: 200px;
+    gap: 18px;
+
+    .signupSwitch {
+      color: #0062ff;
+      border-bottom: 1px solid #0062ff;
+    }
+
+    .adminSwitch {
+      color: #0062ff;
+      border-bottom: 1px solid #0062ff;
+    }
+
+    .dot {
+      width: 3.2px;
+      height: 3.2px;
+      background-color: black;
+      border-radius: 50px;
+    }
+  }
+}
