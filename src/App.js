@@ -11,14 +11,13 @@ function App() {
         <Routes>
           <Route path="mainPage" element={<MainPage />} />
         </Routes>
-        {/* <BrowserRouter>
+        {/* 
         <AuthProvider>
           <Routes>
             <Route path="login" element={<LoginPage />} />
             <Route path="RegistPage" element={<RegistPage />} />
           </Routes>
-        </AuthProvider>
-  </BrowserRouter> */}
+        </AuthProvider>*/}
       </div>
     </Router>
   );

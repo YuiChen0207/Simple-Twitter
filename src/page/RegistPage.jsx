@@ -1,3 +1,4 @@
+
 import { AuthInput } from '../component';
 
 const RegistPage = () => {
