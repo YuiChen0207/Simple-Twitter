@@ -1,4 +1,4 @@
-import AuthInput from '../component/AuthInput';
+import AuthInput from '../component/authInput/AuthInput';
 import siteLogo from '../assets/logo.svg';
 import '../styles/LoginPage.scss';
 
