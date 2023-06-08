@@ -6,6 +6,7 @@
   justify-content: center;
   align-items: center;
   margin-top: 69px;
+  font-family: var(--main-font-family);
 
   .logo {
     width: 45px;
@@ -28,7 +29,7 @@
     font-size: 20px;
     font-weight: 400;
     color: white;
-    background-color: $primary-color;
+    background-color: var(--brand-color);
     padding: 8px 0;
     width: 356px;
     border-radius: 50px;
@@ -44,14 +45,14 @@
     gap: 18px;
 
     .signupSwitch {
-      color: #0062ff;
-      border-bottom: 1px solid #0062ff;
+      color: var(--Primary);
+      border-bottom: 1px solid var(--Primary);
       cursor: pointer;
     }
 
     .adminSwitch {
-      color: #0062ff;
-      border-bottom: 1px solid #0062ff;
+      color: var(--Primary);
+      border-bottom: 1px solid var(--Primary);
       cursor: pointer;
     }
 
