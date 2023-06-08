@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   width: 200px;
-  margin-left: 130px;
   padding: 10px;
   background-color: #ffff;
 
@@ -20,7 +19,7 @@
     }
   }
 
-  .navbar-item .bold {
+  .navbar-item .medium {
     color: var(--gray-800);
   }
 
