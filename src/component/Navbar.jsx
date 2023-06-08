@@ -12,17 +12,17 @@ const Navbar = () => {
         <img src={NavbarLogo} alt="logo" />
       </div>
       <div className="navbar-info">
-        <div className="navbar-item navbar-home">
+        <div className="navbar-item">
           <img src={NavbarHomeIcon} alt="home" />
-          <h5 className="Bold">首頁</h5>
+          <h5 className="bold">首頁</h5>
         </div>
-        <div className="navbar-item navbar-user">
+        <div className="navbar-item">
           <img src={NavbarUserIcon} alt="user" />
-          <h5 className="Bold">個人資料</h5>
+          <h5 className="bold">個人資料</h5>
         </div>
-        <div className="navbar-item navbar-setting">
+        <div className="navbar-item">
           <img src={NavbarSettingIcon} alt="setting" />
-          <h5 className="Bold">設定</h5>
+          <h5 className="bold">設定</h5>
         </div>
         <div className="navbar-item navbar-button">
           <button>推文</button>
