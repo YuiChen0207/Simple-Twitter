@@ -1,3 +1,5 @@
+@import './base.scss';
+
 .authContainer {
   display: flex;
   flex-direction: column;
@@ -12,7 +14,7 @@
 
   .label {
     font-size: 14;
-    color: '#696974';
+    color: var(--gray-700);
     text-align: start;
   }
 
@@ -23,5 +25,6 @@
     border-radius: 0px;
     font-size: 16px;
     padding: 0;
+    color: #b5b5be;
   }
 }
