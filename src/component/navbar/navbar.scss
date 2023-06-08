@@ -26,14 +26,11 @@
   .navbar-button {
     justify-content: center;
     padding: 8px 24px;
-    width: 178px;
-    height: 46px;
     background: var(--brand-color);
     border-radius: 50px;
-    cursor: pointer;
 
     button {
-      color: #fff;
+      color: var(--white);
       font-size: 20px;
       line-height: 30px;
     }
