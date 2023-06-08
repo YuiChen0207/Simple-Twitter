@@ -1,9 +1,11 @@
+import '../styles/AuthInput.scss';
+
 const AuthInput = ({ type, label, value, placeholder, onChange }) => {
   return (
-    <div className="">
-      <div className="">{label}</div>
+    <div className="authContainer">
+      <div className="label">{label}</div>
       <input
-        className=""
+        className="input"
         type={type || 'text'}
         value=""
         placeholder={placeholder}
