@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainPage from './page/MainPage';
 import LoginPage from './page/LoginPage';
+import RegistPage from './page/RegistPage';
 import './base.scss';
 import './reset.scss';
 
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="mainPage" element={<MainPage />} />
           <Route path="login" element={<LoginPage />} />
+          <Route path="signup" element={<RegistPage />} />
         </Routes>
         {/* 
         <AuthProvider>
