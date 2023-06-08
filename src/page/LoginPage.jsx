@@ -1,17 +1,17 @@
 import AuthInput from '../component/AuthInput';
+import siteLogo from '../assets/logo.svg';
+import '../styles/LoginPage.scss';
 
 const LoginPage = () => {
   return (
-    <div>
+    <div className="loginContainer">
       <div>
-        <image src="" />
+        <img className="logo" src={siteLogo} alt="logo" />
       </div>
-      <h1>登入Alphitter</h1>
-      <div>
+      <h1 className="title">登入Alphitter</h1>
+      <div className="inputContainer">
         <AuthInput label="帳號" placeholder="請輸入帳號" value="" />
-      </div>
 
-      <div>
         <AuthInput
           type="password"
           label="密碼"
@@ -19,9 +19,12 @@ const LoginPage = () => {
           value=""
         />
       </div>
-      <button>登入</button>
-      <div>註冊</div>
-      <div>後台登入</div>
+      <button className="btn">登入</button>
+      <div className="switchSec">
+        <span className="signupSwitch">註冊</span>
+        <span className="dot"></span>
+        <span className="adminSwitch">後台登入</span>
+      </div>
     </div>
   );
 };
