@@ -7,9 +7,7 @@ const AuthInput = ({ type, label, value, placeholder, onChange }) => {
       <input
         className="input"
         type={type || 'text'}
-        value=""
         placeholder={placeholder}
-        onChange=""
       />
     </div>
   );
