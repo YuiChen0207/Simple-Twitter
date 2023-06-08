@@ -1,4 +1,4 @@
-import '../styles/AuthInput.scss';
+import './AuthInput.scss';
 
 const AuthInput = ({ type, label, value, placeholder, onChange }) => {
   return (
