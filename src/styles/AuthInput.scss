@@ -25,6 +25,8 @@
     border-radius: 0px;
     font-size: 16px;
     padding: 0;
-    color: #b5b5be;
+    &::placeholder {
+      color: var(--gray-500);
+    }
   }
 }
