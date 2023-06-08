@@ -3,7 +3,7 @@ import NavbarLogo from "../../assets/logo.svg";
 import NavbarHomeIcon from "../../assets/home.svg";
 import NavbarUserIcon from "../../assets/userInfo.svg";
 import NavbarSettingIcon from "../../assets/setting.svg";
-import "./navbar.scss";
+import "./Navbar.scss";
 
 const Navbar = () => {
   return (

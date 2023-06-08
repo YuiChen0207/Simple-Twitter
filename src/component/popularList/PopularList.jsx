@@ -1,6 +1,6 @@
 import React from "react";
 import PopularCard from "./PopularCard/PopularCard";
-import "./popularList.scss";
+import "./PopularList.scss";
 
 const PopularList = () => {
   return (

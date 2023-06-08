@@ -4,14 +4,14 @@
   justify-content: space-between;
   padding: 12px;
 
-  img {
-    margin: auto 0 auto 16px;
+  .popular-card-logo {
+    margin-right: 16px;
   }
 
   .popular-card-info {
     display: flex;
     flex-direction: column;
-    margin: auto 8px auto 8px;
+    margin: auto 8px;
 
     .popular-card-account {
       font-size: 14px;
@@ -20,16 +20,16 @@
   }
 
   .popular-card-followButton {
-    padding: 8px 16px;
-    color: #ff6600;
-    background: #ffffff;
-    border: 1px solid #ff6600;
-    border-radius: 50px;
     margin-left: auto;
-  }
-}
+    padding: 8px 16px;
+    color: var(--brand-color);
+    background: var(--white);
+    border: 1px solid var(--brand-color);
+    border-radius: 50px;
 
-.popular-card-followButton.isFollow {
-  background: #ff6600;
-  color: #ffffff;
+    &.isFollow {
+      background: var(--brand-color);
+      color: var(--white);
+    }
+  }
 }
