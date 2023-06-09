@@ -1,26 +1,42 @@
-import React from "react";
-import "./Post.scss";
+import React, { useState } from "react";
 import PostPhoto from "../../assets/postPhoto.svg";
+import "./Post.scss";
 
 const Post = () => {
+  const [postContent, setPostContent] = useState("有什麼新鮮事？");
+
+  const handlePostContentChange = (e) => {
+    setPostContent(e.target.value);
+  };
+
+  const handlePostContentClick = () => {
+    if (postContent === "有什麼新鮮事？") {
+      setPostContent("");
+    }
+  };
+
   return (
-    <div className="tweet-post-container">
-      <div className="tweet-post-header">
+    <div className="postContainer">
+      <div className="postHeader">
         <h4 className="medium">首頁</h4>
       </div>
       <hr />
-      <div className="tweet-post-content">
-        <div className="tweet-post-box">
-          <img
-            src={PostPhoto}
-            alt="User Avatar"
-            className="tweet-post-avatar"
-          />
-          <h5 className="medium tweet-post-text">有什麼新鮮事？</h5>
+      <div className="postContent">
+        <div className="postBox">
+          <img src={PostPhoto} alt="User Avatar" className="postAvatar" />
+          <div className="postTextContainer">
+            <input
+              type="text"
+              className="postTextInput"
+              value={postContent}
+              onChange={handlePostContentChange}
+              onClick={handlePostContentClick}
+            />
+          </div>
         </div>
-        <button className="button tweet-post-button">推文</button>
+        <button className="button postButton">推文</button>
       </div>
-      <hr className="thickBar"/>
+      <hr className="thickBar" />
     </div>
   );
 };

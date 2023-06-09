@@ -1,47 +1,46 @@
-.tweet-post-container {
+.postContainer {
   display: flex;
   flex-direction: column;
-}
 
-.tweet-post-header {
-  padding: 15px;
-}
+  .postHeader {
+    padding: 15px;
+  }
 
-hr {
-  background-color: #e6ecf0;
-  height: 1px;
-  width: 100%;
-  border: none;
-}
+  hr {
+    background-color: #e6ecf0;
+    height: 1px;
+    width: 100%;
+    border: none;
+  }
+  
+  .postContent {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    border-radius: 8px;
+  }
 
-.thickBar{
-  height: 10px;
-}
+  .postBox {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 30px;
+  }
 
-.tweet-post-title {
-  font-size: 20px;
-  font-weight: bold;
-}
+  .postTextInput {
+    color: var(--Secondary);
+    outline: none;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 700;
+  }
 
-.tweet-post-content {
-  display: flex;
-  justify-content: space-between;
-  padding: 16px;
-  border-radius: 8px;
-}
+  .postButton {
+    padding: 8px 16px;
+    margin-top: auto;
+  }
 
-.tweet-post-box {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding-bottom: 30px;
-}
-
-.tweet-post-text {
-  color: var(--Secondary);
-}
-
-.tweet-post-button {
-  padding: 8px 16px;
-  margin-top: auto;
+  .thickBar {
+    height: 10px;
+  }
 }
