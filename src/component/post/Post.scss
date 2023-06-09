@@ -1,0 +1,46 @@
+.postContainer {
+  display: flex;
+  flex-direction: column;
+
+  .postHeader {
+    padding: 15px;
+  }
+
+  hr {
+    background-color: #e6ecf0;
+    height: 1px;
+    width: 100%;
+    border: none;
+  }
+  
+  .postContent {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    border-radius: 8px;
+  }
+
+  .postBox {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 30px;
+  }
+
+  .postTextInput {
+    color: var(--Secondary);
+    outline: none;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .postButton {
+    padding: 8px 16px;
+    margin-top: auto;
+  }
+
+  .thickBar {
+    height: 10px;
+  }
+}

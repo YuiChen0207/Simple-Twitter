@@ -69,3 +69,10 @@ h5.medium {
   font-size: 18px;
   font-weight: 700;
 }
+
+.button {
+  background-color: var(--brand-color);
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+}
