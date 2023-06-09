@@ -1,9 +1,9 @@
-.loginContainer {
+.signupContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 69px auto 0 auto;
+  margin: 69px auto;
   font-family: var(--main-font-family);
   width: 356px;
 
@@ -36,31 +36,13 @@
   }
 
   .switchSec {
-    display: flex;
-    align-items: center;
     font-size: 16px;
     font-weight: 400;
-    gap: 18px;
-    align-self: flex-end;
-    padding-right: 12px;
 
-    .signupSwitch {
+    .cancelSwitch {
       color: var(--Primary);
       border-bottom: 1px solid var(--Primary);
       cursor: pointer;
-    }
-
-    .adminSwitch {
-      color: var(--Primary);
-      border-bottom: 1px solid var(--Primary);
-      cursor: pointer;
-    }
-
-    .dot {
-      width: 3.2px;
-      height: 3.2px;
-      background-color: black;
-      border-radius: 50px;
     }
   }
 }

@@ -1,35 +1,28 @@
-
-import { AuthInput } from '../component';
+import AuthInput from '../component/authInput/AuthInput';
+import siteLogo from '../assets/logo.svg';
+import '../styles/RegistPage.scss';
 
 const RegistPage = () => {
   return (
-    <div>
+    <div className="signupContainer">
       <div>
-        <image src="" />
+        <img className="logo" src={siteLogo} alt="logo" />
       </div>
-      <h1>建立你的帳號</h1>
-      <div>
+      <h1 className="title">建立你的帳號</h1>
+      <div className="inputContainer">
         <AuthInput label="帳號" placeholder="請輸入帳號" value="" />
-      </div>
 
-      <div>
         <AuthInput label="名稱" placeholder="請輸入使用者名稱" value="" />
-      </div>
 
-      <div>
         <AuthInput label="Email" placeholder="請輸入Email" value="" />
-      </div>
 
-      <div>
         <AuthInput
           type="password"
           label="密碼"
           placeholder="請設定密碼"
           value=""
         />
-      </div>
 
-      <div>
         <AuthInput
           type="password"
           label="密碼確認"
@@ -37,8 +30,10 @@ const RegistPage = () => {
           value=""
         />
       </div>
-      <button>註冊</button>
-      <div>取消</div>
+      <button className="btn">註冊</button>
+      <div className="switchSec">
+        <span className="cancelSwitch">取消</span>
+      </div>
     </div>
   );
 };

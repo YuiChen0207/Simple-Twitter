@@ -1,25 +1,25 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const authURL = 'https://todo-list.alphacamp.io/api/auth'
+const authURL = 'https://todo-list.alphacamp.io/api/auth';
 
 export const login = async ({ username, password }) => {
   try {
     const { data } = await axios.post(`${authURL}/login`, {
       username,
       password,
-    })
+    });
 
-    const { authToken } = data
+    console.log(data);
 
+    const { authToken } = data;
     if (authToken) {
-      return { success: true, ...data }
+      return { success: true, ...data };
     }
-
-    return data
+    return data;
   } catch (error) {
-    console.error('[Login Failed]:', error)
+    console.error('[Login Failed]:', error);
   }
-}
+};
 
 export const register = async ({ username, email, password }) => {
   try {
@@ -27,18 +27,18 @@ export const register = async ({ username, email, password }) => {
       username,
       email,
       password,
-    })
-    const { authToken } = data
+    });
+    const { authToken } = data;
 
     if (authToken) {
-      return { success: true, ...data }
+      return { success: true, ...data };
     }
 
-    return data
+    return data;
   } catch (error) {
-    console.error('[Register Failed]: ', error)
+    console.error('[Register Failed]: ', error);
   }
-}
+};
 
 export const checkPermission = async (authToken) => {
   try {
@@ -46,9 +46,9 @@ export const checkPermission = async (authToken) => {
       headers: {
         Authorization: 'Bearer ' + authToken,
       },
-    })
-    return response.data.success
+    });
+    return response.data.success;
   } catch (error) {
-    console.error('[Check Permission Failed]:', error)
+    console.error('[Check Permission Failed]:', error);
   }
-}
+};

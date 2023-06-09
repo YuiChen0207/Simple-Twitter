@@ -1,4 +1,4 @@
-.loginContainer {
+.loginAdminContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,31 +36,15 @@
   }
 
   .switchSec {
-    display: flex;
-    align-items: center;
     font-size: 16px;
     font-weight: 400;
-    gap: 18px;
     align-self: flex-end;
     padding-right: 12px;
-
-    .signupSwitch {
-      color: var(--Primary);
-      border-bottom: 1px solid var(--Primary);
-      cursor: pointer;
-    }
 
     .adminSwitch {
       color: var(--Primary);
       border-bottom: 1px solid var(--Primary);
       cursor: pointer;
-    }
-
-    .dot {
-      width: 3.2px;
-      height: 3.2px;
-      background-color: black;
-      border-radius: 50px;
     }
   }
 }
