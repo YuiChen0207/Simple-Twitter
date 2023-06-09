@@ -1,7 +1,7 @@
 import Navbar from "../component/navbar/Navbar";
 import PopularList from "../component/popularList/PopularList";
 import Post from "../component/post/Post";
-import Tweets from "../component/tweets/Tweets";
+import TweetsList from "../component/tweets/TweetList";
 import "./MainPage.scss";
 
 const Main = () => {
@@ -13,7 +13,7 @@ const Main = () => {
           <Post />
         </div>
         <div className="tweetsSection">
-          <Tweets className="tweetsSection" />
+          <TweetsList className="tweetsSection" />
         </div>
       </div>
       <PopularList />
