@@ -29,7 +29,7 @@ const Main = () => {
           <Post />
         </div>
         <div className="tweetsSection">
-          <TweetsList className="tweetsSection" />
+          <TweetsList tweets={tweets} className="tweetsSection" />
         </div>
       </div>
       <PopularList />
