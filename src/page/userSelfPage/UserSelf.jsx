@@ -1,6 +1,7 @@
 import Header from "../../component/header/Header";
 import Navbar from "../../component/navbar/Navbar";
 import PopularList from "../../component/popularList/PopularList";
+import TabBar from "../../component/tabBar/TabBar";
 import TweetsList from "../../component/tweets/TweetList";
 import UserInfo from "../../component/userInfo/UserInfo";
 import "../MainPage/MainPage.scss";
@@ -20,6 +21,8 @@ const UserSelf = () => {
             followersCount={59}
           />
         </div>
+        <TabBar />
+        <hr />
         <div className="tweetsSection">
           <TweetsList className="tweetsSection" />
         </div>
