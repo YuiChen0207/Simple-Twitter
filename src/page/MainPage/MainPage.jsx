@@ -1,7 +1,7 @@
-import Navbar from "../component/navbar/Navbar";
-import PopularList from "../component/popularList/PopularList";
-import Post from "../component/post/Post";
-import TweetsList from "../component/tweets/TweetList";
+import Navbar from "../../component/navbar/Navbar";
+import PopularList from "../../component/popularList/PopularList";
+import Post from "../../component/post/Post";
+import TweetsList from "../../component/tweets/TweetList";
 import "./MainPage.scss";
 
 const Main = () => {
