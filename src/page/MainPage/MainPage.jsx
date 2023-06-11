@@ -1,9 +1,9 @@
-import Navbar from '../component/navbar/Navbar';
-import PopularList from '../component/popularList/PopularList';
-import Post from '../component/post/Post';
-import TweetsList from '../component/tweets/TweetList';
+import Navbar from '../../component/navbar/Navbar'
+import PopularList from '../../component/popularList/PopularList';
+import Post from '../../component/post/Post';
+import TweetsList from '../../component/tweets/TweetList';
 import './MainPage.scss';
-import { getTweets } from '../api/tweets';
+import { getTweets } from '../../api/tweets';
 import { useEffect, useState } from 'react';
 
 const Main = () => {
