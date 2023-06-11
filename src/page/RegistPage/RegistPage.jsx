@@ -1,6 +1,6 @@
-import AuthInput from '../component/authInput/AuthInput';
-import siteLogo from '../assets/logo.svg';
-import '../styles/RegistPage.scss';
+import AuthInput from '../../component/authInput/AuthInput';
+import siteLogo from '../../assets/logo.svg';
+import '../RegistPage/RegistPage.scss';
 
 const RegistPage = () => {
   return (
