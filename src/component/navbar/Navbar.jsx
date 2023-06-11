@@ -47,11 +47,11 @@ const Navbar = () => {
       <div className="navbar-info">
         {navItems.map(({ path, icon, activeIcon, text }) => (
           <NavLink
-            exact
+            exact="true"
             to={`/${path}`}
             key={path}
             className={`navbar-item ${activeItem === path ? "active" : ""}`}
-            activeClassName="active"
+            activeclassname="active"
             onClick={() => handleItemClick(path)}
           >
             <img src={activeItem === path ? activeIcon : icon} alt={path} />
