@@ -7,20 +7,23 @@ import LoginAdmin from './page/LoginAdmin/LoginAdmin';
 import SettingPage from './page/SettingPage/SettingPage';
 import './base.scss';
 import './reset.scss';
+import { AuthProvider } from './contexts/AuthContext';
 
 /* import {LoginPage, MainPage, RegistPage} from './page' */
 function App() {
   return (
     <Router>
       <div className="app">
-        <Routes>
-          <Route path="/mainPage" element={<MainPage />} />
-          <Route path="/user/self" element={<UserSelf />} />
-          <Route path="/login-admin" element={<LoginAdmin />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<RegistPage />} />
-          <Route path="account-setting" element={<SettingPage />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path="/mainPage" element={<MainPage />} />
+            <Route path="/user/self" element={<UserSelf />} />
+            <Route path="/login-admin" element={<LoginAdmin />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<RegistPage />} />
+            <Route path="account-setting" element={<SettingPage />} />
+          </Routes>
+        </AuthProvider>
         {/* 
         <AuthProvider>
           <Routes>
