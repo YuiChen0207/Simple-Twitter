@@ -1,9 +1,9 @@
 import './PageTag.scss';
 
-const PageTag = () => {
+const PageTag = ({ title }) => {
   return (
     <div className="titleContainer">
-      <h4 className="medium">帳戶設定</h4>
+      <h4 className="medium">{title}</h4>
     </div>
   );
 };
