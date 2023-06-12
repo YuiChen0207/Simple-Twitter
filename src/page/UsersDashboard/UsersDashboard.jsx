@@ -10,7 +10,7 @@ const UsersDashboard = () => {
         <Navbar />
       </div>
       <div className="cardsContainer">
-        <PageTag />
+        <PageTag title="使用者列表" />
         <ul className="cardList">
           <UserCard></UserCard>
           <UserCard></UserCard>
