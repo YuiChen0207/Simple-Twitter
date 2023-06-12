@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import PopupModal from "../popupModal/PopupModal";
+import NavbarItem from "./navItems/NavItems";
+import { useLocation } from "react-router-dom";
 import NavbarLogo from "../../assets/logo.svg";
 import NavbarHomeIcon from "../../assets/home.svg";
 import NavbarHomeIconActive from "../../assets/homeActive.svg";
@@ -12,28 +14,43 @@ import "./Navbar.scss";
 const navItems = [
   {
     path: "mainPage",
-    icon: NavbarHomeIcon,
-    activeIcon: NavbarHomeIconActive,
+    icon: {
+      default: NavbarHomeIcon,
+      active: NavbarHomeIconActive,
+    },
     text: "首頁",
   },
   {
     path: "user/self",
-    icon: NavbarUserIcon,
-    activeIcon: NavbarUserIconActive,
+    icon: {
+      default: NavbarUserIcon,
+      active: NavbarUserIconActive,
+    },
     text: "個人資料",
   },
   {
     path: "settings",
-    icon: NavbarSettingIcon,
-    activeIcon: NavbarSettingIconActive,
+    icon: {
+      default: NavbarSettingIcon,
+      active: NavbarSettingIconActive,
+    },
     text: "設定",
   },
 ];
 
 const Navbar = () => {
+  const [showModal, setShowModal] = useState(false);
   const location = useLocation();
   const { pathname } = location;
   const [activeItem, setActiveItem] = useState(pathname.substring(1));
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   const handleItemClick = (item) => {
     setActiveItem(item);
@@ -41,27 +58,26 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <div className="navbar-logo">
+      <div className="navbarLogo">
         <img src={NavbarLogo} alt="logo" />
       </div>
-      <div className="navbar-info">
-        {navItems.map(({ path, icon, activeIcon, text }) => (
-          <NavLink
-            exact="true"
-            to={`/${path}`}
+      <div className="navbarInfo">
+        {navItems.map(({ path, icon, text }) => (
+          <NavbarItem
             key={path}
-            className={`navbar-item ${activeItem === path ? "active" : ""}`}
-            activeclassname="active"
-            onClick={() => handleItemClick(path)}
-          >
-            <img src={activeItem === path ? activeIcon : icon} alt={path} />
-            <h5 className="medium">{text}</h5>
-          </NavLink>
+            path={path}
+            icon={icon.default}
+            activeIcon={icon.active}
+            text={text}
+            isActive={activeItem === path}
+            onClick={handleItemClick}
+          />
         ))}
-        <div className="navbar-item navbar-button">
+        <div className="navbarItem navbarButton" onClick={handleOpenModal}>
           <button>推文</button>
         </div>
       </div>
+      {showModal && <PopupModal open={showModal} onClose={handleCloseModal} />}
     </div>
   );
 };
