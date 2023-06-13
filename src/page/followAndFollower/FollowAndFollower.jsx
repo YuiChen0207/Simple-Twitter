@@ -1,24 +1,18 @@
-import { useState } from "react";
-
+import Header from "../../component/header/Header";
+import TabBar from "../../component/tabBar/TabBar";
 import Navbar from "../../component/navbar/Navbar";
 import PopularList from "../../component/popularList/PopularList";
-import Post from "../../component/post/Post";
-import TweetsList from "../../component/tweets/TweetList";
 import "./FollowAndFollower.scss";
 
 const FollowAndFollower = () => {
-  const [tweets, setTweets] = useState([]);
-
   return (
     <div className="mainContainer">
       <Navbar />
+
       <div className="mainContent">
-        <div className="postSection">
-          <Post />
-        </div>
-        <div className="tweetsSection">
-          <TweetsList tweets={tweets} className="tweetsSection" />
-        </div>
+        {/* Header帶入api資料 */}
+        <Header username="John Doe" tweetCount={25} />
+        <TabBar activePage="FollowAndFollower" />
       </div>
       <PopularList />
     </div>

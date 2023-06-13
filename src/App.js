@@ -1,16 +1,16 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import MainPage from './page/mainPage/MainPage';
-import UserSelf from './page/userSelfPage/UserSelf';
-import LoginPage from './page/LoginPage/LoginPage';
-import RegistPage from './page/RegistPage/RegistPage';
-import LoginAdmin from './page/LoginAdmin/LoginAdmin';
-import SettingPage from './page/SettingPage/SettingPage';
-import UsersDashboard from './page/UsersDashboard/UsersDashboard';
-import AdminMain from './page/AdminMain/AdminMain';
-import './base.scss';
-import './reset.scss';
-import { AuthProvider } from './contexts/AuthContext';
-import FollowAndFollower from './page/followAndFollower/FollowAndFollower';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MainPage from "./page/mainPage/MainPage";
+import UserSelf from "./page/userSelfPage/UserSelf";
+import LoginPage from "./page/LoginPage/LoginPage";
+import RegistPage from "./page/RegistPage/RegistPage";
+import LoginAdmin from "./page/LoginAdmin/LoginAdmin";
+import SettingPage from "./page/SettingPage/SettingPage";
+import UsersDashboard from "./page/UsersDashboard/UsersDashboard";
+import AdminMain from "./page/AdminMain/AdminMain";
+import FollowAndFollower from "./page/followAndFollower/FollowAndFollower";
+import { AuthProvider } from "./contexts/AuthContext";
+import "./base.scss";
+import "./reset.scss";
 
 /* import {LoginPage, MainPage, RegistPage} from './page' */
 function App() {

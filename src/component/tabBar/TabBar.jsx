@@ -7,16 +7,23 @@ const tabOptions = [
   { id: "likes", label: "喜歡的內容" },
 ];
 
-const TabBar = () => {
+const tabOptionsFollow = [
+  { id: "followers", label: "跟隨者" },
+  { id: "following", label: "正在追隨" },
+];
+
+const TabBar = ({ activePage }) => {
   const [activeTab, setActiveTab] = useState("tweets");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
 
+  const options = activePage === "UserSelf" ? tabOptions : tabOptionsFollow;
+
   return (
     <div className="tabBar">
-      {tabOptions.map((option) => (
+      {options.map((option) => (
         <button
           key={option.id}
           className={`tabButton ${activeTab === option.id ? "active" : ""}`}

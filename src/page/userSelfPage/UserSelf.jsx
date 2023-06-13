@@ -37,7 +37,7 @@ const UserSelf = () => {
             followersCount={59}
           />
         </div>
-        <TabBar />
+        <TabBar activePage="UserSelf" />
         <hr />
         <div className="tweetsSection">
           <TweetsList TweetsList tweets={tweets} className="tweetsSection" />
