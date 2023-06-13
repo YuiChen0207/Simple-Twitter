@@ -10,7 +10,7 @@ const SettingPage = () => {
         <Navbar />
       </div>
       <div className="settingContainer">
-        <PageTag />
+        <PageTag title="帳戶設定" />
         <div className="inputContainer">
           <AuthInput label="帳號" placeholder="請輸入帳號" value="" />
 
