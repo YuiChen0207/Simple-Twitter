@@ -3,13 +3,12 @@
   flex-direction: column;
   width: 200px;
   padding: 10px;
-  white-space: nowrap;
 
-  .navbarLogo {
+  .navbar-logo {
     margin-bottom: 30px;
   }
 
-  .navbarItem {
+  .navbar-item {
     display: flex;
     align-items: center;
     margin-bottom: 40px;
@@ -25,16 +24,15 @@
     }
   }
 
-  .navbarItem .medium {
+  .navbar-item .medium {
     color: var(--gray-800);
   }
 
-  .navbarButton {
+  .navbar-button {
     justify-content: center;
     padding: 8px 24px;
     background: var(--brand-color);
     border-radius: 50px;
-    cursor: pointer;
 
     button {
       color: var(--white);
