@@ -10,6 +10,10 @@
     gap: 10px;
     padding: 10px 20px;
 
+    .close {
+      cursor: pointer;
+    }
+
     .medium {
       margin-left: 25px;
       color: #1c1c1c;
@@ -23,18 +27,23 @@
 
   .modalBody {
     .background {
-      width: 100%;
-      height: 200px;
-      background-image: url("../../../assets/backgroundImage.svg");
-      background-repeat: no-repeat;
-      background-size: cover;
+      position: relative;
+
+      .backgroundImage {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
 
       .backgroundOverlay {
         display: flex;
         align-items: center;
         justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: 100%;
+        height: 98%;
         gap: 30px;
         opacity: 0.75;
         background: linear-gradient(
@@ -42,6 +51,12 @@
           rgba(23, 23, 37, 0.5),
           rgba(23, 23, 37, 0.5)
         );
+      }
+      .cameraIcon {
+        cursor: pointer;
+      }
+      .whiteCloseIcon {
+        cursor: pointer;
       }
     }
 
@@ -60,6 +75,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        border-radius: 50%;
       }
 
       .editUserAvatarOverlay {
