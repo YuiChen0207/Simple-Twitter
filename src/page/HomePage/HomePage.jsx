@@ -12,9 +12,7 @@ const HomePage = () => {
         ? navigate('/admin_main')
         : navigate('/mainpage');
     } else {
-      currentMember.role === 'admin'
-        ? navigate('/login')
-        : navigate('/login_admin');
+      navigate('/login');
     }
   }, [navigate, isAuthenticated, currentMember]);
 };
