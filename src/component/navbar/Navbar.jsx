@@ -14,29 +14,28 @@ import './Navbar.scss';
 
 const navItems = [
   {
-    path: 'mainPage',
+    path: "mainPage",
     icon: {
       default: NavbarHomeIcon,
       active: NavbarHomeIconActive,
     },
-    text: '首頁',
+    text: "首頁",
   },
   {
-    path: 'user/self',
+    path: "user/self",
     icon: {
       default: NavbarUserIcon,
       active: NavbarUserIconActive,
     },
-    text: '個人資料',
+    text: "個人資料",
   },
   {
-
-    path: "account-setting",
+    path: "settings",
     icon: {
       default: NavbarSettingIcon,
       active: NavbarSettingIconActive,
     },
-    text: '設定',
+    text: "設定",
   },
 ];
 

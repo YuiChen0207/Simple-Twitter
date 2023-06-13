@@ -10,6 +10,7 @@ import AdminMain from './page/AdminMain/AdminMain';
 import './base.scss';
 import './reset.scss';
 import { AuthProvider } from './contexts/AuthContext';
+import FollowAndFollower from './page/followAndFollower/FollowAndFollower';
 
 /* import {LoginPage, MainPage, RegistPage} from './page' */
 function App() {
@@ -20,6 +21,8 @@ function App() {
           <Routes>
             <Route path="/mainPage" element={<MainPage />} />
             <Route path="/user/self" element={<UserSelf />} />
+            <Route path="/follow" element={<FollowAndFollower />} />
+            <Route path="/follower" element={<FollowAndFollower />} />
             <Route path="/login_admin" element={<LoginAdmin />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<RegistPage />} />
