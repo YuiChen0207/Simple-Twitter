@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import MainPage from './page/mainPage/MainPage';
+import MainPage from './page/MainPage/MainPage';
 import UserSelf from './page/userSelfPage/UserSelf';
 import LoginPage from './page/LoginPage/LoginPage';
 import RegistPage from './page/RegistPage/RegistPage';
@@ -8,6 +8,7 @@ import SettingPage from './page/SettingPage/SettingPage';
 import UsersDashboard from './page/UsersDashboard/UsersDashboard';
 import AdminMain from './page/AdminMain/AdminMain';
 import HomePage from './page/HomePage/HomePage';
+import ReplyList from './page/ReplyList/ReplyList';
 import './base.scss';
 import './reset.scss';
 import { AuthProvider } from './contexts/AuthContext';
@@ -28,6 +29,7 @@ function App() {
             <Route path="/settings" element={<SettingPage />} />
             <Route path="/admin_main" element={<AdminMain />} />
             <Route path="/admin_users" element={<UsersDashboard />} />
+            <Route path="/reply_list" element={<ReplyList />} />
           </Routes>
         </AuthProvider>
         {/* 
