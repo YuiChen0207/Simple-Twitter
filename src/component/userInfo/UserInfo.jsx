@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import EditPopupModal from "../popupModal/editPopupModal/EditPopupModal";
 import userPhoto from "../../assets/postPhoto.svg";
 import "./UserInfo.scss";
@@ -11,6 +12,7 @@ const UserInfo = ({
   followersCount,
 }) => {
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleEditProfileClick = () => {
     setShowModal(true);
@@ -18,6 +20,14 @@ const UserInfo = ({
 
   const handleClosePopup = () => {
     setShowModal(false);
+  };
+
+  const handleFollowingClick = () => {
+    navigate("/follow");
+  };
+
+  const handleFollowersClick = () => {
+    navigate("/follower");
   };
   return (
     <div className="userInfoContainer">
@@ -34,10 +44,16 @@ const UserInfo = ({
           <div className="accountName">@{accountName}</div>
           <div className="bio">{bio}</div>
           <div className="countSection">
-            <div className="count followingCount">
+            <div
+              className="count followingCount"
+              onClick={handleFollowingClick}
+            >
               {followingCount}位<span>跟隨中</span>
             </div>
-            <div className="count followersCount">
+            <div
+              className="count followersCount"
+              onClick={handleFollowersClick}
+            >
               {followersCount}位<span>跟隨者</span>
             </div>
           </div>

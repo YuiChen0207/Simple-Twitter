@@ -13,6 +13,7 @@ import './base.scss';
 import './reset.scss';
 import { AuthProvider } from './contexts/AuthContext';
 
+
 /* import {LoginPage, MainPage, RegistPage} from './page' */
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
             <Route path="*" element={<HomePage />} />
             <Route path="/mainPage" element={<MainPage />} />
             <Route path="/user/self" element={<UserSelf />} />
+            <Route path="/follow" element={<FollowAndFollower />} />
+            <Route path="/follower" element={<FollowAndFollower />} />
             <Route path="/login_admin" element={<LoginAdmin />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<RegistPage />} />

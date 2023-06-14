@@ -3,7 +3,7 @@ import PopupModal from "../popupModal/PopupModal";
 import PostPhoto from "../../assets/postPhoto.svg";
 import "./Post.scss";
 
-const Post = () => {
+const Post = ({ setTweets }) => {
   const [postContent, setPostContent] = useState("有什麼新鮮事？");
   const [showModal, setShowModal] = useState(false);
 
@@ -50,7 +50,13 @@ const Post = () => {
         </button>
       </div>
       <hr className="thickBar" />
-      {showModal && <PopupModal open={showModal} onClose={handleCloseModal} />}
+      {showModal && (
+        <PopupModal
+          setTweets={setTweets}
+          open={showModal}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 };
