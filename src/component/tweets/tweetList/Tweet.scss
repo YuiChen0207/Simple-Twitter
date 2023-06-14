@@ -1,68 +1,68 @@
 .tweetContainer {
   display: flex;
   padding: 15px;
-}
 
-.tweetLogo {
-  margin: 0 10px;
-}
-
-.tweetContent {
-  margin-left: 5px;
-
-  .tweetHeader {
-    display: flex;
-    align-items: center;
-
-    .tweetUsername {
-      margin-right: 8px;
-      font-size: 16px;
-      font-weight: 700;
-    }
-
-    .tweetAccountName,
-    .tweetPostTime {
-      margin: 0 6px;
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--Secondary);
-    }
-
-    .dot {
-      width: 3px;
-      height: 3px;
-      border-radius: 50%;
-      background-color: var(--Secondary);
-    }
+  .userLogo {
+    height: 50px;
+    width: 50px;
+    margin: 0 8px auto 0;
   }
 
-  .tweetText {
-    padding: 10px 0;
-  }
+  .tweetContent {
+    margin-left: 5px;
 
-  .tweetFooter {
-    display: flex;
-
-    .tweetComments {
+    .tweetHeader {
       display: flex;
-      margin-right: 40px;
-      gap: 10px;
+      align-items: center;
 
-      .commentCount {
+      .tweetUsername {
+        font-weight: 700;
+      }
+
+      .tweetAccountName,
+      .tweetPostTime {
+        margin: 0 6px;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 400;
         color: var(--Secondary);
+      }
+
+      .dot {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background-color: var(--Secondary);
       }
     }
 
-    .tweetLikes {
-      display: flex;
-      gap: 10px;
+    .tweetText {
+      padding: 10px 0;
+    }
 
-      .likeCount {
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--Secondary);
+    .tweetFooter {
+      display: flex;
+
+      .tweetComments {
+        display: flex;
+        margin-right: 40px;
+        gap: 10px;
+
+        .commentCount {
+          font-size: 14px;
+          font-weight: 600;
+          color: var(--Secondary);
+        }
+      }
+
+      .tweetLikes {
+        display: flex;
+        gap: 10px;
+
+        .likeCount {
+          font-size: 14px;
+          font-weight: 600;
+          color: var(--Secondary);
+        }
       }
     }
   }

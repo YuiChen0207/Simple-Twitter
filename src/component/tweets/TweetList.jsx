@@ -1,5 +1,6 @@
 import React from "react";
 import Tweet from "./tweetList/Tweet";
+import grayLogo from "../../assets/logoGray.svg";
 
 const TweetsList = ({ tweets }) => {
   // const tweets = [
@@ -68,9 +69,9 @@ const TweetsList = ({ tweets }) => {
       {tweets.map((tweet) => (
         <Tweet
           key={tweet.id}
-          //logo={tweet.logo}
-          //username={tweet.username}
-          //accountName={tweet.accountName}
+          logo={grayLogo} //等待後端資料
+          username={tweet.User.account}
+          accountName={tweet.User.account}
           postTime={formatTime(tweet.createdAt)}
           content={tweet.description}
           comments={tweet.RepliesCount}
