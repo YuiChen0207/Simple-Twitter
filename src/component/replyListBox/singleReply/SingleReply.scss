@@ -1,0 +1,68 @@
+.singleReplyContainer {
+  display: flex;
+  padding: 16px 30px 16px 24px;
+  border-bottom: 1px solid #e6ecf0;
+  position: relative;
+
+  .userImg {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+
+  .singleReplyMainContent {
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px;
+
+    .singleReplyContent {
+      display: flex;
+      align-items: center;
+
+      .name {
+        font-size: 16px;
+        font-weight: 700;
+        margin-right: 8px;
+        color: var(--gray-900);
+      }
+
+      .account,
+      .date {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--Secondary);
+      }
+
+      .dot {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background-color: var(--Secondary);
+        margin: 0 6px;
+      }
+    }
+
+    .replyTo {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--brand-color);
+      margin: 8px 0;
+
+      &::before {
+        content: '回覆';
+        color: var(--Secondary);
+        padding-right: 4px;
+      }
+    }
+
+    .content {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 26px;
+      color: var(--gray-900);
+    }
+  }
+}
