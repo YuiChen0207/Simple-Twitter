@@ -5,14 +5,9 @@ import TweetsList from "../../component/tweets/TweetList";
 import "./MainPage.scss";
 import { getTweets } from "../../api/tweets";
 import { useEffect, useState } from "react";
-import PopupModal from "../../component/popupModal/PopupModal";
 
 const Main = () => {
   const [tweets, setTweets] = useState([]);
-
-  const addNewTweet = (newTweet) => {
-    setTweets([newTweet, ...tweets]);
-  };
 
   useEffect(() => {
     const getTweetsAsync = async () => {
@@ -28,14 +23,13 @@ const Main = () => {
 
   return (
     <div className="mainContainer">
-      <Navbar />
+      <Navbar setTweets={setTweets} />
       <div className="mainContent">
         <div className="postSection">
-          <Post />
+          <Post setTweets={setTweets} />
         </div>
         <div className="tweetsSection">
           <TweetsList tweets={tweets} className="tweetsSection" />
-          <PopupModal addNewTweet={addNewTweet} />
         </div>
       </div>
       <PopularList />

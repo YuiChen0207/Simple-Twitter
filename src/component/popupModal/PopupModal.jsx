@@ -5,7 +5,7 @@ import UserPhotoIcon from "../../assets/postPhoto.svg";
 import { postTweet } from "../../api/tweets";
 import "./PopupModal.scss";
 
-const PopupModal = ({ open, onClose, addNewTweet }) => {
+const PopupModal = ({ open, onClose, setTweets }) => {
   const [tweetText, setTweetText] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -30,12 +30,13 @@ const PopupModal = ({ open, onClose, addNewTweet }) => {
         const response = await postTweet(tweetData);
         console.log("推文已發布:", response);
 
-        addNewTweet(response.tweet.description);
+        setTweets((prevTweets) => [response.tweet.description, ...prevTweets]);
 
         setTweetText("");
         setErrorMessage("");
 
         onClose();
+        window.location.reload();//可在優化
       } catch (error) {
         console.error("發佈推文失败:", error);
       }

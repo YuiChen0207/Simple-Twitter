@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import PopupModal from '../popupModal/PopupModal';
-import NavbarItem from './navItems/NavItems';
-import { useLocation } from 'react-router-dom';
-import NavbarLogo from '../../assets/logo.svg';
-import NavbarHomeIcon from '../../assets/home.svg';
-import NavbarHomeIconActive from '../../assets/homeActive.svg';
-import NavbarUserIcon from '../../assets/userInfo.svg';
-import NavbarUserIconActive from '../../assets/userInfoActive.svg';
-import NavbarSettingIcon from '../../assets/setting.svg';
-import NavbarSettingIconActive from '../../assets/settingActive.svg';
-import NavbarLogoutIcon from '../../assets/logout.svg';
-import './Navbar.scss';
+import React, { useState } from "react";
+import PopupModal from "../popupModal/PopupModal";
+import NavbarItem from "./navItems/NavItems";
+import { useLocation } from "react-router-dom";
+import NavbarLogo from "../../assets/logo.svg";
+import NavbarHomeIcon from "../../assets/home.svg";
+import NavbarHomeIconActive from "../../assets/homeActive.svg";
+import NavbarUserIcon from "../../assets/userInfo.svg";
+import NavbarUserIconActive from "../../assets/userInfoActive.svg";
+import NavbarSettingIcon from "../../assets/setting.svg";
+import NavbarSettingIconActive from "../../assets/settingActive.svg";
+import NavbarLogoutIcon from "../../assets/logout.svg";
+import "./Navbar.scss";
 
 const navItems = [
   {
@@ -41,24 +41,24 @@ const navItems = [
 
 const adminNavItems = [
   {
-    path: 'admin_main',
+    path: "admin_main",
     icon: {
       default: NavbarHomeIcon,
       active: NavbarHomeIconActive,
     },
-    text: '推文清單',
+    text: "推文清單",
   },
   {
-    path: 'admin_users',
+    path: "admin_users",
     icon: {
       default: NavbarUserIcon,
       active: NavbarUserIconActive,
     },
-    text: '使用者列表',
+    text: "使用者列表",
   },
 ];
 
-const Navbar = () => {
+const Navbar = ({ setTweets }) => {
   const [showModal, setShowModal] = useState(false);
   const location = useLocation();
   const { pathname } = location;
@@ -76,7 +76,7 @@ const Navbar = () => {
     setActiveItem(item);
   };
 
-  const loopMenuItems = activeItem.includes('admin') ? adminNavItems : navItems;
+  const loopMenuItems = activeItem.includes("admin") ? adminNavItems : navItems;
 
   return (
     <div className="navbar">
@@ -96,12 +96,18 @@ const Navbar = () => {
           />
         ))}
       </div>
-      {activeItem.includes('admin') ? null : (
+      {activeItem.includes("admin") ? null : (
         <div className="navbarItem navbarButton" onClick={handleOpenModal}>
           <button>推文</button>
         </div>
       )}
-      {showModal && <PopupModal open={showModal} onClose={handleCloseModal} />}
+      {showModal && (
+        <PopupModal
+          setTweets={setTweets}
+          open={showModal}
+          onClose={handleCloseModal}
+        />
+      )}
       <div className="logoutBtn">
         <img src={NavbarLogoutIcon} alt="" />
         <h5 className="medium">登出</h5>

@@ -19,18 +19,21 @@ const TweetsList = ({ tweets }) => {
 
   return (
     <div className="tweetsListContainer">
-      {tweets.map((tweet) => (
-        <Tweet
-          key={tweet.id}
-          logo={grayLogo} //等待後端資料
-          username={tweet.User.account}
-          accountName={tweet.User.account}
-          postTime={formatTime(tweet.createdAt)}
-          content={tweet.description}
-          comments={tweet.RepliesCount}
-          likes={tweet.LikesCount}
-        />
-      ))}
+      {tweets.map(
+        (tweet) =>
+          tweet.User?.account && (
+            <Tweet
+              key={tweet.id}
+              logo={grayLogo}
+              username={tweet.User?.account ?? ""}
+              accountName={tweet.User?.account ?? ""}
+              postTime={formatTime(tweet.createdAt)}
+              content={tweet.description ?? ""}
+              comments={tweet.RepliesCount ?? 0}
+              likes={tweet.LikesCount ?? 0}
+            />
+          )
+      )}
     </div>
   );
 };
