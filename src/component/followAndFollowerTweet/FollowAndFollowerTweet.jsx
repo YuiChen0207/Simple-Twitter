@@ -9,6 +9,7 @@ const FollowAndFollowerTweet = ({ userName, tweet }) => {
     setIsFollow(!isFollow);
   };
 
+  //若url是follow render跟隨者頁面
   return (
     <>
       <div className="followAndFollowerTweetContainer">

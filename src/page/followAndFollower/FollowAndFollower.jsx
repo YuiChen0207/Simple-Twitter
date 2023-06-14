@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "../../component/header/Header";
 import TabBar from "../../component/tabBar/TabBar";
 import Navbar from "../../component/navbar/Navbar";
@@ -6,14 +8,27 @@ import FollowAndFollowerTweet from "../../component/followAndFollowerTweet/Follo
 import "./FollowAndFollower.scss";
 
 const FollowAndFollower = () => {
+  const location = useLocation();
+  const path = location.pathname;
+  const initialTab = path === "/follow" ? "following" : "followers";
+  const [activeTab, setActiveTab] = useState(initialTab);
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
   return (
     <div className="mainContainer">
       <Navbar />
       <div className="mainContent">
         {/* Header帶入api資料 */}
-        <Header username="John Doe" tweetCount={25} />
+        {/* 帶入的pageName可以在優化成其他使用者 */}
+        <Header username="John Doe" tweetCount={25} pageName="user/self" />
         <hr />
-        <TabBar activePage="FollowAndFollower" />
+        <TabBar
+          activePage="FollowAndFollower"
+          activeTab={activeTab}
+          onTabClick={handleTabClick}
+        />
         <hr />
         <FollowAndFollowerTweet
           userName="Apple"
