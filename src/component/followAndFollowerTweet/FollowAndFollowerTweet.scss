@@ -1,0 +1,31 @@
+.followAndFollowerTweetContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+
+  .upSection {
+    display: flex;
+    align-items: center;
+  }
+  
+  .userLogo {
+    margin-right: 8px;
+  }
+
+  .whiteButton {
+    margin-left: auto;
+    padding: 8px 16px;
+    border-radius: 50px;
+
+    &.isFollow {
+      background: var(--brand-color);
+      color: var(--white);
+    }
+  }
+  .tweet {
+    font-weight: 400;
+    margin: 2px 0 0 55px;
+    line-height: 26px;
+    
+  }
+}

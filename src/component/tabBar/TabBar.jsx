@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./TabBar.scss";
 
 const tabOptions = [
@@ -7,20 +6,21 @@ const tabOptions = [
   { id: "likes", label: "喜歡的內容" },
 ];
 
-const TabBar = () => {
-  const [activeTab, setActiveTab] = useState("tweets");
+const tabOptionsFollow = [
+  { id: "followers", label: "跟隨者" },
+  { id: "following", label: "正在追隨" },
+];
 
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
-  };
+const TabBar = ({ activePage, activeTab, onTabClick }) => {
+  const options = activePage === "UserSelf" ? tabOptions : tabOptionsFollow;
 
   return (
     <div className="tabBar">
-      {tabOptions.map((option) => (
+      {options.map((option) => (
         <button
           key={option.id}
           className={`tabButton ${activeTab === option.id ? "active" : ""}`}
-          onClick={() => handleTabClick(option.id)}
+          onClick={() => onTabClick(option.id)}
         >
           {option.label}
         </button>

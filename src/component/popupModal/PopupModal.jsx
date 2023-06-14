@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Popup from "reactjs-popup";
 import CloseIcon from "../../assets/closeIcon.svg";
 import UserPhotoIcon from "../../assets/postPhoto.svg";
+import { postTweet } from "../../api/tweets";
 import "./PopupModal.scss";
 
-const PopupModal = ({ open, onClose }) => {
+const PopupModal = ({ open, onClose, setTweets }) => {
   const [tweetText, setTweetText] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -17,16 +18,30 @@ const PopupModal = ({ open, onClose }) => {
     onClose();
   };
 
-  const handleTweet = () => {
+  const handleTweet = async () => {
     if (tweetText.length > 140) {
       setErrorMessage("字數不可超過140字");
     } else {
-      // 执行推文操作
-      setErrorMessage(""); // 清空错误消息
-      onClose();
+      try {
+        const tweetData = {
+          description: tweetText,
+        };
+
+        const response = await postTweet(tweetData);
+        console.log("推文已發布:", response);
+
+        setTweets((prevTweets) => [response.tweet.description, ...prevTweets]);
+
+        setTweetText("");
+        setErrorMessage("");
+
+        onClose();
+        window.location.reload();//可在優化
+      } catch (error) {
+        console.error("發佈推文失败:", error);
+      }
     }
   };
-
   const popupContentStyle = {
     position: "absolute",
     top: "56px",
@@ -70,7 +85,6 @@ const PopupModal = ({ open, onClose }) => {
           <button className="orangeButton" onClick={handleTweet}>
             推文
           </button>
-          {/* 點擊推文按鈕後可以新增tweet，等待api串接 */}
         </div>
       </div>
     </Popup>

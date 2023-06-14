@@ -15,12 +15,12 @@ const Tweet = ({
   return (
     <>
       <div className="tweetContainer">
-        <div className="tweetLogo">{logo}</div>
+        <img src={logo} alt="Logo" className="userLogo"/>
         <div className="tweetContent">
           <div className="tweetHeader">
             <span className="tweetUsername">{username}</span>
 
-            <span className="tweetAccountName">{accountName}</span>
+            <span className="tweetAccountName">@{accountName}</span>
             <span className="dot" />
             <span className="tweetPostTime">{postTime}</span>
           </div>
