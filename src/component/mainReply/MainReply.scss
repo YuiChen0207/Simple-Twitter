@@ -1,0 +1,105 @@
+.singleReplyBox {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #e6ecf0;
+
+  .replyMainBody {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 21px 8px 16px;
+
+    .replyContentBox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      .userImg {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        object-position: 50% 50%;
+      }
+
+      .replyContent {
+        display: flex;
+        flex-direction: column;
+        .name {
+          font-size: 16px;
+          font-weight: 700;
+          color: var(--gray-900);
+        }
+
+        .account {
+          font-size: 14px;
+          font-weight: 400;
+          color: var(--Secondary);
+        }
+      }
+    }
+
+    .content {
+      font-size: 24px;
+      font-weight: 400;
+      padding: 8px 0;
+      color: var(--gray-900);
+    }
+
+    .timestamp {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--Secondary);
+      gap: 5px;
+
+      .dot {
+        width: 3.2px;
+        height: 3.2px;
+        border-radius: 50%;
+        background-color: var(--Secondary);
+      }
+    }
+  }
+
+  .countBox {
+    display: flex;
+    font-size: 19px;
+    font-weight: 700;
+    font-family: 'Montserrat';
+    gap: 24px;
+    padding: 16px 0;
+    margin: 0 16px 0 16px;
+    border-top: 1px solid #e6ecf0;
+    border-bottom: 1px solid #e6ecf0;
+
+    .replyCount {
+      &::after {
+        content: '回覆';
+        color: var(--Secondary);
+        padding-left: 4px;
+      }
+    }
+
+    .likeCount {
+      &::after {
+        content: '喜歡次數';
+        color: var(--Secondary);
+        padding-left: 4px;
+      }
+    }
+  }
+
+  .actionBox {
+    display: flex;
+    gap: 133px;
+    padding: 22px 0;
+    margin-left: 16px;
+
+    img {
+      width: auto;
+      height: 25px;
+      cursor: pointer;
+    }
+  }
+}
