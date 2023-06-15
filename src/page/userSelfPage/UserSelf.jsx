@@ -1,28 +1,43 @@
-import { useEffect, useState } from 'react';
-import { getTweets } from '../../api/tweets';
-import Header from '../../component/header/Header';
-import Navbar from '../../component/navbar/Navbar';
-import PopularList from '../../component/popularList/PopularList';
-import TabBar from '../../component/tabBar/TabBar';
-import TweetsList from '../../component/tweets/TweetList';
-import UserInfo from '../../component/userInfo/UserInfo';
-import '../MainPage/MainPage.scss';
+import { useEffect, useState } from "react";
+import { getUserTweets } from "../../api/tweets";
+import { useAuth } from "../../contexts/AuthContext";
+import Header from "../../component/header/Header";
+import Navbar from "../../component/navbar/Navbar";
+import PopularList from "../../component/popularList/PopularList";
+import TabBar from "../../component/tabBar/TabBar";
+import UserInfo from "../../component/userInfo/UserInfo";
+import UserTweetsList from "../../component/userTweetList/UserTweetList";
+import "./UserSelf.scss";
 
 const UserSelf = () => {
-  //TweetsList裡面的api資料要更改為自己的推文
+  const { currentMember } = useAuth();
   const [tweets, setTweets] = useState([]);
+  const [activeTab, setActiveTab] = useState("tweets");
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
 
   useEffect(() => {
-    const getTweetsAsync = async () => {
+    if (!currentMember || !currentMember.id) {
+      return;
+    }
+    
+    const { id } = currentMember;
+
+    const fetchUserTweets = async () => {
       try {
-        const tweets = await getTweets();
-        setTweets(tweets.map((tweet) => ({ ...tweet })));
+        const userTweets = await getUserTweets(id);
+        console.log(userTweets);
+        setTweets(userTweets.map((tweet) => ({ ...tweet })));
       } catch (error) {
-        console.error(error);
+        console.error("获取用户推文失败：", error);
       }
     };
-    getTweetsAsync();
-  }, []);
+
+    fetchUserTweets();
+  }, [currentMember]);
+
   return (
     <div className="mainContainer">
       <Navbar />
@@ -37,10 +52,14 @@ const UserSelf = () => {
             followersCount={59}
           />
         </div>
-        <TabBar activePage="UserSelf" />
+        <TabBar
+          activePage="UserSelf"
+          activeTab={activeTab}
+          onTabClick={handleTabClick}
+        />
         <hr />
         <div className="tweetsSection">
-          <TweetsList TweetsList tweets={tweets} className="tweetsSection" />
+          <UserTweetsList tweets={tweets} className="tweetsSection" />
         </div>
       </div>
       <PopularList />
