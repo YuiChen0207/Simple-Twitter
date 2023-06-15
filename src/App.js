@@ -14,7 +14,6 @@ import './base.scss';
 import './reset.scss';
 import { AuthProvider } from './contexts/AuthContext';
 
-
 /* import {LoginPage, MainPage, RegistPage} from './page' */
 function App() {
   return (
