@@ -41,7 +41,10 @@ const Main = () => {
           <Post setTweets={setTweets} />
         </div>
         <div className="tweetsSection">
-          <TweetsList tweets={tweets} className="tweetsSection" />
+          <TweetsList
+            tweets={tweets}
+            className="tweetsSection"
+          />
         </div>
       </div>
       <PopularList />

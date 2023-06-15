@@ -6,7 +6,7 @@ export const login = async ({ account, password }) => {
   try {
     const {
       data: { data },
-    } = await axios.post(`${authURL}/signin`, {
+    } = await axios.post(`${authURL}/users/signin`, {
       account,
       password,
     });

@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem("authToken");
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }
@@ -19,22 +19,24 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-export const getTweets = async () => {
+export const likeTweet = async (tweetId) => {
   try {
-    const res = await axiosInstance.get(`${baseUrl}/tweets`);
-    console.log(res.data);
+    const res = await axiosInstance.post(`${baseUrl}/tweets/${tweetId}/like`);
+    console.log(res.data)
     return res.data;
   } catch (error) {
-    console.error("[Get Todos failed]: ", error);
+    console.error("[Like Tweet failed]: ", error);
+    throw error;
   }
 };
 
-export const postTweet = async (tweetData) => {
+export const unlikeTweet = async (tweetId) => {
   try {
-    const res = await axiosInstance.post(`${baseUrl}/tweets`, tweetData);
+    const res = await axiosInstance.post(`${baseUrl}/tweets/${tweetId}/unlike`);
+    console.log(res.data);
     return res.data;
   } catch (error) {
-    console.error("[Post Tweet failed]: ", error);
+    console.error("[Unlike Tweet failed]: ", error);
     throw error;
   }
 };

@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import Tweet from "./tweetList/Tweet";
 import grayLogo from "../../assets/logoGray.svg";
 
@@ -30,7 +29,8 @@ const TweetsList = ({ tweets }) => {
               postTime={formatTime(tweet.createdAt)}
               content={tweet.description ?? ""}
               comments={tweet.RepliesCount ?? 0}
-              likes={tweet.LikesCount ?? 0}
+              tweetId={tweet.id}
+              likes={tweet.LikesCount}
             />
           )
       )}

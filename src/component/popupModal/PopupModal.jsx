@@ -30,7 +30,7 @@ const PopupModal = ({ open, onClose, setTweets }) => {
         const response = await postTweet(tweetData);
         console.log("推文已發布:", response);
 
-        setTweets((prevTweets) => [response.tweet.description, ...prevTweets]);
+        setTweets((prevTweets) => [response.description, ...prevTweets]);
 
         setTweetText("");
         setErrorMessage("");
