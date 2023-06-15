@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import MainPage from './page/MainPage/MainPage';
+import MainPage from './page/mainPage/MainPage';
 import UserSelf from './page/userSelfPage/UserSelf';
 import LoginPage from './page/LoginPage/LoginPage';
 import RegistPage from './page/RegistPage/RegistPage';
@@ -9,7 +9,7 @@ import UsersDashboard from './page/UsersDashboard/UsersDashboard';
 import AdminMain from './page/AdminMain/AdminMain';
 import HomePage from './page/HomePage/HomePage';
 import ReplyList from './page/ReplyList/ReplyList';
-import FollowAndFollower from './page/followAndFollower/FollowAndFollower';
+import FollowAndFollower from "./page/followAndFollower/FollowAndFollower";
 import './base.scss';
 import './reset.scss';
 import { AuthProvider } from './contexts/AuthContext';

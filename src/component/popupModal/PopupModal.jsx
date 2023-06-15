@@ -28,7 +28,6 @@ const PopupModal = ({ open, onClose }) => {
       setErrorMessage('內容不可空白');
       return;
     }
-
     try {
       const response = await postTweet({ tweetText });
       console.log('推文已發布:', response);

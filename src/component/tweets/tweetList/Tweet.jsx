@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import { likeTweet, unlikeTweet } from "../../../api/likeAndUnlike";
 import commitIcon from "../../../assets/commit.svg";
 import heartIcon from "../../../assets/heart.svg";
+
 import "./Tweet.scss";
 
 const Tweet = ({
@@ -10,12 +12,33 @@ const Tweet = ({
   postTime,
   content,
   comments,
+  tweetId,
   likes,
 }) => {
+  const [isLiked, setIsLiked] = useState(false);
+  const [count, setCount] = useState(likes);
+
+  const handleLike = async () => {
+    try {
+      if (isLiked && count === 0) {
+        return;
+      }
+      if (isLiked) {
+        await unlikeTweet(tweetId);
+        setCount((prevLikes) => prevLikes - 1);
+      } else {
+        await likeTweet(tweetId);
+        setCount((prevLikes) => prevLikes + 1);
+      }
+    } catch (error) {
+      console.error("喜歡推文失败:", error);
+    }
+    setIsLiked(!isLiked);
+  };
   return (
     <>
       <div className="tweetContainer">
-        <img src={logo} alt="Logo" className="userLogo"/>
+        <img src={logo} alt="Logo" className="userLogo" />
         <div className="tweetContent">
           <div className="tweetHeader">
             <span className="tweetUsername">{username}</span>
@@ -30,9 +53,13 @@ const Tweet = ({
               <img src={commitIcon} alt="commit icon" />
               <span className="commentCount">{comments}</span>
             </div>
-            <div className="tweetLikes">
-              <img src={heartIcon} alt="heart icon" />
-              <span className="likeCount">{likes}</span>
+            <div className="tweetLikes" onClick={handleLike}>
+              <img
+                src={heartIcon}
+                alt="heart icon"
+                className={`heartIcon ${isLiked ? "liked" : ""}`}
+              />
+              <span className="likeCount">{count}</span>
             </div>
           </div>
         </div>
