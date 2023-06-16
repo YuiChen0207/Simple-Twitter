@@ -19,7 +19,7 @@ const ReplyList = () => {
   useEffect(() => {
     const getTweet = async () => {
       try {
-        const tweet = await getSingleTweet(774);
+        const tweet = await getSingleTweet(currentId);
         console.log(tweet);
         setSingleTweet(tweet);
       } catch (error) {
@@ -32,7 +32,7 @@ const ReplyList = () => {
   useEffect(() => {
     const getReplies = async () => {
       try {
-        const replies = await getTweetReplies(774);
+        const replies = await getTweetReplies(currentId);
         console.log(replies);
         setTweetReplies([...replies]);
       } catch (error) {
