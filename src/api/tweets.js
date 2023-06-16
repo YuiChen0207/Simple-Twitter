@@ -40,7 +40,6 @@ export const postTweet = async ({ tweetText }) => {
   }
 };
 
-
 export const getSingleTweet = async (id) => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/tweets/${id}`);
@@ -72,20 +71,22 @@ export const postReply = async ({ id, comment }) => {
     throw error;
   }
 };
-=======
+
 export const getUserTweets = async (userId) => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/users/${userId}/tweets`);
     console.log(res.data);
     return res.data;
   } catch (error) {
-    console.error("[Get User Tweets failed]: ", error);
+    console.error('[Get User Tweets failed]: ', error);
   }
 };
 
 export const getUserRepliedTweets = async (userId) => {
   try {
-    const res = await axiosInstance.get(`${baseUrl}/users/${userId}/replied_tweets`);
+    const res = await axiosInstance.get(
+      `${baseUrl}/users/${userId}/replied_tweets`
+    );
     console.log(res.data);
     return res.data;
   } catch (error) {
@@ -99,7 +100,6 @@ export const getUserLikes = async (userId) => {
     console.log(res.data);
     return res.data;
   } catch (error) {
-    console.error("[Get User Likes failed]: ", error);
+    console.error('[Get User Likes failed]: ', error);
   }
 };
-

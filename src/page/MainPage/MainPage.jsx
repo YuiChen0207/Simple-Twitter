@@ -1,10 +1,10 @@
 import Navbar from '../../component/navbar/Navbar';
-import PopularList from '../../component/popularList/PopularList';
+import PopularList from '../../component/popularList/PopularList.jsx';
 import Post from '../../component/post/Post';
 import TweetsList from '../../component/tweets/TweetList';
 import './MainPage.scss';
 import { getTweets } from '../../api/tweets';
-import { getPopularList } from "../../api/popularList";
+import { getPopularList } from '../../api/popularlist';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
@@ -28,7 +28,6 @@ const Main = () => {
     };
     getTweetsAsync();
   }, []);
-
 
   useEffect(() => {
     const getPopularCardsAsync = async () => {
