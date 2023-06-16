@@ -21,13 +21,13 @@ const UserTweetsList = ({ tweets }) => {
       {tweets.map((tweet) => (
         <Tweet
           key={tweet.id}
-          logo={tweet.avatar ?? grayLogo}
-          username={tweet.User?.account ?? "John Doe"}
-          accountName={tweet?.account ?? "John Doe"}
+          logo={tweet.avatar ?? grayLogo} //logo要再改
+          username={tweet.name}
+          accountName={tweet.account}
           postTime={formatTime(tweet.createdAt)}
-          content={tweet.description ?? ""}
-          comments={tweet.replyCount ?? 0}
-          likes={tweet.LikesCount ?? 0}
+          content={tweet.description}
+          comments={tweet.replyCount}
+          likes={tweet.likeCount}
         />
       ))}
     </div>
