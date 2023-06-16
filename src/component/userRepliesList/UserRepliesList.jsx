@@ -21,12 +21,12 @@ const UserRepliesList = ({ replies }) => {
       {replies.map((reply) => (
         <Tweet
           key={reply.id}
-          logo={reply.replyAvatar ?? grayLogo}//要加Logo
-          username={reply?.replyName}
-          accountName={reply?.replyAccount}
+          logo={/* reply.replyAvatar ?? */ grayLogo}//要加Logo
+          username={reply.replyName}
+          accountName={reply.replyAccount}
           postTime={formatTime(reply.createdAt)}
           content={reply.comment}
-          replyTo={reply.Tweet?.User?.account} //要改成發文者名稱
+          replyTo={reply.Tweet?.User?.account}
           hideFooter={true}
         />
       ))}
