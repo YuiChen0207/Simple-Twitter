@@ -7,17 +7,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getSingleTweet, getTweetReplies } from '../../api/tweets';
 import { useEffect, useState } from 'react';
 import { useId } from '../../contexts/IdContext';
+import { getPopularList } from '../../api/popularlist';
 import './ReplyList.scss';
 
 const ReplyList = () => {
   const [singleTweet, setSingleTweet] = useState({});
   const [tweetReplies, setTweetReplies] = useState([]);
+  const [popularCards, setPopularCards] = useState([]);
   const { currentId } = useId();
 
   useEffect(() => {
     const getTweet = async () => {
       try {
-        const tweet = await getSingleTweet(currentId);
+        const tweet = await getSingleTweet(774);
         console.log(tweet);
         setSingleTweet(tweet);
       } catch (error) {
@@ -30,7 +32,7 @@ const ReplyList = () => {
   useEffect(() => {
     const getReplies = async () => {
       try {
-        const replies = await getTweetReplies(currentId);
+        const replies = await getTweetReplies(774);
         console.log(replies);
         setTweetReplies([...replies]);
       } catch (error) {
@@ -39,6 +41,18 @@ const ReplyList = () => {
     };
     getReplies();
   }, [currentId]);
+
+  useEffect(() => {
+    const getPopularCardsAsync = async () => {
+      try {
+        const popularCards = await getPopularList();
+        setPopularCards(popularCards.map((users) => ({ ...users })));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getPopularCardsAsync();
+  }, []);
 
   return (
     <div className="replyMainContainer">
@@ -57,7 +71,7 @@ const ReplyList = () => {
         />
         <ReplyListBox replies={tweetReplies} replyTo="" />
       </div>
-      <PopularList />
+      <PopularList popularCards={popularCards} />
     </div>
   );
 };
