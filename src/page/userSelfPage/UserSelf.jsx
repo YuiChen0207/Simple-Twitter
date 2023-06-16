@@ -14,7 +14,7 @@ import UserTweetsList from "../../component/userTweetList/UserTweetList";
 import UserRepliesList from "../../component/userRepliesList/UserRepliesList";
 import UserLikesList from "../../component/userLikesList/UserLikesList";
 import "./UserSelf.scss";
-
+import { getPopularList } from "../../api/popularList";
 
 const UserSelf = () => {
   const { currentMember } = useAuth();
@@ -22,18 +22,19 @@ const UserSelf = () => {
   const [tweets, setTweets] = useState([]);
   const [replies, setReplies] = useState([]);
   const [likes, setLikes] = useState([]);
+  const [popularCards, setPopularCards] = useState([]);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
 
   useEffect(() => {
-    if (!currentMember || !currentMember.id) {
-      return;
-    }
-    const { id } = currentMember;
+    const fetchData = async () => {
+      if (!currentMember || !currentMember.id) {
+        return;
+      }
+      const { id } = currentMember;
 
-    const fetchUserTweets = async () => {
       try {
         const userTweets = await getUserTweets(id);
         //console.log(userTweets);
@@ -41,9 +42,7 @@ const UserSelf = () => {
       } catch (error) {
         console.error("获取用户推文失败：", error);
       }
-    };
 
-    const fetchUserReplies = async () => {
       try {
         const userReplies = await getUserRepliedTweets(id);
         //console.log(userReplies);
@@ -51,21 +50,22 @@ const UserSelf = () => {
       } catch (error) {
         console.error("獲取用戶資料失败：", error);
       }
-    };
 
-    const fetchUserLikes = async () => {
       try {
         const userLikes = await getUserLikes(id);
-        console.log(userLikes);
+        //console.log(userLikes);
         setLikes(userLikes.map((like) => ({ ...like })));
       } catch (error) {
         console.error("获取用户喜欢的推文失败：", error);
       }
+      try {
+        const popularCards = await getPopularList();
+        setPopularCards(popularCards.map((users) => ({ ...users })));
+      } catch (error) {
+        console.error("获取热门列表失败：", error);
+      }
     };
-
-    fetchUserTweets();
-    fetchUserReplies();
-    fetchUserLikes();
+    fetchData();
   }, [currentMember]);
 
   return (
@@ -100,7 +100,7 @@ const UserSelf = () => {
           )}
         </div>
       </div>
-      <PopularList />
+      <PopularList popularCards={popularCards} />
     </div>
   );
 };
