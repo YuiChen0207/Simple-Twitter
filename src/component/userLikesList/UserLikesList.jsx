@@ -1,7 +1,7 @@
 import Tweet from "../tweets/tweetList/Tweet";
 import grayLogo from "../../assets/logoGray.svg";
 
-const UserTweetsList = ({ tweets }) => {
+const UserRepliesList = ({ likes }) => {
   function formatTime(timestamp) {
     const currentTime = new Date();
     const postTime = new Date(timestamp);
@@ -18,20 +18,21 @@ const UserTweetsList = ({ tweets }) => {
 
   return (
     <div className="tweetsListContainer">
-      {tweets.map((tweet) => (
+      {likes.map((like) => (
         <Tweet
-          key={tweet.id}
-          logo={tweet.avatar ?? grayLogo}
-          username={tweet.User?.account ?? "John Doe"}
-          accountName={tweet?.account ?? "John Doe"}
-          postTime={formatTime(tweet.createdAt)}
-          content={tweet.description ?? ""}
-          comments={tweet.replyCount ?? 0}
-          likes={tweet.LikesCount ?? 0}
+          key={like.id}
+          logo={like.avatar ?? grayLogo}
+          username={like?.account ?? "John Doe"} //要改成user name
+          accountName={like?.account ?? "John Doe"}
+          postTime={formatTime(like.createdAt)}
+          content={like.description ?? ""}
+          comments={like.replyCount ?? 0} //缺少按讚數及愛心數
+          likes={like.LikesCount ?? 0}
+          postName={like.id} //要改成發文者名稱
         />
       ))}
     </div>
   );
 };
 
-export default UserTweetsList;
+export default UserRepliesList;

@@ -4,12 +4,15 @@ import Post from '../../component/post/Post';
 import TweetsList from '../../component/tweets/TweetList';
 import './MainPage.scss';
 import { getTweets } from '../../api/tweets';
+import { getPopularlists } from '../../api/popularlist';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
 const Main = () => {
   const [tweets, setTweets] = useState([]);
+  const [popularCards, setPopularCards] = useState([]);
+
   const navigate = useNavigate();
 
   const { isAuthenticated } = useAuth();
@@ -26,6 +29,19 @@ const Main = () => {
     getTweetsAsync();
   }, []);
 
+
+  useEffect(() => {
+    const getPopularCardsAsync = async () => {
+      try {
+        const popularCards = await getPopularlists();
+        setPopularCards(popularCards.map((users) => ({ ...users })));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getPopularCardsAsync();
+  }, []);
+
   useEffect(() => {
     if (!isAuthenticated) {
       navigate('/login');
@@ -40,13 +56,10 @@ const Main = () => {
           <Post />
         </div>
         <div className="tweetsSection">
-          <TweetsList
-            tweets={tweets}
-            className="tweetsSection"
-          />
+          <TweetsList tweets={tweets} className="tweetsSection" />
         </div>
       </div>
-      <PopularList />
+      <PopularList popularCards={popularCards} />
     </div>
   );
 };
