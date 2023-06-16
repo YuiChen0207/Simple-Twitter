@@ -7,11 +7,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getSingleTweet, getTweetReplies } from '../../api/tweets';
 import { useEffect, useState } from 'react';
 import { useId } from '../../contexts/IdContext';
+import { getPopularList } from '../../api/popularlist';
 import './ReplyList.scss';
 
 const ReplyList = () => {
   const [singleTweet, setSingleTweet] = useState({});
   const [tweetReplies, setTweetReplies] = useState([]);
+  const [popularCards, setPopularCards] = useState([]);
   const { currentId } = useId();
 
   useEffect(() => {
@@ -40,6 +42,18 @@ const ReplyList = () => {
     getReplies();
   }, [currentId]);
 
+  useEffect(() => {
+    const getPopularCardsAsync = async () => {
+      try {
+        const popularCards = await getPopularList();
+        setPopularCards(popularCards.map((users) => ({ ...users })));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getPopularCardsAsync();
+  }, []);
+
   return (
     <div className="replyMainContainer">
       <Navbar />
@@ -57,7 +71,7 @@ const ReplyList = () => {
         />
         <ReplyListBox replies={tweetReplies} replyTo="" />
       </div>
-      <PopularList />
+      <PopularList popularCards={popularCards} />
     </div>
   );
 };
