@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import MainPage from './page/mainPage/MainPage';
+import MainPage from './page/MainPage/MainPage';
 import UserSelf from './page/userSelfPage/UserSelf';
 import UserOther from './page/UserOtherPage/UserOtherPage';
 import LoginPage from './page/LoginPage/LoginPage';
@@ -14,6 +14,7 @@ import FollowAndFollower from './page/followAndFollower/FollowAndFollower';
 import './base.scss';
 import './reset.scss';
 import { AuthProvider } from './contexts/AuthContext';
+import { IdProvider } from './contexts/IdContext';
 
 /* import {LoginPage, MainPage, RegistPage} from './page' */
 function App() {
@@ -21,7 +22,9 @@ function App() {
     <Router>
       <div className="app">
         <AuthProvider>
-          <Routes>
+
+          <IdProvider>
+           <Routes>
             <Route path="*" element={<HomePage />} />
             <Route path="/mainPage" element={<MainPage />} />
             <Route path="/user/self" element={<UserSelf />} />
@@ -36,6 +39,10 @@ function App() {
             <Route path="/admin_users" element={<UsersDashboard />} />
             <Route path="/reply_list" element={<ReplyList />} />
           </Routes>
+          </IdProvider>
+
+         
+
         </AuthProvider>
         {/* 
         <AuthProvider>
