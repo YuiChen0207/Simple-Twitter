@@ -1,7 +1,10 @@
 import Tweet from "./tweetList/Tweet";
 import grayLogo from "../../assets/logoGray.svg";
+import { useUserId } from "../../contexts/UserIdContext";
 
 const TweetsList = ({ tweets }) => {
+  const { setUserIdFromTweet } = useUserId();
+
   function formatTime(timestamp) {
     const currentTime = new Date();
     const postTime = new Date(timestamp);
@@ -23,7 +26,7 @@ const TweetsList = ({ tweets }) => {
           tweet.User?.account && (
             <Tweet
               key={tweet.id}
-              logo={grayLogo}
+              logo={tweet.User.avatar ?? grayLogo}
               username={tweet.User?.account ?? ""}
               accountName={tweet.User?.account ?? ""}
               postTime={formatTime(tweet.createdAt)}
@@ -31,6 +34,7 @@ const TweetsList = ({ tweets }) => {
               comments={tweet.RepliesCount ?? 0}
               tweetId={tweet.id}
               likes={tweet.LikesCount}
+              onGetUserIdFromTweet={() => setUserIdFromTweet(tweet.User.id)}
             />
           )
       )}

@@ -21,14 +21,14 @@ const UserRepliesList = ({ likes }) => {
       {likes.map((like) => (
         <Tweet
           key={like.id}
-          logo={like.avatar ?? grayLogo}
-          username={like?.account ?? "John Doe"} //要改成user name
-          accountName={like?.account ?? "John Doe"}
+          logo={like.tweetOwnerAvatar ?? grayLogo}
+          username={like.tweetOwnerName}
+          accountName={like.tweetOwnerAccount}
           postTime={formatTime(like.createdAt)}
-          content={like.description ?? ""}
-          comments={like.replyCount ?? 0} //缺少按讚數及愛心數
-          likes={like.LikesCount ?? 0}
-          postName={like.id} //要改成發文者名稱
+          content={like.description}
+          comments={like.replyCount}
+          likes={like.likeCount}
+          //isLiked={true} 愛心變紅還沒做
         />
       ))}
     </div>

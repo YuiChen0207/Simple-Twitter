@@ -3,18 +3,20 @@ import {
   getUserLikes,
   getUserRepliedTweets,
   getUserTweets,
-} from '../../api/tweets';
-import { useAuth } from '../../contexts/AuthContext';
-import Header from '../../component/header/Header';
-import Navbar from '../../component/navbar/Navbar';
-import PopularList from '../../component/popularList/PopularList';
-import TabBar from '../../component/tabBar/TabBar';
-import UserInfo from '../../component/userInfo/UserInfo';
-import UserTweetsList from '../../component/userTweetList/UserTweetList';
-import UserRepliesList from '../../component/userRepliesList/UserRepliesList';
-import UserLikesList from '../../component/userLikesList/UserLikesList';
-import './UserSelf.scss';
-import { getPopularList } from '../../api/popularlist';
+
+} from "../../api/tweets";
+import { useAuth } from "../../contexts/AuthContext";
+import { getPopularList } from "../../api/popularlist";
+import { getUserPageById } from "../../api/getUserPage";
+import Header from "../../component/header/Header";
+import Navbar from "../../component/navbar/Navbar";
+import PopularList from "../../component/popularList/PopularList";
+import TabBar from "../../component/tabBar/TabBar";
+import UserInfo from "../../component/userInfo/UserInfo";
+import UserTweetsList from "../../component/userTweetList/UserTweetList";
+import UserRepliesList from "../../component/userRepliesList/UserRepliesList";
+import UserLikesList from "../../component/userLikesList/UserLikesList";
+import "./UserSelf.scss";
 
 const UserSelf = () => {
   const { currentMember } = useAuth();
@@ -23,6 +25,7 @@ const UserSelf = () => {
   const [replies, setReplies] = useState([]);
   const [likes, setLikes] = useState([]);
   const [popularCards, setPopularCards] = useState([]);
+  const [userData, setUserData] = useState(null);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -40,7 +43,7 @@ const UserSelf = () => {
         //console.log(userTweets);
         setTweets(userTweets.map((tweet) => ({ ...tweet })));
       } catch (error) {
-        console.error('获取用户推文失败：', error);
+        console.error('獲取用户推文失敗：', error);
       }
 
       try {
@@ -48,7 +51,7 @@ const UserSelf = () => {
         //console.log(userReplies);
         setReplies(userReplies.map((reply) => ({ ...reply })));
       } catch (error) {
-        console.error('獲取用戶資料失败：', error);
+        console.error("獲取用戶資料失敗：", error);
       }
 
       try {
@@ -56,13 +59,26 @@ const UserSelf = () => {
         //console.log(userLikes);
         setLikes(userLikes.map((like) => ({ ...like })));
       } catch (error) {
-        console.error('获取用户喜欢的推文失败：', error);
+        console.error("獲取用户喜歡的推文失敗：", error);
       }
       try {
         const popularCards = await getPopularList();
         setPopularCards(popularCards.map((users) => ({ ...users })));
       } catch (error) {
-        console.error('获取热门列表失败：', error);
+        console.error("獲取熱門列表失敗：", error);
+      }
+      try {
+        const popularCards = await getPopularList();
+        setPopularCards(popularCards.map((users) => ({ ...users })));
+      } catch (error) {
+        console.error("獲取熱門列表失敗：", error);
+      }
+      try {
+        const user = await getUserPageById(id);
+        console.log(user);
+        setUserData(user);
+      } catch (error) {
+        console.error("獲取用户信息失敗：", error);
       }
     };
     fetchData();
@@ -72,14 +88,18 @@ const UserSelf = () => {
     <div className="mainContainer">
       <Navbar />
       <div className="mainContent">
-        <Header username="John Doe" tweetCount={25} />
+        <Header username={userData?.name} tweetCount={userData?.TweetCount} />
         <div className="postSection">
           <UserInfo
-            username="John Doe"
-            accountName="heyjohn"
-            bio="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. "
-            followingCount={34}
-            followersCount={59}
+            avatar={userData?.avatar}
+            username={userData?.name}
+            accountName={userData?.account}
+            bio={
+              /* userData.introduction */ "Sed ipsum consequatur eaque ad repellat reiciendis"
+            }
+            followingCount={userData?.followingCount}
+            followersCount={userData?.followerCount}
+            banner={userData?.banner}
           />
         </div>
         <TabBar

@@ -1,21 +1,37 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EditPopupModal from "../popupModal/editPopupModal/EditPopupModal";
-import userPhoto from "../../assets/postPhoto.svg";
+import { getUserEdit } from "../../api/popupEditModal";
 import "./UserInfo.scss";
+import { useAuth } from "../../contexts/AuthContext";
 
 const UserInfo = ({
+  avatar,
   username,
   accountName,
   bio,
   followingCount,
   followersCount,
+  banner,
 }) => {
+  const { currentMember } = useAuth();
   const [showModal, setShowModal] = useState(false);
+  const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
-  const handleEditProfileClick = () => {
-    setShowModal(true);
+  const handleEditProfileClick = async () => {
+    if (!currentMember || !currentMember.id) {
+      return;
+    }
+    const { id } = currentMember;
+    
+    try {
+      const userData = await getUserEdit(id);
+      setUserData(userData);
+      setShowModal(true);
+    } catch (error) {
+      console.error("獲取用户編輯數據失敗:", error);
+    }
   };
 
   const handleClosePopup = () => {
@@ -31,10 +47,10 @@ const UserInfo = ({
   };
   return (
     <div className="userInfoContainer">
-      <div className="background" />
+      <img src={banner} className="background" alt="banner" />
       <div className="userContext">
         <div className="upSection">
-          <img src={userPhoto} alt="User Icon" className="userAvatar" />
+          <img src={avatar} alt="User Icon" className="userAvatar" />
           <button className="whiteButton" onClick={handleEditProfileClick}>
             編輯個人資料
           </button>
@@ -43,6 +59,7 @@ const UserInfo = ({
           <h5 className="medium">{username}</h5>
           <div className="accountName">@{accountName}</div>
           <div className="bio">{bio}</div>
+          {/* 要新增bio */}
           <div className="countSection">
             <div
               className="count followingCount"
@@ -60,7 +77,11 @@ const UserInfo = ({
         </div>
       </div>
       {showModal && (
-        <EditPopupModal open={showModal} onClose={handleClosePopup} />
+        <EditPopupModal
+          open={showModal}
+          onClose={handleClosePopup}
+          userData={userData}
+        />
       )}
     </div>
   );

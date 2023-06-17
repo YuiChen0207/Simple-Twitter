@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
-import PopupModal from '../popupModal/PopupModal';
-import PostPhoto from '../../assets/postPhoto.svg';
-import './Post.scss';
+import React, { useEffect, useState } from "react";
+import PopupModal from "../popupModal/PopupModal";
+import { getPostTweet } from "../../api/tweets";
+import "./Post.scss";
+
 
 const Post = () => {
   //const [postContent, setPostContent] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [userLogo, setUserLogo] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const logo = await getPostTweet();
+        setUserLogo(logo);
+      } catch (error) {
+        console.error("獲取用户Logo失敗:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   // const handlePostContentChange = (e) => {
   //   setPostContent(e.target.value);
@@ -27,16 +42,15 @@ const Post = () => {
       <hr />
       <div className="postContent">
         <div className="postBox" onClick={handleOpenModal}>
-          <img src={PostPhoto} alt="User Avatar" className="userAvatar" />
+          <img src={userLogo} alt="User Avatar" className="userAvatar" />
           <div className="postTextContainer">
             <input
               type="text"
               className="postTextInput"
-              placeholder={'有什麼新鮮事？'}
+              placeholder={"有什麼新鮮事？"}
             />
           </div>
         </div>
-        {/* 點擊推文按鈕後可以新增tweet，等待api串接 */}
         <button className="button orangeButton" onClick={handleOpenModal}>
           推文
         </button>

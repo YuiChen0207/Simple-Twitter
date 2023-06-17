@@ -94,6 +94,10 @@
         );
         border-radius: 50%;
       }
+
+      .cameraIcon{
+        cursor: pointer;
+      }
     }
   }
 
@@ -145,5 +149,11 @@
         background-color: #f5f8fa;
       }
     }
+  }
+  .errorMessage{
+    padding-top: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--Error);
   }
 }

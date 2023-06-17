@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { likeTweet, unlikeTweet } from '../../../api/likeAndUnlike';
-import commitIcon from '../../../assets/commit.svg';
-import heartIcon from '../../../assets/heart.svg';
-import './Tweet.scss';
-import { useId } from '../../../contexts/IdContext';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { likeTweet, unlikeTweet } from "../../../api/likeAndUnlike";
+import commitIcon from "../../../assets/commit.svg";
+import heartIcon from "../../../assets/heart.svg";
+import { useId } from "../../../contexts/IdContext";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./Tweet.scss";
 
 const Tweet = ({
   logo,
@@ -17,6 +18,7 @@ const Tweet = ({
   likes,
   replyTo,
   hideFooter,
+  onGetUserIdFromTweet,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [count, setCount] = useState(likes);
@@ -36,12 +38,14 @@ const Tweet = ({
         setCount((prevLikes) => prevLikes + 1);
       }
     } catch (error) {
-      console.error('喜歡推文失败:', error);
+      console.error("喜歡推文失败:", error);
     }
     setIsLiked(!isLiked);
   };
+
   return (
     <>
+
       <div
         className="tweetContainer"
         onClick={(e) => {
@@ -51,7 +55,19 @@ const Tweet = ({
           }
         }}
       >
-        <img src={logo} alt="Logo" className="userLogo" />
+       
+
+      
+        <Link to={`/user/other`}>
+          <img
+            src={logo}
+            alt="Logo"
+            className="userLogo"
+            onClick={onGetUserIdFromTweet}
+          />
+        </Link>
+
+
         <div className="tweetContent">
           <div className="tweetHeader">
             <span className="tweetUsername">{username}</span>
@@ -66,7 +82,11 @@ const Tweet = ({
               回覆 <span>@{replyTo}</span>
             </div>
           )}
+
           <div className="tweetText">{content}</div>
+
+          
+
           <div className="tweetFooter">
             {!hideFooter && (
               <>
