@@ -1,20 +1,22 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthContext";
-import MainPage from "./page/mainPage/MainPage";
-import UserSelf from "./page/userSelfPage/UserSelf";
-import UserOther from "./page/UserOtherPage/UserOtherPage";
-import LoginPage from "./page/LoginPage/LoginPage";
-import RegistPage from "./page/RegistPage/RegistPage";
-import LoginAdmin from "./page/LoginAdmin/LoginAdmin";
-import SettingPage from "./page/SettingPage/SettingPage";
-import UsersDashboard from "./page/UsersDashboard/UsersDashboard";
-import AdminMain from "./page/AdminMain/AdminMain";
-import HomePage from "./page/HomePage/HomePage";
-import ReplyList from "./page/ReplyList/ReplyList";
-import FollowAndFollower from "./page/followAndFollower/FollowAndFollower";
-import "./base.scss";
-import "./reset.scss";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainPage from './page/mainPage/MainPage';
+import UserSelf from './page/userSelfPage/UserSelf';
+import UserOther from './page/UserOtherPage/UserOtherPage';
+import LoginPage from './page/LoginPage/LoginPage';
+import RegistPage from './page/RegistPage/RegistPage';
+import LoginAdmin from './page/LoginAdmin/LoginAdmin';
+import SettingPage from './page/SettingPage/SettingPage';
+import UsersDashboard from './page/UsersDashboard/UsersDashboard';
+import AdminMain from './page/AdminMain/AdminMain';
+import HomePage from './page/HomePage/HomePage';
+import ReplyList from './page/ReplyList/ReplyList';
+import FollowAndFollower from './page/followAndFollower/FollowAndFollower';
+import './base.scss';
+import './reset.scss';
+import { AuthProvider } from './contexts/AuthContext';
+import { IdProvider } from './contexts/IdContext';
 import { UserIdProvider } from "./contexts/UserIdContext";
+
 
 /* import {LoginPage, MainPage, RegistPage} from './page' */
 function App() {
@@ -23,6 +25,7 @@ function App() {
       <div className="app">
         <AuthProvider>
           <UserIdProvider>
+          <IdProvider>
             <Routes>
               <Route path="*" element={<HomePage />} />
               <Route path="/mainPage" element={<MainPage />} />
@@ -39,6 +42,7 @@ function App() {
               <Route path="/reply_list" element={<ReplyList />} />
             </Routes>
           </UserIdProvider>
+          </IdProvider>
         </AuthProvider>
         {/* 
         <AuthProvider>

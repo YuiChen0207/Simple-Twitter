@@ -1,5 +1,5 @@
 import Navbar from '../../component/navbar/Navbar';
-import PopularList from '../../component/popularList/PopularList';
+import PopularList from '../../component/popularList/PopularList.jsx';
 import Post from '../../component/post/Post';
 import TweetsList from '../../component/tweets/TweetList';
 import './MainPage.scss';
@@ -28,7 +28,6 @@ const Main = () => {
     };
     getTweetsAsync();
   }, []);
-
 
   useEffect(() => {
     const getPopularCardsAsync = async () => {

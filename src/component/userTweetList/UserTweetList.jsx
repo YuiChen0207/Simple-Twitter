@@ -28,7 +28,6 @@ const UserTweetsList = ({ tweets }) => {
           content={tweet.description}
           comments={tweet.replyCount}
           likes={tweet.likeCount}
-          
         />
       ))}
     </div>
