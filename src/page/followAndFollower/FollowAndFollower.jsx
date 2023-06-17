@@ -11,10 +11,10 @@ import './FollowAndFollower.scss';
 import { useAuth } from '../../contexts/AuthContext';
 
 const FollowAndFollower = () => {
-  //const location = useLocation();
-  //const path = location.pathname;
-  // const initialTab = path === '/follow' ? 'following' : 'followers';
-  const [activeTab, setActiveTab] = useState('followers');
+  const location = useLocation();
+  const path = location.pathname;
+  const initialTab = path === '/follow' ? 'following' : 'followers';
+  const [activeTab, setActiveTab] = useState(initialTab);
   const [popularCards, setPopularCards] = useState([]);
   const [followshipList, setFollowshipList] = useState('');
 
