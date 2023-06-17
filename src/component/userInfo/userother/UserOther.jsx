@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import EditPopupModal from "../../popupModal/editPopupModal/EditPopupModal";
-import userPhoto from "../../../assets/postPhoto.svg";
 import btnMsg from "../../../assets/btnMsg.svg";
 import btnNotfi from "../../../assets/btnNotfi.svg";
+import activeNotfi from "../../../assets/btn_notfi.svg";
 import "./UserOther.scss";
 
 const UserOtherItem = ({
@@ -13,15 +12,19 @@ const UserOtherItem = ({
   followingCount,
   followersCount,
 }) => {
-  
-  const [showModal, setShowModal] = useState(false);
+  const [notificationIcon, setNotificationIcon] = useState(btnNotfi);
+  const [isFollow, setIsFollow] = useState(false);
 
-  const handleEditProfileClick = () => {
-    setShowModal(true);
+  const handleFollow = () => {
+    setIsFollow(!isFollow);
   };
 
-  const handleClosePopup = () => {
-    setShowModal(false);
+  const handleNotificationClick = () => {
+    if (notificationIcon === btnNotfi) {
+      setNotificationIcon(activeNotfi);
+    } else {
+      setNotificationIcon(btnNotfi);
+    }
   };
   return (
     <div className="userInfoContainer">
@@ -31,10 +34,19 @@ const UserOtherItem = ({
           <img src={avatar} alt="User Icon" className="userAvatar" />
           <div className="btnSection">
             <img src={btnMsg} alt="msg" className="msgIcon" />
-            <img src={btnNotfi} alt="notfi" className="notIicon" />
-            <button className="whiteButton" onClick={handleEditProfileClick}>
-              編輯個人資料
+            <img
+              src={notificationIcon}
+              alt="notfi"
+              className="notiIcon"
+              onClick={handleNotificationClick}
+            />
+            <button
+              className={`whiteButton  ${isFollow ? "isFollow" : ""}`}
+              onClick={handleFollow}
+            >
+              {isFollow ? "正在跟隨" : "跟隨"}
             </button>
+            {/* 要帶入API資料 */}
           </div>
         </div>
         <div className="lowerSection">
@@ -51,9 +63,6 @@ const UserOtherItem = ({
           </div>
         </div>
       </div>
-      {showModal && (
-        <EditPopupModal open={showModal} onClose={handleClosePopup} />
-      )}
     </div>
   );
 };

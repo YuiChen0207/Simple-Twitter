@@ -9,7 +9,7 @@ import Navbar from "../../component/navbar/Navbar";
 import PopularList from "../../component/popularList/PopularList";
 import TabBar from "../../component/tabBar/TabBar";
 import UserOtherItem from "../../component/userInfo/userOther/UserOther";
-import { getPopularList } from "../../api/popularList";
+import { getPopularList } from "../../api/popularlist.js";
 import { getUserPageById } from "../../api/getUserPage";
 import { useUserId } from "../../contexts/UserIdContext";
 import UserTweetsList from "../../component/userTweetList/UserTweetList";

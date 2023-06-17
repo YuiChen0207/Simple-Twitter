@@ -84,3 +84,13 @@ export const getUserLikes = async (userId) => {
     console.error('[Get User Likes failed]: ', error);
   }
 };
+
+export const getPostTweet = async () => {
+  try {
+    const res = await axiosInstance.get(`${baseUrl}/tweets/postTweet`);
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    console.error("[Get Tweets failed]: ", error);
+  }
+};
