@@ -1,6 +1,6 @@
 import axios from 'axios';
 const baseUrl = 'https://infinite-dawn-77240.herokuapp.com/api';
-const testApi = 'http://localhost:3004/users';
+//const testApi = 'http://localhost:3004/users';
 
 // 驗證區
 const axiosInstance = axios.create({
@@ -32,12 +32,12 @@ axiosInstance.interceptors.request.use(
 // };
 
 // 正式版
-export const getPopularlists = async () => {
+export const getPopularList = async () => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/users/top`);
-    console.log(res);
+    console.log(res.data.users);
     return res.data.users;
   } catch (error) {
-    console.error('[Get getPopularlist failed]: ', error);
+    console.error("[Get getPopularList failed]: ", error);
   }
 };
