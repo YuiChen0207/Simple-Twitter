@@ -11,7 +11,7 @@ const RegistPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [passwordCheck, setPasswordCheck] = useState('');
+  const [checkPassword, setCheckPassword] = useState('');
   const navigate = useNavigate();
 
   const { register, isAuthenticated } = useAuth();
@@ -33,16 +33,16 @@ const RegistPage = () => {
       return;
     }
 
-    if (passwordCheck.length === 0) {
+    if (checkPassword.length === 0) {
       return;
     }
 
     const success = await register({
       name,
-      email,
       account,
       password,
-      passwordCheck,
+      checkPassword,
+      email,
     });
 
     if (success) {
@@ -111,9 +111,9 @@ const RegistPage = () => {
         <AuthInput
           type="password"
           label="密碼確認"
-          value={passwordCheck}
+          value={checkPassword}
           onChange={(checkedPasswordInputValue) =>
-            setPasswordCheck(checkedPasswordInputValue)
+            setCheckPassword(checkedPasswordInputValue)
           }
         />
       </div>

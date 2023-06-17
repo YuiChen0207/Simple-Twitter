@@ -27,8 +27,6 @@ const MainReply = ({ tweet, repliesSet, tweetSet }) => {
     setShowModal(false);
   };
 
-  //const banner = tweet.User.banner;
-
   return (
     <div className="singleReplyBox">
       <div className="replyMainBody">

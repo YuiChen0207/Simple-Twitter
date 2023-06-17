@@ -65,7 +65,7 @@ const ReplyList = () => {
           <h4 className="medium">推文</h4>
         </div>
         <MainReply
-          tweet={singleTweet}
+          tweet={{ ...singleTweet }}
           tweetSet={setSingleTweet}
           repliesSet={setTweetReplies}
         />
