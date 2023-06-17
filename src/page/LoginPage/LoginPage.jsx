@@ -46,7 +46,7 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    if (isAuthenticated && currentMember.role === 'user') {
+    if (isAuthenticated && currentMember?.role === 'user') {
       navigate('/mainpage');
     }
   }, [navigate, isAuthenticated, currentMember]);
