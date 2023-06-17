@@ -6,7 +6,7 @@ import {
 
 } from "../../api/tweets";
 import { useAuth } from "../../contexts/AuthContext";
-import { getPopularList } from "../../api/popularList";
+import { getPopularList } from "../../api/popularlist";
 import { getUserPageById } from "../../api/getUserPage";
 import Header from "../../component/header/Header";
 import Navbar from "../../component/navbar/Navbar";

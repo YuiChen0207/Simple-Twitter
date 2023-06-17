@@ -37,7 +37,7 @@ const UserInfo = ({
       <div className="userContext">
         <div className="upSection">
           <img
-            src={avatar ?? userPhoto}
+            src={avatar}
             alt="User Icon"
             className="userAvatar"
           />
