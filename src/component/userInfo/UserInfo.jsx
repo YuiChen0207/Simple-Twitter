@@ -37,7 +37,7 @@ const UserInfo = ({
       <div className="userContext">
         <div className="upSection">
           <img
-            src={/* avatar ??  */userPhoto}//換user image
+            src={avatar ?? userPhoto}
             alt="User Icon"
             className="userAvatar"
           />

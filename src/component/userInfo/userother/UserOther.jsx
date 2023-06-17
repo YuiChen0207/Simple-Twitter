@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
-import EditPopupModal from '../../popupModal/editPopupModal/EditPopupModal';
-import userPhoto from '../../../assets/postPhoto.svg';
-import btnMsg from '../../../assets/btnMsg.svg';
-import btnNotfi from '../../../assets/btnNotfi.svg';
-import './UserOther.scss';
+import React, { useState } from "react";
+import EditPopupModal from "../../popupModal/editPopupModal/EditPopupModal";
+import userPhoto from "../../../assets/postPhoto.svg";
+import btnMsg from "../../../assets/btnMsg.svg";
+import btnNotfi from "../../../assets/btnNotfi.svg";
+import "./UserOther.scss";
 
 const UserOtherItem = ({
+  avatar,
   username,
   accountName,
   bio,
   followingCount,
   followersCount,
 }) => {
+  
   const [showModal, setShowModal] = useState(false);
 
   const handleEditProfileClick = () => {
@@ -26,7 +28,7 @@ const UserOtherItem = ({
       <div className="background" />
       <div className="userContext">
         <div className="upSection">
-          <img src={userPhoto} alt="User Icon" className="userAvatar" />
+          <img src={avatar} alt="User Icon" className="userAvatar" />
           <div className="btnSection">
             <img src={btnMsg} alt="msg" className="msgIcon" />
             <img src={btnNotfi} alt="notfi" className="notIicon" />

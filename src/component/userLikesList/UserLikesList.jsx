@@ -21,7 +21,7 @@ const UserRepliesList = ({ likes }) => {
       {likes.map((like) => (
         <Tweet
           key={like.id}
-          logo={/* like.tweetOwnerAvatar ??  */ grayLogo} //要改成user image
+          logo={like.tweetOwnerAvatar ?? grayLogo}
           username={like.tweetOwnerName}
           accountName={like.tweetOwnerAccount}
           postTime={formatTime(like.createdAt)}

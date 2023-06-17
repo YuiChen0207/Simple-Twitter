@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { likeTweet, unlikeTweet } from "../../../api/likeAndUnlike";
 import commitIcon from "../../../assets/commit.svg";
 import heartIcon from "../../../assets/heart.svg";
-
 import "./Tweet.scss";
 
 const Tweet = ({
@@ -16,6 +16,7 @@ const Tweet = ({
   likes,
   replyTo,
   hideFooter,
+  onGetUserIdFromTweet,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [count, setCount] = useState(likes);
@@ -37,10 +38,19 @@ const Tweet = ({
     }
     setIsLiked(!isLiked);
   };
+
   return (
     <>
       <div className="tweetContainer">
-        <img src={logo} alt="Logo" className="userLogo" />
+        <Link to={`/user/other`}>
+          <img
+            src={logo}
+            alt="Logo"
+            className="userLogo"
+            onClick={onGetUserIdFromTweet}
+          />
+        </Link>
+
         <div className="tweetContent">
           <div className="tweetHeader">
             <span className="tweetUsername">{username}</span>

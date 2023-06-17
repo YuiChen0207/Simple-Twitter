@@ -21,7 +21,7 @@ const UserRepliesList = ({ replies }) => {
       {replies.map((reply) => (
         <Tweet
           key={reply.id}
-          logo={/* reply.replyAvatar ?? */ grayLogo}//要加Logo
+          logo={reply.replyAvatar ?? grayLogo}
           username={reply.replyName}
           accountName={reply.replyAccount}
           postTime={formatTime(reply.createdAt)}

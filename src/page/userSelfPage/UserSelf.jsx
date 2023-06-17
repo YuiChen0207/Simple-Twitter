@@ -5,6 +5,8 @@ import {
   getUserTweets,
 } from "../../api/tweets";
 import { useAuth } from "../../contexts/AuthContext";
+import { getPopularList } from "../../api/popularList";
+import { getUserPageById } from "../../api/getUserPage";
 import Header from "../../component/header/Header";
 import Navbar from "../../component/navbar/Navbar";
 import PopularList from "../../component/popularList/PopularList";
@@ -13,9 +15,8 @@ import UserInfo from "../../component/userInfo/UserInfo";
 import UserTweetsList from "../../component/userTweetList/UserTweetList";
 import UserRepliesList from "../../component/userRepliesList/UserRepliesList";
 import UserLikesList from "../../component/userLikesList/UserLikesList";
-import { getPopularList } from "../../api/popularList";
-import { getUserPageById } from "../../api/getUserPage";
 import "./UserSelf.scss";
+
 
 const UserSelf = () => {
   const { currentMember } = useAuth();
@@ -88,7 +89,7 @@ const UserSelf = () => {
             username={userData?.name}
             accountName={userData?.account}
             bio={
-              /* userData?.introduction */ "Sed ipsum consequatur eaque ad repellat reiciendis"
+              /* userData.introduction */ "Sed ipsum consequatur eaque ad repellat reiciendis"
             }
             followingCount={userData?.followingCount}
             followersCount={userData?.followerCount}
