@@ -42,7 +42,15 @@ const Tweet = ({
   };
   return (
     <>
-      <div className="tweetContainer">
+      <div
+        className="tweetContainer"
+        onClick={(e) => {
+          if (e.target.tagName !== 'IMG') {
+            checkItemId(tweetId);
+            navigate('/reply_list');
+          }
+        }}
+      >
         <img src={logo} alt="Logo" className="userLogo" />
         <div className="tweetContent">
           <div className="tweetHeader">
@@ -58,13 +66,7 @@ const Tweet = ({
               回覆 <span>@{replyTo}</span>
             </div>
           )}
-           <div
-            className="tweetText"
-            onClick={() => {
-              checkItemId(tweetId);
-              navigate('/reply_list');
-            }}
-          >{content}</div>
+          <div className="tweetText">{content}</div>
           <div className="tweetFooter">
             {!hideFooter && (
               <>
@@ -76,13 +78,12 @@ const Tweet = ({
                   <img
                     src={heartIcon}
                     alt="heart icon"
-                    className={`heartIcon ${isLiked ? "liked" : ""}`}
+                    className={`heartIcon ${isLiked ? 'liked' : ''}`}
                   />
                   <span className="likeCount">{count}</span>
                 </div>
               </>
             )}
-
           </div>
         </div>
       </div>
