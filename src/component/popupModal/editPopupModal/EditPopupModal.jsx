@@ -1,27 +1,20 @@
 import React, { useState } from "react";
 import Popup from "reactjs-popup";
 import CloseIcon from "../../../assets/closeIcon.svg";
-import UserPhotoIcon from "../../../assets/postPhoto.svg";
 import CameraIcon from "../../../assets/camera.svg";
 import WhiteCloseIcon from "../../../assets/whiteClose.svg";
-import backgroundImage from "../../../assets/backgroundImage.svg";
 import "./EditPopupModal.scss";
 
-const EditPopupModal = ({ open, onClose }) => {
-  const [username, setUsername] = useState("Chen Tzu-yu");
-  const [intro, setIntro] = useState("I am an front-end engineer");
+const EditPopupModal = ({ open, onClose, userData }) => {
+  const [username, setUsername] = useState(userData.user.name || "");
+  const [intro, setIntro] = useState(userData.user.introduction || "");
   const [backgroundPhotoFile, setBackgroundPhotoFile] = useState(null);
   const [backgroundPhotoPreview, setBackgroundPhotoPreview] = useState(null);
   const [userPhotoFile, setUserPhotoFile] = useState(null);
   const [userPhotoPreview, setUserPhotoPreview] = useState(null);
+  const [errorMessageUsername, setErrorMessageUsername] = useState(null);
+  const [errorMessageIntro, setErrorMessageIntro] = useState(null);
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const handleIntroChange = (e) => {
-    setIntro(e.target.value);
-  };
 
   const handlePopupClose = () => {
     onClose();
@@ -49,7 +42,7 @@ const EditPopupModal = ({ open, onClose }) => {
     top: "56px",
     left: "50%",
     width: "634px",
-    height: "620px",
+    height: "650px",
     borderRadius: "14px",
     background: "var(--white)",
     transform: "translateX(-50%)",
@@ -59,7 +52,31 @@ const EditPopupModal = ({ open, onClose }) => {
     background: "rgba(0, 0, 0, 0.5)",
   };
 
+    const handleUsernameChange = (e) => {
+      setUsername(e.target.value);
+      setErrorMessageUsername(null); // 清除错误消息
+    };
+
+    const handleIntroChange = (e) => {
+      setIntro(e.target.value);
+      setErrorMessageIntro(null); // 清除错误消息
+    };
+
   const handleSave = () => {
+    if (username.length > 50 && intro.length > 160) {
+      setErrorMessageUsername("字數超出上限!");
+      setErrorMessageIntro("字數超出上限!");
+      return;
+    } else if (username.length > 50) {
+      setErrorMessageUsername("字數超出上限!");
+      setErrorMessageIntro(null);
+      return;
+    } else if (intro.length > 160) {
+      setErrorMessageIntro("字數超出上限!");
+      setErrorMessageUsername(null);
+      return;
+    }
+
     // 执行保存操作，例如向服务器发送更新请求
     // 使用新的背景图像、用户头像、名称和自我介绍
     // 可以根据需要自定义保存逻辑
@@ -85,9 +102,14 @@ const EditPopupModal = ({ open, onClose }) => {
     >
       <div className="editModal">
         <div className="modalHeader">
-          <img src={CloseIcon} alt="close" className="close" onClick={handlePopupClose} />
+          <img
+            src={CloseIcon}
+            alt="close"
+            className="close"
+            onClick={handlePopupClose}
+          />
           <h5 className="medium">編輯個人資料</h5>
-          <button className="orangeButton" onClick={handleSave}>
+          <button type="submit" className="orangeButton" onClick={handleSave}>
             儲存
           </button>
         </div>
@@ -101,7 +123,7 @@ const EditPopupModal = ({ open, onClose }) => {
               />
             ) : (
               <img
-                src={backgroundImage} //要帶入使用者原來的backgroundImage
+                src={userData.user.banner}
                 alt="background"
                 className="backgroundImage"
               />
@@ -129,7 +151,11 @@ const EditPopupModal = ({ open, onClose }) => {
             {userPhotoPreview ? (
               <img src={userPhotoPreview} alt="avatar" className="avatarIcon" />
             ) : (
-              <img src={UserPhotoIcon} alt="avatar" className="avatarIcon" /> //要帶入使用者原來的UserPhotoIcon
+              <img
+                src={userData.user.avatar}
+                alt="avatar"
+                className="avatarIcon"
+              />
             )}
             <div className="editUserAvatarOverlay">
               <label htmlFor="userPhotoInput">
@@ -146,32 +172,38 @@ const EditPopupModal = ({ open, onClose }) => {
           </div>
         </div>
         <div className="userContext">
-          <div className="nameInputContainer">
-            <label htmlFor="nameInput" className="inputLabel nameLabel">
-              名稱
-            </label>
-            <input
-              id="nameInput"
-              className="nameInput"
-              value={username}
-              onChange={handleUsernameChange}
-              placeholder={username}
-            />
-            <div className="inputInfo">{username.length}/50</div>
-          </div>
-          <div className="introInputContainer">
-            <label htmlFor="introInput" className="inputLabel introLabel">
-              自我介紹
-            </label>
-            <textarea
-              id="introInput"
-              className="introInput"
-              value={intro}
-              onChange={handleIntroChange}
-              placeholder={intro}
-            />
-            <div className="inputInfo">{intro.length}/160</div>
-          </div>
+            <div className="nameInputContainer">
+              <label htmlFor="nameInput" className="inputLabel nameLabel">
+                名稱
+              </label>
+              <input
+                id="nameInput"
+                className="nameInput"
+                value={username}
+                onChange={handleUsernameChange}
+                placeholder={userData.user.name || ""}
+              />
+              <div className="inputInfo">{username.length}/50</div>
+            </div>
+            {errorMessageUsername && (
+              <div className="errorMessage">{errorMessageUsername}</div>
+            )}
+            <div className="introInputContainer">
+              <label htmlFor="introInput" className="inputLabel introLabel">
+                自我介紹
+              </label>
+              <textarea
+                id="introInput"
+                className="introInput"
+                value={intro}
+                onChange={handleIntroChange}
+                placeholder={userData.user.introduction || ""} //要帶入使用者自介
+              />
+              <div className="inputInfo">{intro.length}/160</div>
+            </div>
+            {errorMessageIntro && (
+              <div className="errorMessage">{errorMessageIntro}</div>
+            )}
         </div>
       </div>
     </Popup>

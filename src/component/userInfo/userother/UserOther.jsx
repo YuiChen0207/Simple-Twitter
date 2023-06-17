@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import EditPopupModal from "../../popupModal/editPopupModal/EditPopupModal";
-import userPhoto from "../../../assets/postPhoto.svg";
 import btnMsg from "../../../assets/btnMsg.svg";
 import btnNotfi from "../../../assets/btnNotfi.svg";
 import activeNotfi from "../../../assets/btn_notfi.svg";
