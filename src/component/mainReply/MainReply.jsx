@@ -33,10 +33,10 @@ const MainReply = ({ tweet, repliesSet, tweetSet }) => {
     <div className="singleReplyBox">
       <div className="replyMainBody">
         <div className="replyContentBox">
-          <img className="userImg" src="" alt="user-img" />
+          <img className="userImg" src={tweet.User.avatar} alt="user-img" />
           <div className="replyContent">
-            <span className="name">*</span>
-            <span className="account">@</span>
+            <span className="name">{tweet.User.name}</span>
+            <span className="account">@{tweet.User.account}</span>
           </div>
         </div>
         <div className="content">{tweet.description}</div>
