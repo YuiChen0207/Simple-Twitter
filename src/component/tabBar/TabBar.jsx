@@ -12,7 +12,8 @@ const tabOptionsFollow = [
 ];
 
 const TabBar = ({ activePage, activeTab, onTabClick }) => {
-  const options = activePage === "UserSelf" ? tabOptions : tabOptionsFollow;
+  const options =
+    activePage === "UserSelf" || "UserOther" ? tabOptions : tabOptionsFollow;
 
   return (
     <div className="tabBar">

@@ -5,6 +5,8 @@ import heartIcon from '../../../assets/heart.svg';
 import './Tweet.scss';
 import { useId } from '../../../contexts/IdContext';
 import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
+
 
 const Tweet = ({
   logo,
@@ -17,6 +19,7 @@ const Tweet = ({
   likes,
   replyTo,
   hideFooter,
+  onGetUserIdFromTweet,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [count, setCount] = useState(likes);
@@ -40,10 +43,19 @@ const Tweet = ({
     }
     setIsLiked(!isLiked);
   };
+
   return (
     <>
       <div className="tweetContainer">
-        <img src={logo} alt="Logo" className="userLogo" />
+        <Link to={`/user/other`}>
+          <img
+            src={logo}
+            alt="Logo"
+            className="userLogo"
+            onClick={onGetUserIdFromTweet}
+          />
+        </Link>
+
         <div className="tweetContent">
           <div className="tweetHeader">
             <span className="tweetUsername">{username}</span>
