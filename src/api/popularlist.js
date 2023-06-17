@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axiosInstance, { baseUrl } from "./axiosInstance";
+/* import axios from 'axios';
 const baseUrl = 'https://infinite-dawn-77240.herokuapp.com/api';
 //const testApi = 'http://localhost:3004/users';
 
@@ -19,7 +20,7 @@ axiosInstance.interceptors.request.use(
     console.error(error);
   }
 );
-
+ */
 // // 測試用
 // export const getPopularlists = async () => {
 //   try {

@@ -1,28 +1,9 @@
-import axios from "axios";
-
-const baseUrl = "https://infinite-dawn-77240.herokuapp.com/api";
-
-const axiosInstance = axios.create({
-  baseURL: baseUrl,
-});
-
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    console.error(error);
-  }
-);
+import axiosInstance, { baseUrl } from "./axiosInstance";
 
 export const likeTweet = async (tweetId) => {
   try {
     const res = await axiosInstance.post(`${baseUrl}/tweets/${tweetId}/like`);
-    console.log(res.data)
+    console.log(res.data);
     return res.data;
   } catch (error) {
     console.error("[Like Tweet failed]: ", error);

@@ -21,7 +21,7 @@ const UserTweetsList = ({ tweets }) => {
       {tweets.map((tweet) => (
         <Tweet
           key={tweet.id}
-          logo={tweet.avatar ?? grayLogo} //logo要再改
+          logo={tweet.avatar ?? grayLogo}
           username={tweet.name}
           accountName={tweet.account}
           postTime={formatTime(tweet.createdAt)}

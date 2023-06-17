@@ -15,6 +15,8 @@ import './base.scss';
 import './reset.scss';
 import { AuthProvider } from './contexts/AuthContext';
 import { IdProvider } from './contexts/IdContext';
+import { UserIdProvider } from "./contexts/UserIdContext";
+
 
 /* import {LoginPage, MainPage, RegistPage} from './page' */
 function App() {
@@ -22,6 +24,7 @@ function App() {
     <Router>
       <div className="app">
         <AuthProvider>
+          <UserIdProvider>
           <IdProvider>
             <Routes>
               <Route path="*" element={<HomePage />} />
@@ -38,6 +41,7 @@ function App() {
               <Route path="/admin_users" element={<UsersDashboard />} />
               <Route path="/reply_list" element={<ReplyList />} />
             </Routes>
+          </UserIdProvider>
           </IdProvider>
         </AuthProvider>
         {/* 
