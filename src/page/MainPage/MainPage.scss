@@ -21,7 +21,7 @@
 .tweetsSection {
   width: 100%;
   flex: 80%;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .tweetsSection::-webkit-scrollbar {
