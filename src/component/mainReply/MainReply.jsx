@@ -27,16 +27,14 @@ const MainReply = ({ tweet, repliesSet, tweetSet }) => {
     setShowModal(false);
   };
 
-  //const banner = tweet.User.banner;
-
   return (
     <div className="singleReplyBox">
       <div className="replyMainBody">
         <div className="replyContentBox">
-          <img className="userImg" src={tweet.User.avatar} alt="user-img" />
+          <img className="userImg" src="" alt="user-img" />
           <div className="replyContent">
-            <span className="name">{tweet.User.name}</span>
-            <span className="account">@{tweet.User.account}</span>
+            <span className="name">*</span>
+            <span className="account">@</span>
           </div>
         </div>
         <div className="content">{tweet.description}</div>
