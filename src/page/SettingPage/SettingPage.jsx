@@ -1,9 +1,19 @@
-import Navbar from '../../component/navbar/Navbar';
-import AuthInput from '../../component/authInput/AuthInput';
-import PageTag from '../../component/pageTag/PageTag';
-import '../SettingPage/SettingPage.scss';
+import Navbar from "../../component/navbar/Navbar";
+import AuthInput from "../../component/authInput/AuthInput";
+import PageTag from "../../component/pageTag/PageTag";
+import "../SettingPage/SettingPage.scss";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import { useEffect } from "react";
 
 const SettingPage = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [navigate, isAuthenticated]);
   return (
     <div className="settingMainContainer">
       <div className="navContainer">

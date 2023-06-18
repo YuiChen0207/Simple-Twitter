@@ -3,12 +3,13 @@ import PopularList from "../../component/popularList/PopularList";
 import MainReply from "../../component/mainReply/MainReply";
 import ReplyListBox from "../../component/replyListBox/ReplyListBox";
 import ArrowLeft from "../../assets/arrow.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getSingleTweet, getTweetReplies } from "../../api/tweets";
 import { useEffect, useState } from "react";
 import { useId } from "../../contexts/IdContext";
 import { getPopularList } from "../../api/popularlist";
 import "./ReplyList.scss";
+import { useAuth } from "../../contexts/AuthContext";
 
 const ReplyList = () => {
   const [singleTweet, setSingleTweet] = useState({});
@@ -16,6 +17,8 @@ const ReplyList = () => {
   const [popularCards, setPopularCards] = useState([]);
   const { currentId } = useId();
   const tweet = { ...singleTweet };
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   const handlePrevPage = () => {
     window.history.back();
@@ -59,6 +62,11 @@ const ReplyList = () => {
     getPopularCardsAsync();
   }, []);
 
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [navigate, isAuthenticated]);
   return (
     <div className="replyMainContainer">
       <Navbar />

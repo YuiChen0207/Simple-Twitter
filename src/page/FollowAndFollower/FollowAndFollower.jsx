@@ -1,24 +1,25 @@
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import Header from '../../component/header/Header';
-import TabBar from '../../component/tabBar/TabBar';
-import Navbar from '../../component/navbar/Navbar';
-import PopularList from '../../component/popularList/PopularList';
-import FollowAndFollowerTweet from '../../component/followAndFollowerTweet/FollowAndFollowerTweet';
-import { getPopularList } from '../../api/popularlist';
-import { getFollowerList, getFollowingList } from '../../api/followship';
-import './FollowAndFollower.scss';
-import { useAuth } from '../../contexts/AuthContext';
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import Header from "../../component/header/Header";
+import TabBar from "../../component/tabBar/TabBar";
+import Navbar from "../../component/navbar/Navbar";
+import PopularList from "../../component/popularList/PopularList";
+import FollowAndFollowerTweet from "../../component/followAndFollowerTweet/FollowAndFollowerTweet";
+import { getPopularList } from "../../api/popularlist";
+import { getFollowerList, getFollowingList } from "../../api/followship";
+import "./FollowAndFollower.scss";
+import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const FollowAndFollower = () => {
   const location = useLocation();
   const path = location.pathname;
-  const initialTab = path === '/follow' ? 'following' : 'followers';
+  const initialTab = path === "/follow" ? "following" : "followers";
   const [activeTab, setActiveTab] = useState(initialTab);
   const [popularCards, setPopularCards] = useState([]);
-  const [followshipList, setFollowshipList] = useState('');
-
-  const { currentMember } = useAuth();
+  const [followshipList, setFollowshipList] = useState("");
+  const navigate = useNavigate();
+  const { currentMember, isAuthenticated } = useAuth();
   const UserId = currentMember?.id;
   console.log(UserId);
 
@@ -26,7 +27,7 @@ const FollowAndFollower = () => {
     const getFollowshipList = async () => {
       try {
         const list =
-          activeTab === 'followers'
+          activeTab === "followers"
             ? await getFollowerList(UserId)
             : await getFollowingList(UserId);
         console.log(list);
@@ -54,6 +55,12 @@ const FollowAndFollower = () => {
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [navigate, isAuthenticated]);
   return (
     <div className="mainContainer">
       <Navbar />
@@ -69,7 +76,7 @@ const FollowAndFollower = () => {
         />
 
         {[...followshipList]?.map((list, i) => {
-          if (activeTab === 'followers') {
+          if (activeTab === "followers") {
             return (
               <FollowAndFollowerTweet
                 index={i}

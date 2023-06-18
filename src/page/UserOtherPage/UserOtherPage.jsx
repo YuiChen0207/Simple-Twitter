@@ -16,6 +16,8 @@ import UserTweetsList from "../../component/userTweetList/UserTweetList";
 import UserRepliesList from "../../component/userRepliesList/UserRepliesList";
 import UserLikesList from "../../component/userLikesList/UserLikesList";
 import "../MainPage/MainPage.scss";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 const UserOther = () => {
   const { userId } = useUserId();
@@ -25,6 +27,8 @@ const UserOther = () => {
   const [likes, setLikes] = useState([]);
   const [popularCards, setPopularCards] = useState([]);
   const [userData, setUserData] = useState(null);
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -73,6 +77,12 @@ const UserOther = () => {
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [navigate, isAuthenticated]);
   return (
     <div className="mainContainer">
       <Navbar />
