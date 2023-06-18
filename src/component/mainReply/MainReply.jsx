@@ -1,11 +1,11 @@
-import profileImg from '../../assets/img/canadian-girl.jpg';
-import commentIcon from '../../assets/commit.svg';
-import emptyHeart from '../../assets/heart.svg';
-import fullHeart from '../../assets/like-heart.svg';
-import PopupReply from '../popupReply/PopupReply';
-import React, { useState } from 'react';
-import { unlikeTweet, likeTweet } from '../../api/likeAndUnlike';
-import './MainReply.scss';
+import profileImg from "../../assets/img/canadian-girl.jpg";
+import commentIcon from "../../assets/commit.svg";
+import emptyHeart from "../../assets/heart.svg";
+import fullHeart from "../../assets/like-heart.svg";
+import PopupReply from "../popupReply/PopupReply";
+import React, { useState } from "react";
+import { unlikeTweet, likeTweet } from "../../api/likeAndUnlike";
+import "./MainReply.scss";
 
 const MainReply = ({ tweet, repliesSet, tweetSet, setTweet }) => {
   const [showModal, setShowModal] = useState(false);
@@ -75,7 +75,6 @@ const MainReply = ({ tweet, repliesSet, tweetSet, setTweet }) => {
           onClose={handleCloseModal}
           repliesSet={repliesSet}
           tweetSet={tweetSet}
-          tweet={tweet}
         />
       )}
     </div>
