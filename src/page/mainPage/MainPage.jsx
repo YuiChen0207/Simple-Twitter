@@ -21,7 +21,7 @@ const Main = () => {
     const getTweetsAsync = async () => {
       try {
         const tweets = await getTweets();
-        setTweets(tweets.map((tweet) => ({ ...tweet })));
+        setTweets(tweets);
       } catch (error) {
         console.error(error);
       }
