@@ -16,15 +16,17 @@ import UserTweetsList from "../../component/userTweetList/UserTweetList";
 import UserRepliesList from "../../component/userRepliesList/UserRepliesList";
 import UserLikesList from "../../component/userLikesList/UserLikesList";
 import "./UserSelf.scss";
+import { useNavigate } from "react-router-dom";
 
 const UserSelf = () => {
-  const { currentMember } = useAuth();
+  const { currentMember, isAuthenticated } = useAuth();
   const [activeTab, setActiveTab] = useState("tweets");
   const [tweets, setTweets] = useState([]);
   const [replies, setReplies] = useState([]);
   const [likes, setLikes] = useState([]);
   const [popularCards, setPopularCards] = useState([]);
   const [userData, setUserData] = useState(null);
+  const navigate = useNavigate();
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -91,6 +93,12 @@ const UserSelf = () => {
     };
     fetchData();
   }, [currentMember]);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [navigate, isAuthenticated]);
 
   return (
     <div className="mainContainer">

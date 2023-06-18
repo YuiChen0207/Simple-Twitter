@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { likeTweet, unlikeTweet } from "../../../api/likeAndUnlike";
 import commitIcon from "../../../assets/commit.svg";
 import heartIcon from "../../../assets/heart.svg";
@@ -6,6 +6,8 @@ import { useId } from "../../../contexts/IdContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./Tweet.scss";
+import PopupReply from "../../popupReply/PopupReply";
+import { getSingleTweet } from "../../../api/tweets";
 
 const Tweet = ({
   logo,
@@ -19,11 +21,25 @@ const Tweet = ({
   replyTo,
   hideFooter,
   onGetUserIdFromTweet,
+  setList,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [count, setCount] = useState(likes);
   const { checkItemId } = useId();
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOneTweet = async () => {
+    checkItemId(tweetId);
+  };
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   const handleLike = async () => {
     try {
@@ -45,19 +61,15 @@ const Tweet = ({
 
   return (
     <>
-
       <div
         className="tweetContainer"
         onClick={(e) => {
-          if (e.target.tagName !== 'IMG') {
+          if (e.target.tagName !== "IMG") {
             checkItemId(tweetId);
-            navigate('/reply_list');
+            navigate("/reply_list");
           }
         }}
       >
-       
-
-      
         <Link to={`/user/other`}>
           <img
             src={logo}
@@ -66,7 +78,6 @@ const Tweet = ({
             onClick={onGetUserIdFromTweet}
           />
         </Link>
-
 
         <div className="tweetContent">
           <div className="tweetHeader">
@@ -85,20 +96,22 @@ const Tweet = ({
 
           <div className="tweetText">{content}</div>
 
-          
-
           <div className="tweetFooter">
             {!hideFooter && (
               <>
-                <div className="tweetComments">
-                  <img src={commitIcon} alt="commit icon" />
+                <div className="tweetComments" onClick={() => handleOneTweet()}>
+                  <img
+                    src={commitIcon}
+                    alt="commit icon"
+                    onClick={handleOpenModal}
+                  />
                   <span className="commentCount">{comments}</span>
                 </div>
                 <div className="tweetLikes" onClick={handleLike}>
                   <img
                     src={heartIcon}
                     alt="heart icon"
-                    className={`heartIcon ${isLiked ? 'liked' : ''}`}
+                    className={`heartIcon ${isLiked ? "liked" : ""}`}
                   />
                   <span className="likeCount">{count}</span>
                 </div>
@@ -106,8 +119,14 @@ const Tweet = ({
             )}
           </div>
         </div>
+        {showModal && (
+          <PopupReply
+            open={showModal}
+            onClose={handleCloseModal}
+            setList={setList}
+          />
+        )}
       </div>
-      <hr />
     </>
   );
 };
