@@ -1,12 +1,12 @@
-import Navbar from '../../component/navbar/Navbar';
-import PopularList from '../../component/popularList/PopularList.jsx';
-import Post from '../../component/post/Post';
-import TweetsList from '../../component/tweets/TweetList';
-import { getTweets } from '../../api/tweets';
+import Navbar from "../../component/navbar/Navbar";
+import PopularList from "../../component/popularList/PopularList.jsx";
+import Post from "../../component/post/Post";
+import TweetsList from "../../component/tweets/TweetList";
+import { getTweets } from "../../api/tweets";
 import { getPopularList } from "../../api/popularlist.js";
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 import "./MainPage.scss";
 
 const Main = () => {
@@ -21,7 +21,7 @@ const Main = () => {
     const getTweetsAsync = async () => {
       try {
         const tweets = await getTweets();
-        setTweets(tweets.map((tweet) => ({ ...tweet })));
+        setTweets(tweets);
       } catch (error) {
         console.error(error);
       }
@@ -43,7 +43,7 @@ const Main = () => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/login');
+      navigate("/login");
     }
   }, [navigate, isAuthenticated]);
 
@@ -55,7 +55,11 @@ const Main = () => {
           <Post />
         </div>
         <div className="tweetsSection">
-          <TweetsList tweets={tweets} className="tweetsSection" />
+          <TweetsList
+            tweets={tweets}
+            className="tweetsSection"
+            setTweetsList={setTweets}
+          />
         </div>
       </div>
       <PopularList popularCards={popularCards} />
