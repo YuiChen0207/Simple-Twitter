@@ -3,8 +3,7 @@ import PopupModal from "../popupModal/PopupModal";
 import { getPostTweet } from "../../api/tweets";
 import "./Post.scss";
 
-
-const Post = () => {
+const Post = ({ setList }) => {
   //const [postContent, setPostContent] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [userLogo, setUserLogo] = useState("");
@@ -56,7 +55,13 @@ const Post = () => {
         </button>
       </div>
       <hr className="thickBar" />
-      {showModal && <PopupModal open={showModal} onClose={handleCloseModal} />}
+      {showModal && (
+        <PopupModal
+          open={showModal}
+          setList={setList}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 };
