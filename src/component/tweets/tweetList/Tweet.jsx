@@ -24,7 +24,7 @@ const Tweet = ({
   setList,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
-  const [count, setCount] = useState(likes);
+  //const [count, setCount] = useState(likes);
   const { checkItemId } = useId();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -43,15 +43,37 @@ const Tweet = ({
 
   const handleLike = async () => {
     try {
-      if (isLiked && count === 0) {
-        return;
-      }
+      // if (isLiked) {
+      //   return;
+      // }
       if (isLiked) {
-        await unlikeTweet(tweetId);
-        setCount((prevLikes) => prevLikes - 1);
+        await unlikeTweet(String(tweetId));
+        setList?.((prev) => {
+          return prev.map((tweet) => {
+            if (tweet.id === tweetId) {
+              return {
+                ...tweet,
+                LikesCount: tweet.LikesCount - 1,
+              };
+            }
+            return { ...tweet };
+          });
+        });
+        setIsLiked(false);
       } else {
-        await likeTweet(tweetId);
-        setCount((prevLikes) => prevLikes + 1);
+        await likeTweet(String(tweetId));
+        setList?.((prev) => {
+          return prev.map((tweet) => {
+            if (tweet.id === tweetId) {
+              return {
+                ...tweet,
+                LikesCount: tweet.LikesCount + 1,
+              };
+            }
+            return { ...tweet };
+          });
+        });
+        setIsLiked(true);
       }
     } catch (error) {
       console.error("喜歡推文失败:", error);
@@ -113,7 +135,7 @@ const Tweet = ({
                     alt="heart icon"
                     className={`heartIcon ${isLiked ? "liked" : ""}`}
                   />
-                  <span className="likeCount">{count}</span>
+                  <span className="likeCount">{likes}</span>
                 </div>
               </>
             )}
