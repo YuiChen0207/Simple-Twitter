@@ -1,5 +1,5 @@
-import Tweet from "../tweets/tweetList/Tweet";
 import grayLogo from "../../assets/logoGray.svg";
+import UserPageTweet from "../userPageTweet/UserPageTweet";
 
 const UserRepliesList = ({ replies }) => {
   function formatTime(timestamp) {
@@ -19,7 +19,7 @@ const UserRepliesList = ({ replies }) => {
   return (
     <div className="tweetsListContainer">
       {replies.map((reply) => (
-        <Tweet
+        <UserPageTweet
           key={reply.id}
           logo={reply.replyAvatar ?? grayLogo}
           username={reply.replyName}

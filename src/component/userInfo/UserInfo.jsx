@@ -64,7 +64,6 @@ const UserInfo = ({
           <h5 className="medium">{username}</h5>
           <div className="accountName">@{accountName}</div>
           <div className="bio">{bio}</div>
-          {/* 要新增bio */}
           <div className="countSection">
             <div
               className="count followingCount"
