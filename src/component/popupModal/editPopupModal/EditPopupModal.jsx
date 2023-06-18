@@ -1,20 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
 import CloseIcon from "../../../assets/closeIcon.svg";
 import CameraIcon from "../../../assets/camera.svg";
 import WhiteCloseIcon from "../../../assets/whiteClose.svg";
 import "./EditPopupModal.scss";
+import { updateUser } from "../../../api/popupEditModal";
 
-const EditPopupModal = ({ open, onClose, userData }) => {
+const EditPopupModal = ({
+  open,
+  onClose,
+  userData,
+  onUserDataUpdate,
+  setUserData,
+}) => {
   const [username, setUsername] = useState(userData.user.name || "");
   const [intro, setIntro] = useState(userData.user.introduction || "");
   const [backgroundPhotoFile, setBackgroundPhotoFile] = useState(null);
-  const [backgroundPhotoPreview, setBackgroundPhotoPreview] = useState(null);
+  const [backgroundPhotoPreview, setBackgroundPhotoPreview] = useState(
+    userData.user.banner || null
+  );
   const [userPhotoFile, setUserPhotoFile] = useState(null);
-  const [userPhotoPreview, setUserPhotoPreview] = useState(null);
+  const [userPhotoPreview, setUserPhotoPreview] = useState(
+    userData.user.avatar || null
+  );
   const [errorMessageUsername, setErrorMessageUsername] = useState(null);
   const [errorMessageIntro, setErrorMessageIntro] = useState(null);
+  const [updatedUserData, setUpdatedUserData] = useState({});
 
+  useEffect(() => {
+    setBackgroundPhotoPreview(userData.user.banner || null);
+    setUserPhotoPreview(userData.user.avatar || null);
+  }, [userData.user.banner, userData.user.avatar]);
 
   const handlePopupClose = () => {
     onClose();
@@ -37,30 +53,29 @@ const EditPopupModal = ({ open, onClose, userData }) => {
     setBackgroundPhotoPreview(null);
   };
 
-  const popupContentStyle = {
-    position: "absolute",
-    top: "56px",
-    left: "50%",
-    width: "634px",
-    height: "650px",
-    borderRadius: "14px",
-    background: "var(--white)",
-    transform: "translateX(-50%)",
+  const handleUsernameChange = (e) => {
+    const updatedName = e.target.value;
+    setUsername(updatedName);
+    setErrorMessageUsername(null);
+
+    const updatedData = {
+      ...updatedUserData,
+      name: updatedName,
+    };
+    setUpdatedUserData(updatedData);
   };
 
-  const overlayStyle = {
-    background: "rgba(0, 0, 0, 0.5)",
+  const handleIntroChange = (e) => {
+    const updatedIntro = e.target.value;
+    setIntro(updatedIntro);
+    setErrorMessageIntro(null);
+
+    const updatedData = {
+      ...updatedUserData,
+      introduction: updatedIntro,
+    };
+    setUpdatedUserData(updatedData);
   };
-
-    const handleUsernameChange = (e) => {
-      setUsername(e.target.value);
-      setErrorMessageUsername(null); // 清除错误消息
-    };
-
-    const handleIntroChange = (e) => {
-      setIntro(e.target.value);
-      setErrorMessageIntro(null); // 清除错误消息
-    };
 
   const handleSave = () => {
     if (username.length > 50 && intro.length > 160) {
@@ -77,18 +92,49 @@ const EditPopupModal = ({ open, onClose, userData }) => {
       return;
     }
 
-    // 执行保存操作，例如向服务器发送更新请求
-    // 使用新的背景图像、用户头像、名称和自我介绍
-    // 可以根据需要自定义保存逻辑
-    console.log("保存數據:", {
-      username,
-      intro,
-      backgroundPhotoFile,
-      userPhotoFile,
-    });
+    if (
+      Object.keys(updatedUserData).length === 0 &&
+      !backgroundPhotoFile &&
+      !userPhotoFile
+    ) {
+      onClose();
+      return;
+    }
 
-    // 关闭弹出框
-    onClose();
+    const updatedData = {
+      ...userData.user,
+      ...updatedUserData,
+      banner: backgroundPhotoFile
+        ? backgroundPhotoPreview
+        : userData.user.banner,
+      avatar: userPhotoFile ? userPhotoPreview : userData.user.avatar,
+    };
+
+    updateUser(userData.user.id, updatedData)
+      .then((response) => {
+        console.log("用户信息更新成功:", response);
+        onUserDataUpdate(updatedData);
+        setUserData({ ...userData, user: updatedData });
+        onClose();
+      })
+      .catch((error) => {
+        console.error("用户信息更新失败:", error);
+      });
+  };
+
+  const popupContentStyle = {
+    position: "absolute",
+    top: "56px",
+    left: "50%",
+    width: "634px",
+    height: "650px",
+    borderRadius: "14px",
+    background: "var(--white)",
+    transform: "translateX(-50%)",
+  };
+
+  const overlayStyle = {
+    background: "rgba(0, 0, 0, 0.5)",
   };
 
   return (
@@ -172,38 +218,38 @@ const EditPopupModal = ({ open, onClose, userData }) => {
           </div>
         </div>
         <div className="userContext">
-            <div className="nameInputContainer">
-              <label htmlFor="nameInput" className="inputLabel nameLabel">
-                名稱
-              </label>
-              <input
-                id="nameInput"
-                className="nameInput"
-                value={username}
-                onChange={handleUsernameChange}
-                placeholder={userData.user.name || ""}
-              />
-              <div className="inputInfo">{username.length}/50</div>
-            </div>
-            {errorMessageUsername && (
-              <div className="errorMessage">{errorMessageUsername}</div>
-            )}
-            <div className="introInputContainer">
-              <label htmlFor="introInput" className="inputLabel introLabel">
-                自我介紹
-              </label>
-              <textarea
-                id="introInput"
-                className="introInput"
-                value={intro}
-                onChange={handleIntroChange}
-                placeholder={userData.user.introduction || ""} //要帶入使用者自介
-              />
-              <div className="inputInfo">{intro.length}/160</div>
-            </div>
-            {errorMessageIntro && (
-              <div className="errorMessage">{errorMessageIntro}</div>
-            )}
+          <div className="nameInputContainer">
+            <label htmlFor="nameInput" className="inputLabel nameLabel">
+              名稱
+            </label>
+            <input
+              id="nameInput"
+              className="nameInput"
+              value={username}
+              onChange={handleUsernameChange}
+              placeholder={userData.user.name || ""}
+            />
+            <div className="inputInfo">{username.length}/50</div>
+          </div>
+          {errorMessageUsername && (
+            <div className="errorMessage">{errorMessageUsername}</div>
+          )}
+          <div className="introInputContainer">
+            <label htmlFor="introInput" className="inputLabel introLabel">
+              自我介紹
+            </label>
+            <textarea
+              id="introInput"
+              className="introInput"
+              value={intro}
+              onChange={handleIntroChange}
+              placeholder={userData.user.introduction || ""}
+            />
+            <div className="inputInfo">{intro.length}/160</div>
+          </div>
+          {errorMessageIntro && (
+            <div className="errorMessage">{errorMessageIntro}</div>
+          )}
         </div>
       </div>
     </Popup>
