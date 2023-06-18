@@ -1,6 +1,5 @@
-import AdminTweet from './adminTweet/AdminTweet';
-import './AdminTweetList.scss';
-import profileImg from '../../assets/img/canadian-girl.jpg';
+import AdminTweet from "./adminTweet/AdminTweet";
+import "./AdminTweetList.scss";
 
 const AdminTweetList = ({ tweets, setList }) => {
   return (
