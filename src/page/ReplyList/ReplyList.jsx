@@ -1,14 +1,14 @@
-import Navbar from '../../component/navbar/Navbar';
-import PopularList from '../../component/popularList/PopularList';
-import MainReply from '../../component/mainReply/MainReply';
-import ReplyListBox from '../../component/replyListBox/ReplyListBox';
-import ArrowLeft from '../../assets/arrow.svg';
-import { Link, useNavigate } from 'react-router-dom';
-import { getSingleTweet, getTweetReplies } from '../../api/tweets';
-import { useEffect, useState } from 'react';
-import { useId } from '../../contexts/IdContext';
-import { getPopularList } from '../../api/popularlist';
-import './ReplyList.scss';
+import Navbar from "../../component/navbar/Navbar";
+import PopularList from "../../component/popularList/PopularList";
+import MainReply from "../../component/mainReply/MainReply";
+import ReplyListBox from "../../component/replyListBox/ReplyListBox";
+import ArrowLeft from "../../assets/arrow.svg";
+import { Link, useNavigate } from "react-router-dom";
+import { getSingleTweet, getTweetReplies } from "../../api/tweets";
+import { useEffect, useState } from "react";
+import { useId } from "../../contexts/IdContext";
+import { getPopularList } from "../../api/popularlist";
+import "./ReplyList.scss";
 
 const ReplyList = () => {
   const [singleTweet, setSingleTweet] = useState({});
