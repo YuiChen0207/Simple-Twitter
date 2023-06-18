@@ -49,10 +49,10 @@ const Main = () => {
 
   return (
     <div className="mainContainer">
-      <Navbar />
+      <Navbar setList={setTweets} />
       <div className="mainContent">
         <div className="postSection">
-          <Post />
+          <Post setList={setTweets} />
         </div>
         <div className="tweetsSection">
           <TweetsList
