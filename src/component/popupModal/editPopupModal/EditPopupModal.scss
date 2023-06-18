@@ -95,7 +95,7 @@
         border-radius: 50%;
       }
 
-      .cameraIcon{
+      .cameraIcon {
         cursor: pointer;
       }
     }
@@ -115,6 +115,10 @@
       padding: 10px;
       background-color: #f5f8fa;
       border-bottom: 2px solid #657786;
+
+      &.error {
+        border-bottom: 2px solid var(--Error);
+      }
 
       .inputLabel {
         font-size: 14px;
@@ -150,7 +154,7 @@
       }
     }
   }
-  .errorMessage{
+  .errorMessage {
     padding-top: 4px;
     font-size: 12px;
     font-weight: 500;
