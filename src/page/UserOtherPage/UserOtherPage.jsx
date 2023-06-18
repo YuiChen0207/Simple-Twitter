@@ -15,7 +15,7 @@ import { useUserId } from '../../contexts/UserIdContext';
 import UserTweetsList from '../../component/userTweetList/UserTweetList';
 import UserRepliesList from '../../component/userRepliesList/UserRepliesList';
 import UserLikesList from '../../component/userLikesList/UserLikesList';
-import '../mainPage/MainPage.scss';
+import '../MainPage/MainPage.scss';
 
 const UserOther = () => {
   const { userId } = useUserId();
