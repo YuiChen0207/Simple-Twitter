@@ -2,7 +2,7 @@ import './TabBar.scss';
 
 const tabOptions = [
   { id: 'tweets', label: '推文' },
-  { id: 'replies', label: '回復' },
+  { id: 'replies', label: '回覆' },
   { id: 'likes', label: '喜歡的內容' },
 ];
 

@@ -1,74 +1,93 @@
-import AuthInput from '../../component/authInput/AuthInput';
-import siteLogo from '../../assets/logo.svg';
-import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
-import { useAuth } from '../../contexts/AuthContext';
-import '../RegistPage/RegistPage.scss';
+import AuthInput from "../../component/authInput/AuthInput";
+import siteLogo from "../../assets/logo.svg";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { useAuth } from "../../contexts/AuthContext";
+import "../RegistPage/RegistPage.scss";
 
 const RegistPage = () => {
-  const [account, setAccount] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [checkPassword, setCheckPassword] = useState('');
+  const [account, setAccount] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [checkPassword, setCheckPassword] = useState("");
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   const { register, isAuthenticated } = useAuth();
 
   const handleClick = async () => {
+    setErrors({});
+
+    const newErrors = {};
+
     if (account.length === 0) {
-      return;
+      newErrors.account = "帳號不得為空";
     }
 
-    if (name.length === 0 || name.length > 50) {
-      return;
+    if (name.length === 0) {
+      newErrors.name = "名稱不得為空";
     }
 
     if (email.length === 0) {
-      return;
+      newErrors.email = "Email 不得為空";
     }
 
     if (password.length === 0) {
-      return;
+      newErrors.password = "密碼不得為空";
     }
 
     if (checkPassword.length === 0) {
+      newErrors.checkPassword = "密碼確認不得為空";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      // 如果有錯誤訊息，設定到 errors 物件中
+      setErrors(newErrors);
       return;
     }
 
-    const success = await register({
-      name,
-      account,
-      password,
-      checkPassword,
-      email,
-    });
-
-    if (success) {
-      Swal.fire({
-        position: 'top',
-        title: '註冊成功!',
-        timer: 1000,
-        icon: 'success',
-        showConfirmButton: false,
+    try {
+      const success = await register({
+        name,
+        account,
+        password,
+        checkPassword,
+        email,
       });
 
-      return;
+      if (success) {
+        Swal.fire({
+          position: "top",
+          title: "註冊成功!",
+          timer: 1000,
+          icon: "success",
+          showConfirmButton: false,
+        });
+      }
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.error) {
+        const errorMessage = error.response.data.error;
+        setErrors((prevErrors) => ({ ...prevErrors, common: errorMessage }));
+      } else if (
+        error.response &&
+        error.response.data &&
+        error.response.data.status
+      ) {
+        const errorMessage = error.response.data.status;
+        setErrors((prevErrors) => ({ ...prevErrors, common: errorMessage }));
+      } else {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          common: "註冊失敗",
+        }));
+      }
     }
-
-    Swal.fire({
-      position: 'top',
-      title: '註冊失敗',
-      timer: 1000,
-      icon: 'error',
-      showConfirmButton: false,
-    });
   };
-
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/login');
+      navigate("/login");
     }
   }, [navigate, isAuthenticated]);
 
@@ -85,6 +104,7 @@ const RegistPage = () => {
           value={account}
           onChange={(accountInputValue) => setAccount(accountInputValue)}
         />
+        {errors.account && <p className="error">{errors.account}</p>}
 
         <AuthInput
           label="名稱"
@@ -92,6 +112,7 @@ const RegistPage = () => {
           value={name}
           onChange={(nameInputValue) => setName(nameInputValue)}
         />
+        {errors.name && <p className="error">{errors.name}</p>}
 
         <AuthInput
           label="Email"
@@ -99,6 +120,7 @@ const RegistPage = () => {
           value={email}
           onChange={(emailInputValue) => setEmail(emailInputValue)}
         />
+        {errors.email && <p className="error">{errors.email}</p>}
 
         <AuthInput
           type="password"
@@ -107,6 +129,7 @@ const RegistPage = () => {
           value={password}
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
+        {errors.password && <p className="error">{errors.password}</p>}
 
         <AuthInput
           type="password"
@@ -116,6 +139,10 @@ const RegistPage = () => {
             setCheckPassword(checkedPasswordInputValue)
           }
         />
+        {errors.checkPassword && (
+          <p className="error">{errors.checkPassword}</p>
+        )}
+        {errors.common && <p className="error">{errors.common}</p>}
       </div>
       <button className="btn" onClick={handleClick}>
         註冊
