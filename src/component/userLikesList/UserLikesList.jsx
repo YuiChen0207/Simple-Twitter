@@ -1,5 +1,5 @@
+import Tweet from "../tweets/tweetList/Tweet";
 import grayLogo from "../../assets/logoGray.svg";
-import UserPageTweet from "../userPageTweet/UserPageTweet";
 
 const UserRepliesList = ({ likes }) => {
   function formatTime(timestamp) {
@@ -19,7 +19,7 @@ const UserRepliesList = ({ likes }) => {
   return (
     <div className="tweetsListContainer">
       {likes.map((like) => (
-        <UserPageTweet
+        <Tweet
           key={like.id}
           logo={like.tweetOwnerAvatar ?? grayLogo}
           username={like.tweetOwnerName}
@@ -28,7 +28,7 @@ const UserRepliesList = ({ likes }) => {
           content={like.description}
           comments={like.replyCount}
           likes={like.likeCount}
-          isLike={true}
+          //isLiked={true} 愛心變紅還沒做
         />
       ))}
     </div>

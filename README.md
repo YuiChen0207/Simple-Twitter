@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# Simple Twitter 前後分離協作專案 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 作品連結：[Simpe Twitter](https://owenlu0125.github.io/login)
 
-## Available Scripts
+## 後端repo連結：[後端連結](https://github.com/tschiang23/twitter-api-2020)
+## 頁面截圖：
+![](./public/screenshot1.png)
+![](./public/screenshot2.png)
+![](./public/screenshot3.png)
+![](./public/screenshot4.png)
 
-In the project directory, you can run:
+## 功能說明
 
-### `npm start`
+前台：<br/>
+使用者可以註冊/登入帳號、推文、回覆推文、設定帳號資料、編輯個人資訊、跟隨/取消跟隨其他使用者、查看單一偏貼文及該篇文章的回覆內容。<br/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+後台：<br/>
+管理者可以登入帳號、觀看推文清單及使用者列表、刪除推文。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+##  使用說明
 
-### `npm test`
+      1.  確認已經安裝 node.js 與 npm
+      2.  clone 專案
+      3.  終端機進入資料夾並輸入：`$ npm `
+      4.  安裝完畢後，繼續輸入：`$ npm run start`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 測試帳號
 
-### `npm run build`
+      前台：
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+      ---
+      Account: user1
+      Password: 12345678
+      ---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+      後台：
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+      ---
+      Account: root
+      Password: 12345678
+      ---

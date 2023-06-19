@@ -1,11 +1,11 @@
-import UserCard from '../../component/userCard/UserCard';
-import Navbar from '../../component/navbar/Navbar';
-import PageTag from '../../component/pageTag/PageTag';
-import { useEffect, useState } from 'react';
-import { getUsersByAdmin } from '../../api/admin';
-import './UsersDashboard.scss';
-import { useAuth } from '../../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import UserCard from "../../component/userCard/UserCard";
+import Navbar from "../../component/navbar/Navbar";
+import PageTag from "../../component/pageTag/PageTag";
+import { useEffect, useState } from "react";
+import { getUsersByAdmin } from "../../api/admin";
+import "./UsersDashboard.scss";
+import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const UsersDashboard = () => {
   const [allUsersData, setAllUsersData] = useState([]);
@@ -26,7 +26,7 @@ const UsersDashboard = () => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/login_admin');
+      navigate("/login_admin");
     }
   }, [navigate, isAuthenticated]);
   return (
@@ -43,7 +43,7 @@ const UsersDashboard = () => {
                 name={user.name}
                 account={user.account}
                 avatar={user.avatar}
-                tweetNum={user.tweetCount}
+                tweetNum={user.tweetsCount}
                 likeNum={user.likedTweetsCount}
                 followingNum={user.followingsCount}
                 followerNum={user.followersCount}

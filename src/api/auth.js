@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-const authURL = "https://infinite-dawn-77240.herokuapp.com/api";
+const authURL = 'https://infinite-dawn-77240.herokuapp.com/api';
 
 export const login = async ({ account, password }) => {
   try {
@@ -17,8 +17,7 @@ export const login = async ({ account, password }) => {
     }
     return data;
   } catch (error) {
-    console.error("[Login Failed]:", error);
-    return { success: false, error };
+    console.error('[Login Failed]:', error);
   }
 };
 
@@ -39,7 +38,7 @@ export const adminLogin = async ({ account, password }) => {
     }
     return data;
   } catch (error) {
-    console.error("[Login Failed]:", error);
+    console.error('[Login Failed]:', error);
   }
 };
 
@@ -67,7 +66,7 @@ export const register = async ({
 
     return data;
   } catch (error) {
-    console.error("[Register Failed]: ", error);
+    console.error('[Register Failed]: ', error);
   }
 };
 
@@ -75,11 +74,11 @@ export const checkPermission = async (authToken) => {
   try {
     const response = await axios.get(`${authURL}/test-token`, {
       headers: {
-        Authorization: "Bearer " + authToken,
+        Authorization: 'Bearer ' + authToken,
       },
     });
     return response.data.success;
   } catch (error) {
-    console.error("[Check Permission Failed]:", error);
+    console.error('[Check Permission Failed]:', error);
   }
 };

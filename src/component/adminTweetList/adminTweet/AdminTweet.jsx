@@ -1,7 +1,6 @@
 import './AdminTweet.scss';
 import deleteIcon from '../../../assets/delete.svg';
 import { DeleteTweetByAdmin } from '../../../api/admin';
-import { formatTime } from "../../../utils/timeUtils";
 
 const AdminTweet = ({
   tweetId,
@@ -33,7 +32,7 @@ const AdminTweet = ({
           <span className="name">{username}</span>
           <span className="account">{accountName}</span>
           <span className="dot" />
-          <span className="date">{formatTime(postTime)}</span>
+          <span className="date">{postTime}</span>
         </div>
         <div className="content">{content}</div>
       </div>

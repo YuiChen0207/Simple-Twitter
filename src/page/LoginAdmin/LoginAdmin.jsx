@@ -1,14 +1,14 @@
-import AuthInput from '../../component/authInput/AuthInput';
-import siteLogo from '../../assets/logo.svg';
-import '../LoginAdmin/LoginAdmin.scss';
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import { useAuth } from '../../contexts/AuthContext';
+import AuthInput from "../../component/authInput/AuthInput";
+import siteLogo from "../../assets/logo.svg";
+import "../LoginAdmin/LoginAdmin.scss";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { useAuth } from "../../contexts/AuthContext";
 
 const LoginAdmin = () => {
-  const [account, setAccount] = useState('');
-  const [password, setPassword] = useState('');
+  const [account, setAccount] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const { adminLogin, isAuthenticated, currentMember } = useAuth();
@@ -26,10 +26,10 @@ const LoginAdmin = () => {
     });
     if (success) {
       Swal.fire({
-        position: 'top',
-        title: '登入成功!',
+        position: "top",
+        title: "登入成功!",
         timer: 1000,
-        icon: 'success',
+        icon: "success",
         showConfirmButton: false,
       });
 
@@ -37,17 +37,17 @@ const LoginAdmin = () => {
     }
 
     Swal.fire({
-      position: 'top',
-      title: '登入失敗',
+      position: "top",
+      title: "登入失敗",
       timer: 1000,
-      icon: 'error',
+      icon: "error",
       showConfirmButton: false,
     });
   };
 
   useEffect(() => {
-    if (isAuthenticated && currentMember.role === 'admin') {
-      navigate('/admin_main');
+    if (isAuthenticated && currentMember.role === "admin") {
+      navigate("/admin_main");
     }
   }, [navigate, isAuthenticated, currentMember]);
 

@@ -39,8 +39,8 @@ const LoginPage = () => {
       });
       return;
     } else {
-      setAccountError("帳號或密碼不存在");
-      setPasswordError("帳號或密碼不存在");
+      setAccountError("帳號不存在");
+      setPasswordError("密碼不存在");
     }
   };
 
