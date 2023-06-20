@@ -3,7 +3,7 @@ import grayLogo from "../../assets/logoGray.svg";
 import { useUserId } from "../../contexts/UserIdContext";
 import { formatTime } from "../../utils/timeUtils";
 
-const TweetsList = ({ tweets }) => {
+const TweetsList = ({ tweets, setTweetsList }) => {
   const { setUserIdFromTweet } = useUserId();
 
   return (
@@ -22,6 +22,7 @@ const TweetsList = ({ tweets }) => {
               tweetId={tweet.id}
               likes={tweet.LikesCount}
               onGetUserIdFromTweet={() => setUserIdFromTweet(tweet.User.id)}
+              setList={setTweetsList}
             />
           )
       )}

@@ -1,12 +1,12 @@
-import Navbar from '../../component/navbar/Navbar';
-import PopularList from '../../component/popularList/PopularList.jsx';
-import Post from '../../component/post/Post';
-import TweetsList from '../../component/tweets/TweetList';
-import { getTweets } from '../../api/tweets';
+import Navbar from "../../component/navbar/Navbar";
+import PopularList from "../../component/popularList/PopularList.jsx";
+import Post from "../../component/post/Post";
+import TweetsList from "../../component/tweets/TweetList";
+import { getTweets } from "../../api/tweets";
 import { getPopularList } from "../../api/popularlist.js";
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 import "./MainPage.scss";
 
 const Main = () => {
@@ -43,19 +43,23 @@ const Main = () => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/login');
+      navigate("/login");
     }
   }, [navigate, isAuthenticated]);
 
   return (
     <div className="mainContainer">
-      <Navbar />
+      <Navbar setList={setTweets} />
       <div className="mainContent">
         <div className="postSection">
-          <Post />
+          <Post setList={setTweets} />
         </div>
         <div className="tweetsSection">
-          <TweetsList tweets={tweets} className="tweetsSection" />
+          <TweetsList
+            tweets={tweets}
+            className="tweetsSection"
+            setTweetsList={setTweets}
+          />
         </div>
       </div>
       <PopularList popularCards={popularCards} />

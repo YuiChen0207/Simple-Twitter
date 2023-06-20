@@ -3,11 +3,13 @@ import Popup from "reactjs-popup";
 import CloseIcon from "../../assets/closeIcon.svg";
 import { getPostTweet, postTweet } from "../../api/tweets";
 import "./PopupModal.scss";
+import { useAuth } from "../../contexts/AuthContext";
 
-const PopupModal = ({ open, onClose }) => {
+const PopupModal = ({ open, onClose, setList }) => {
   const [tweetText, setTweetText] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [userLogo, setUserLogo] = useState("");
+  const { currentMember } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,11 +47,23 @@ const PopupModal = ({ open, onClose }) => {
       const response = await postTweet({ tweetText });
       console.log("推文已發布:", response);
 
+      setList((prev) => {
+        return [
+          {
+            Likes: [],
+            LikesCount: 0,
+            Replies: [],
+            RepliesCount: 0,
+            ...response.data,
+            User: { ...currentMember },
+          },
+          ...prev,
+        ];
+      });
+
       setTweetText("");
       setErrorMessage("");
-
       onClose();
-      window.location.reload(); //可在優化
     } catch (error) {
       console.error("發佈推文失败:", error);
     }
