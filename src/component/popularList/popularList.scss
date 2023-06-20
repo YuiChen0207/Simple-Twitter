@@ -1,0 +1,23 @@
+.popular-list {
+  width: 273px;
+  height: 610px;
+  background-color: var(--gray-100);
+  overflow: scroll;
+  border-radius: 16px;
+  margin: 16px 0;
+
+  .medium {
+    margin: 24px;
+  }
+
+  hr {
+    background-color: #e6ecf0;
+    border: none;
+  }
+
+  .popular-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
