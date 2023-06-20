@@ -1,23 +1,10 @@
 import Tweet from "./tweetList/Tweet";
 import grayLogo from "../../assets/logoGray.svg";
 import { useUserId } from "../../contexts/UserIdContext";
+import { formatTime } from "../../utils/timeUtils";
 
 const TweetsList = ({ tweets, setTweetsList }) => {
   const { setUserIdFromTweet } = useUserId();
-
-  function formatTime(timestamp) {
-    const currentTime = new Date();
-    const postTime = new Date(timestamp);
-
-    const diffInMilliseconds = currentTime - postTime;
-    const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
-
-    if (diffInHours < 1) {
-      return "剛剛";
-    } else {
-      return `${diffInHours}小時`;
-    }
-  }
 
   return (
     <div className="tweetsListContainer">
