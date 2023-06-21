@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
@@ -44,6 +45,7 @@ const RegistPage = () => {
       newErrors.checkPassword = "密碼不一致";
     }
 
+
     if (Object.keys(newErrors).length > 0) {
       // 如果有錯誤訊息，設定到 errors 物件中
       setErrors(newErrors);
@@ -69,6 +71,7 @@ const RegistPage = () => {
         });
       }
     } catch (error) {
+
       console.error("[Registration]:", error);
       if (error === "Account already registered!") {
         setErrors({ account: "此帳號已註冊" });
@@ -88,8 +91,8 @@ const RegistPage = () => {
   const handleInputChange = (e, setter) => {
     setter(e.target.value);
     setErrors((prevErrors) => ({ ...prevErrors, [e.target.name]: "" }));
-  };
 
+  };
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/login");

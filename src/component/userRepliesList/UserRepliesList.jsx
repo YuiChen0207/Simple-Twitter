@@ -1,6 +1,8 @@
+
 import grayLogo from "../../assets/logoGray.svg";
 import { formatTime } from "../../utils/timeUtils";
 import UserPageTweet from "../userPageTweet/UserPageTweet";
+
 
 const UserRepliesList = ({ replies }) => {
   return (
@@ -8,7 +10,7 @@ const UserRepliesList = ({ replies }) => {
       {replies.map((reply) => (
         <UserPageTweet
           key={reply.id}
-          logo={reply.replyAvatar ?? grayLogo}
+          logo={reply.replyAvatar}
           username={reply.replyName}
           accountName={reply.replyAccount}
           postTime={formatTime(reply.createdAt)}

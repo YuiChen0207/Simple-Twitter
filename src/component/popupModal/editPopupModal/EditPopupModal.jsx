@@ -218,7 +218,11 @@ const EditPopupModal = ({
           </div>
         </div>
         <div className="userContext">
-          <div className="nameInputContainer">
+          <div
+            className={`nameInputContainer ${
+              errorMessageUsername ? "error" : ""
+            }`}
+          >
             <label htmlFor="nameInput" className="inputLabel nameLabel">
               名稱
             </label>
@@ -234,7 +238,11 @@ const EditPopupModal = ({
           {errorMessageUsername && (
             <div className="errorMessage">{errorMessageUsername}</div>
           )}
-          <div className="introInputContainer">
+          <div
+            className={`introInputContainer ${
+              errorMessageIntro ? "error" : ""
+            }`}
+          >
             <label htmlFor="introInput" className="inputLabel introLabel">
               自我介紹
             </label>

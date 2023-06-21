@@ -1,9 +1,15 @@
 import "./TabBar.scss";
 
 const tabOptions = [
+<<<<<<< HEAD
+  { id: 'tweets', label: '推文' },
+  { id: 'replies', label: '回覆' },
+  { id: 'likes', label: '喜歡的內容' },
+=======
   { id: "tweets", label: "推文" },
   { id: "replies", label: "回覆" },
   { id: "likes", label: "喜歡的內容" },
+>>>>>>> 0e7a0258deba16114cf276bb17539628755be59f
 ];
 
 const tabOptionsFollow = [
