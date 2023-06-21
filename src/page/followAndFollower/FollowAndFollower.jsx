@@ -12,7 +12,6 @@ import PopularList from "../../component/popularList/PopularList";
 import FollowAndFollowerTweet from "../../component/followAndFollowerTweet/FollowAndFollowerTweet";
 import "./FollowAndFollower.scss";
 
-
 const FollowAndFollower = () => {
   const location = useLocation();
   const path = location.pathname;
@@ -21,8 +20,9 @@ const FollowAndFollower = () => {
   const [popularCards, setPopularCards] = useState([]);
   const [followShipList, setFollowShipList] = useState("");
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, currentMember } = useAuth();
   const { userId } = useUserId();
+  const {name} = currentMember
 
   useEffect(() => {
     const getFollowShipList = async () => {
@@ -61,11 +61,13 @@ const FollowAndFollower = () => {
       navigate("/login");
     }
   }, [navigate, isAuthenticated]);
+
   return (
     <div className="mainContainer">
       <Navbar />
       <div className="mainContent">
-        <Header username="John Doe" tweetCount={25} pageName="user/self" />
+        {/* 帶入API資料 */}
+        <Header username={name} tweetCount={25} pageName="user/self" />
         <hr />
         <TabBar
           activePage="FollowAndFollower"

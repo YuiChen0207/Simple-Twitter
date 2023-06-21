@@ -18,7 +18,6 @@ import UserRepliesList from "../../component/userRepliesList/UserRepliesList";
 import UserLikesList from "../../component/userLikesList/UserLikesList";
 import "./UserSelf.scss";
 
-
 const UserSelf = () => {
   const { currentMember, isAuthenticated } = useAuth();
   const [activeTab, setActiveTab] = useState("tweets");
@@ -44,9 +43,6 @@ const UserSelf = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!currentMember || !currentMember.id) {
-        return;
-      }
       const { id } = currentMember;
 
       try {
@@ -122,13 +118,25 @@ const UserSelf = () => {
         <hr />
         <div className="tweetsSection">
           {activeTab === "tweets" && (
-            <UserTweetsList tweets={tweets} className="tweetsSection" />
+            <UserTweetsList
+              tweets={tweets}
+              username={userData?.name}
+              className="tweetsSection"
+            />
           )}
           {activeTab === "replies" && (
-            <UserRepliesList replies={replies} className="tweetsSection" />
+            <UserRepliesList
+              replies={replies}
+              username={userData?.name}
+              className="tweetsSection"
+            />
           )}
           {activeTab === "likes" && (
-            <UserLikesList likes={likes} className="tweetsSection" />
+            <UserLikesList
+              likes={likes}
+              username={userData?.name}
+              className="tweetsSection"
+            />
           )}
         </div>
       </div>
