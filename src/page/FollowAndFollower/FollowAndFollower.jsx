@@ -4,25 +4,25 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { getPopularList } from "../../api/popularlist";
 import { getFollowerList, getFollowingList } from "../../api/followship";
+import { useUserId } from "../../contexts/UserIdContext";
 import Header from "../../component/header/Header";
 import TabBar from "../../component/tabBar/TabBar";
 import Navbar from "../../component/navbar/Navbar";
 import PopularList from "../../component/popularList/PopularList";
 import FollowAndFollowerTweet from "../../component/followAndFollowerTweet/FollowAndFollowerTweet";
 import "./FollowAndFollower.scss";
-import { useUserId } from "../../contexts/UserIdContext";
+
 
 const FollowAndFollower = () => {
   const location = useLocation();
   const path = location.pathname;
-  const initialTab = path === "/follow" ? "following" : "followers";
+  const initialTab = path === "/follow" ? "followers" : "following";
   const [activeTab, setActiveTab] = useState(initialTab);
   const [popularCards, setPopularCards] = useState([]);
   const [followShipList, setFollowShipList] = useState("");
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const { userId } = useUserId();
-
 
   useEffect(() => {
     const getFollowShipList = async () => {
