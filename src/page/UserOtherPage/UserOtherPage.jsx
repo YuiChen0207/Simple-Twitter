@@ -3,21 +3,6 @@ import {
   getUserLikes,
   getUserRepliedTweets,
   getUserTweets,
-<<<<<<< HEAD
-} from '../../api/tweets';
-import Header from '../../component/header/Header';
-import Navbar from '../../component/navbar/Navbar';
-import PopularList from '../../component/popularList/PopularList';
-import TabBar from '../../component/tabBar/TabBar';
-import UserOtherItem from '../../component/userInfo/userOther/UserOther';
-import { getPopularList } from '../../api/popularlist.js';
-import { getUserPageById } from '../../api/getUserPage';
-import { useUserId } from '../../contexts/UserIdContext';
-import UserTweetsList from '../../component/userTweetList/UserTweetList';
-import UserRepliesList from '../../component/userRepliesList/UserRepliesList';
-import UserLikesList from '../../component/userLikesList/UserLikesList';
-import '../MainPage/MainPage.scss';
-=======
 } from "../../api/tweets";
 import Header from "../../component/header/Header";
 import Navbar from "../../component/navbar/Navbar";
@@ -33,7 +18,6 @@ import UserLikesList from "../../component/userLikesList/UserLikesList";
 import "../MainPage/MainPage.scss";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
->>>>>>> 0e7a0258deba16114cf276bb17539628755be59f
 
 const UserOther = () => {
   const { userId } = useUserId();

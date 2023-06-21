@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
@@ -28,7 +27,7 @@ const RegistPage = () => {
     }
 
     if (!name.length) {
-      newErrors.name = "名稱不得為空";
+      newErrors.name = "請輸入名稱";
     } else if (name.length > 50) {
       newErrors.name = "名字不可超過50個字";
     }
@@ -45,9 +44,7 @@ const RegistPage = () => {
       newErrors.checkPassword = "密碼不一致";
     }
 
-
     if (Object.keys(newErrors).length > 0) {
-      // 如果有錯誤訊息，設定到 errors 物件中
       setErrors(newErrors);
       return;
     }
@@ -71,7 +68,6 @@ const RegistPage = () => {
         });
       }
     } catch (error) {
-
       console.error("[Registration]:", error);
       if (error === "Account already registered!") {
         setErrors({ account: "此帳號已註冊" });
@@ -88,11 +84,6 @@ const RegistPage = () => {
     }
   };
 
-  const handleInputChange = (e, setter) => {
-    setter(e.target.value);
-    setErrors((prevErrors) => ({ ...prevErrors, [e.target.name]: "" }));
-
-  };
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/login");
@@ -111,16 +102,16 @@ const RegistPage = () => {
           placeholder="請輸入帳號"
           name="account"
           value={account}
-          onChange={(e) => handleInputChange(e, setAccount)}
+          onChange={(accountInputValue) => setAccount(accountInputValue)}
         />
         {errors.account && <p className="error">{errors.account}</p>}
 
         <AuthInput
           label="名稱"
           placeholder="請輸入使用者名稱"
-          name="email"
+          name="name"
           value={name}
-          onChange={(e) => handleInputChange(e, setName)}
+          onChange={(nameInputValue) => setName(nameInputValue)}
         />
         {errors.name && <p className="error">{errors.name}</p>}
 
@@ -129,7 +120,7 @@ const RegistPage = () => {
           placeholder="請輸入Email"
           name="email"
           value={email}
-          onChange={(e) => handleInputChange(e, setEmail)}
+          onChange={(emailInputValue) => setEmail(emailInputValue)}
         />
         {errors.email && <p className="error">{errors.email}</p>}
 
@@ -139,7 +130,7 @@ const RegistPage = () => {
           placeholder="請設定密碼"
           name="password"
           value={password}
-          onChange={(e) => handleInputChange(e, setPassword)}
+          onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
         {errors.password && <p className="error">{errors.password}</p>}
 
@@ -149,7 +140,9 @@ const RegistPage = () => {
           placeholder="請再次輸入密碼"
           name="checkPassword"
           value={checkPassword}
-          onChange={(e) => handleInputChange(e, setCheckPassword)}
+          onChange={(checkPasswordInputValue) =>
+            setCheckPassword(checkPasswordInputValue)
+          }
         />
         {errors.checkPassword && (
           <p className="error">{errors.checkPassword}</p>
