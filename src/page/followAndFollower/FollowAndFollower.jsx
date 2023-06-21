@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { getPopularList } from "../../api/popularlist";
+import { getFollowerList, getFollowingList } from "../../api/followship";
 import Header from "../../component/header/Header";
 import TabBar from "../../component/tabBar/TabBar";
 import Navbar from "../../component/navbar/Navbar";
 import PopularList from "../../component/popularList/PopularList";
 import FollowAndFollowerTweet from "../../component/followAndFollowerTweet/FollowAndFollowerTweet";
-import { getPopularList } from "../../api/popularlist";
-import { getFollowerList, getFollowingList } from "../../api/followship";
 import "./FollowAndFollower.scss";
-import { useAuth } from "../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 const FollowAndFollower = () => {
   const location = useLocation();
@@ -17,27 +17,26 @@ const FollowAndFollower = () => {
   const initialTab = path === "/follow" ? "following" : "followers";
   const [activeTab, setActiveTab] = useState(initialTab);
   const [popularCards, setPopularCards] = useState([]);
-  const [followshipList, setFollowshipList] = useState("");
+  const [followShipList, setFollowShipList] = useState("");
   const navigate = useNavigate();
   const { currentMember, isAuthenticated } = useAuth();
   const UserId = currentMember?.id;
   console.log(UserId);
 
   useEffect(() => {
-    const getFollowshipList = async () => {
+    const getFollowShipList = async () => {
       try {
         const list =
           activeTab === "followers"
             ? await getFollowerList(UserId)
             : await getFollowingList(UserId);
-        console.log(list);
 
-        setFollowshipList([...list]);
+        setFollowShipList([...list]);
       } catch (error) {
         console.error(error);
       }
     };
-    getFollowshipList();
+    getFollowShipList();
   }, [activeTab, UserId]);
 
   useEffect(() => {
@@ -65,8 +64,6 @@ const FollowAndFollower = () => {
     <div className="mainContainer">
       <Navbar />
       <div className="mainContent">
-        {/* Header帶入api資料 */}
-        {/* 帶入的pageName可以在優化成其他使用者 */}
         <Header username="John Doe" tweetCount={25} pageName="user/self" />
         <hr />
         <TabBar
@@ -75,7 +72,7 @@ const FollowAndFollower = () => {
           onTabClick={handleTabClick}
         />
 
-        {[...followshipList]?.map((list, i) => {
+        {[...followShipList]?.map((list, i) => {
           if (activeTab === "followers") {
             return (
               <FollowAndFollowerTweet
@@ -83,10 +80,10 @@ const FollowAndFollower = () => {
                 userName={list?.followerName}
                 intro="nkjehfhweohfoewho"
                 avatar={list?.followerAvatar}
-                isFollowship={list?.isFollowed}
+                isFollowShip={list?.isFollowed}
                 followerId={list?.followerId}
-                setList={setFollowshipList}
-                allList={[...followshipList]}
+                setList={setFollowShipList}
+                allList={[...followShipList]}
                 tabStatus={activeTab}
               />
             );
@@ -97,10 +94,10 @@ const FollowAndFollower = () => {
                 userName={list?.followingName}
                 intro="nkjehfhweohfoewho"
                 avatar={list?.followingAvatar}
-                isFollowship={list?.isFollowing}
+                isFollowShip={list?.isFollowing}
                 followerId={list?.followingId}
-                setList={setFollowshipList}
-                allList={[...followshipList]}
+                setList={setFollowShipList}
+                allList={[...followShipList]}
                 tabStatus={activeTab}
               />
             );
