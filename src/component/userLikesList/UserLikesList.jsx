@@ -1,25 +1,12 @@
-import Tweet from "../tweets/tweetList/Tweet";
 import grayLogo from "../../assets/logoGray.svg";
+import UserPageTweet from "../userPageTweet/UserPageTweet";
+import { formatTime } from "../../utils/timeUtils";
 
 const UserRepliesList = ({ likes }) => {
-  function formatTime(timestamp) {
-    const currentTime = new Date();
-    const postTime = new Date(timestamp);
-
-    const diffInMilliseconds = currentTime - postTime;
-    const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
-
-    if (diffInHours < 1) {
-      return "剛剛";
-    } else {
-      return `${diffInHours}小時`;
-    }
-  }
-
   return (
     <div className="tweetsListContainer">
       {likes.map((like) => (
-        <Tweet
+        <UserPageTweet
           key={like.id}
           logo={like.tweetOwnerAvatar ?? grayLogo}
           username={like.tweetOwnerName}
@@ -28,7 +15,7 @@ const UserRepliesList = ({ likes }) => {
           content={like.description}
           comments={like.replyCount}
           likes={like.likeCount}
-          //isLiked={true} 愛心變紅還沒做
+          isLike={true}
         />
       ))}
     </div>

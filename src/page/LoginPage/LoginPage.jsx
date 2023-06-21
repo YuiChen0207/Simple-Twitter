@@ -1,10 +1,10 @@
-import AuthInput from "../../component/authInput/AuthInput";
-import siteLogo from "../../assets/logo.svg";
-import "../LoginPage/LoginPage.scss";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import { useAuth } from "../../contexts/AuthContext";
+import AuthInput from "../../component/authInput/AuthInput";
+import siteLogo from "../../assets/logo.svg";
+import Swal from "sweetalert2";
+import "../LoginPage/LoginPage.scss";
 
 const LoginPage = () => {
   const [account, setAccount] = useState("");
@@ -16,37 +16,48 @@ const LoginPage = () => {
   const { login, isAuthenticated, currentMember } = useAuth();
 
   const handleClick = async () => {
+    if (account.length === 0 || account.length === 0) {
+      setAccountError("請輸入帳號");
+      setPasswordError("請輸入密碼");
+      return;
+    }
     if (account.length === 0) {
       setAccountError("請輸入帳號");
+      setPasswordError("");
       return;
     }
     if (password.length === 0) {
       setPasswordError("請輸入密碼");
+      setAccountError("");
       return;
     }
-    const success = await login({
-      account,
-      password,
-    });
 
-    if (success) {
-      Swal.fire({
-        position: "top",
-        title: "登入成功!",
-        timer: 1000,
-        icon: "success",
-        showConfirmButton: false,
+    try {
+      const success = await login({
+        account,
+        password,
       });
-      return;
-    } else {
-      setAccountError("帳號不存在");
-      setPasswordError("密碼不存在");
+
+      if (success) {
+        Swal.fire({
+          position: "top",
+          title: "登入成功!",
+          timer: 1000,
+          icon: "success",
+          showConfirmButton: false,
+        });
+      } else {
+        setAccountError("帳號或密碼不存在");
+        setPasswordError("帳號或密碼不存在");
+      }
+    } catch (error) {
+      console.error("[Login Failed]:", error);
     }
   };
 
   useEffect(() => {
     if (isAuthenticated && currentMember?.role === "user") {
-      navigate("/mainpage");
+      navigate("/mainPage");
     }
   }, [navigate, isAuthenticated, currentMember]);
 
