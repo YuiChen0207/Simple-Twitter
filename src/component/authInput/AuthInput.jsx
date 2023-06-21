@@ -1,8 +1,9 @@
-import './AuthInput.scss';
+import "./AuthInput.scss";
 
 const AuthInput = ({
   type,
   label,
+  name,
   value,
   placeholder,
   onChange,
@@ -19,9 +20,10 @@ const AuthInput = ({
       <input
         className="input"
         type={type || "text"}
+        name={name}
         value={value}
         placeholder={placeholder}
-        onChange={(event) => onChange?.(event.target.value)}
+        onChange={onChange}
       />
     </div>
   );

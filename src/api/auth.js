@@ -40,6 +40,7 @@ export const adminLogin = async ({ account, password }) => {
     return data;
   } catch (error) {
     console.error("[Login Failed]:", error);
+   return { success: false, error };
   }
 };
 
@@ -59,7 +60,6 @@ export const register = async ({
       email,
     });
 
-    console.log(data);
 
     if (data) {
       return { success: true };
@@ -67,18 +67,9 @@ export const register = async ({
 
     return data;
   } catch (error) {
-    console.error("[Register Failed]: ", error?.response?.data?.error);
-    if (error?.response && error?.response?.data && error?.response?.data?.error) {
-      const errorMessage = error.response.data.error;
-      return { success: false, error: errorMessage };
-    } else if (
-      error?.response?.data?.status
-    ) {
-      const errorMessage = error.response.data.status;
-      return { success: false, error: errorMessage };
-    } else {
-      return { success: false, error: "註冊失敗" };
-    }
+    console.error("[Register Failed]: ", error.response.data.error);
+    throw error.response.data.error;
+
   }
 };
 

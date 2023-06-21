@@ -7,7 +7,7 @@ const tabOptions = [
   { id: 'likes', label: '喜歡的內容' },
 =======
   { id: "tweets", label: "推文" },
-  { id: "replies", label: "回復" },
+  { id: "replies", label: "回覆" },
   { id: "likes", label: "喜歡的內容" },
 >>>>>>> 0e7a0258deba16114cf276bb17539628755be59f
 ];
@@ -19,7 +19,7 @@ const tabOptionsFollow = [
 
 const TabBar = ({ activePage, activeTab, onTabClick }) => {
   const options =
-    activePage === "FollowAndFollower" ? tabOptionsFollow : tabOptions;
+    activePage === "UserSelf" || "UserOther" ? tabOptions : tabOptionsFollow;
 
   return (
     <div className="tabBar">

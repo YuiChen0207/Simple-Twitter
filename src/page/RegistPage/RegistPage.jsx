@@ -1,9 +1,10 @@
+
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 import AuthInput from "../../component/authInput/AuthInput";
 import siteLogo from "../../assets/logo.svg";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import { useAuth } from "../../contexts/AuthContext";
 import "../RegistPage/RegistPage.scss";
 
 const RegistPage = () => {
@@ -22,25 +23,28 @@ const RegistPage = () => {
 
     const newErrors = {};
 
-    if (account.length === 0) {
-      newErrors.account = "帳號不得為空";
+    if (!account.length) {
+      newErrors.account = "請輸入帳號";
     }
 
-    if (name.length === 0) {
+    if (!name.length) {
       newErrors.name = "名稱不得為空";
+    } else if (name.length > 50) {
+      newErrors.name = "名字不可超過50個字";
     }
 
-    if (email.length === 0) {
-      newErrors.email = "Email 不得為空";
+    if (!email.length) {
+      newErrors.email = "請輸入Email";
     }
 
-    if (password.length === 0) {
-      newErrors.password = "密碼不得為空";
+    if (!password.length) {
+      newErrors.password = "請輸入密碼";
     }
 
-    if (checkPassword.length === 0) {
-      newErrors.checkPassword = "密碼確認不得為空";
+    if (!checkPassword.length) {
+      newErrors.checkPassword = "密碼不一致";
     }
+
 
     if (Object.keys(newErrors).length > 0) {
       // 如果有錯誤訊息，設定到 errors 物件中
@@ -67,23 +71,27 @@ const RegistPage = () => {
         });
       }
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.error) {
-        const errorMessage = error.response.data.error;
-        setErrors((prevErrors) => ({ ...prevErrors, common: errorMessage }));
-      } else if (
-        error.response &&
-        error.response.data &&
-        error.response.data.status
-      ) {
-        const errorMessage = error.response.data.status;
-        setErrors((prevErrors) => ({ ...prevErrors, common: errorMessage }));
-      } else {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          common: "註冊失敗",
-        }));
+
+      console.error("[Registration]:", error);
+      if (error === "Account already registered!") {
+        setErrors({ account: "此帳號已註冊" });
+      }
+      if (error === "Name too long") {
+        setErrors({ name: "名字不可超過50個字" });
+      }
+      if (error === "Email already exists!") {
+        setErrors({ email: "此email已註冊" });
+      }
+      if (error === "Password do not match") {
+        setErrors({ checkPassword: "密碼不一致" });
       }
     }
+  };
+
+  const handleInputChange = (e, setter) => {
+    setter(e.target.value);
+    setErrors((prevErrors) => ({ ...prevErrors, [e.target.name]: "" }));
+
   };
   useEffect(() => {
     if (isAuthenticated) {
@@ -101,24 +109,27 @@ const RegistPage = () => {
         <AuthInput
           label="帳號"
           placeholder="請輸入帳號"
+          name="account"
           value={account}
-          onChange={(accountInputValue) => setAccount(accountInputValue)}
+          onChange={(e) => handleInputChange(e, setAccount)}
         />
         {errors.account && <p className="error">{errors.account}</p>}
 
         <AuthInput
           label="名稱"
           placeholder="請輸入使用者名稱"
+          name="email"
           value={name}
-          onChange={(nameInputValue) => setName(nameInputValue)}
+          onChange={(e) => handleInputChange(e, setName)}
         />
         {errors.name && <p className="error">{errors.name}</p>}
 
         <AuthInput
           label="Email"
           placeholder="請輸入Email"
+          name="email"
           value={email}
-          onChange={(emailInputValue) => setEmail(emailInputValue)}
+          onChange={(e) => handleInputChange(e, setEmail)}
         />
         {errors.email && <p className="error">{errors.email}</p>}
 
@@ -126,18 +137,19 @@ const RegistPage = () => {
           type="password"
           label="密碼"
           placeholder="請設定密碼"
+          name="password"
           value={password}
-          onChange={(passwordInputValue) => setPassword(passwordInputValue)}
+          onChange={(e) => handleInputChange(e, setPassword)}
         />
         {errors.password && <p className="error">{errors.password}</p>}
 
         <AuthInput
           type="password"
           label="密碼確認"
+          placeholder="請再次輸入密碼"
+          name="checkPassword"
           value={checkPassword}
-          onChange={(checkedPasswordInputValue) =>
-            setCheckPassword(checkedPasswordInputValue)
-          }
+          onChange={(e) => handleInputChange(e, setCheckPassword)}
         />
         {errors.checkPassword && (
           <p className="error">{errors.checkPassword}</p>
