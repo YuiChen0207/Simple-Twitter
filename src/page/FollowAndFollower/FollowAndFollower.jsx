@@ -10,6 +10,7 @@ import Navbar from "../../component/navbar/Navbar";
 import PopularList from "../../component/popularList/PopularList";
 import FollowAndFollowerTweet from "../../component/followAndFollowerTweet/FollowAndFollowerTweet";
 import "./FollowAndFollower.scss";
+import { useUserId } from "../../contexts/UserIdContext";
 
 const FollowAndFollower = () => {
   const location = useLocation();
@@ -19,17 +20,17 @@ const FollowAndFollower = () => {
   const [popularCards, setPopularCards] = useState([]);
   const [followShipList, setFollowShipList] = useState("");
   const navigate = useNavigate();
-  const { currentMember, isAuthenticated } = useAuth();
-  const UserId = currentMember?.id;
-  console.log(UserId);
+  const { isAuthenticated } = useAuth();
+  const { userId } = useUserId();
+
 
   useEffect(() => {
     const getFollowShipList = async () => {
       try {
         const list =
           activeTab === "followers"
-            ? await getFollowerList(UserId)
-            : await getFollowingList(UserId);
+            ? await getFollowerList(userId)
+            : await getFollowingList(userId);
 
         setFollowShipList([...list]);
       } catch (error) {
@@ -37,7 +38,7 @@ const FollowAndFollower = () => {
       }
     };
     getFollowShipList();
-  }, [activeTab, UserId]);
+  }, [activeTab, userId]);
 
   useEffect(() => {
     const getPopularCardsAsync = async () => {

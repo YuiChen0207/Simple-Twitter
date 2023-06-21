@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
 const UserOther = () => {
-  const { userId } = useUserId();
+  const { userId, setUserIdFromTweet } = useUserId();
   const [activeTab, setActiveTab] = useState("tweets");
   const [tweets, setTweets] = useState([]);
   const [replies, setReplies] = useState([]);
@@ -90,6 +90,7 @@ const UserOther = () => {
         <Header username={userData?.name} tweetCount={userData?.TweetCount} />
         <div className="postSection">
           <UserOtherItem
+            id={userData?.id}
             avatar={userData?.avatar}
             username={userData?.name}
             accountName={userData?.account}
@@ -97,6 +98,7 @@ const UserOther = () => {
             followingCount={userData?.followingCount}
             followersCount={userData?.followerCount}
             banner={userData?.banner}
+            setUserIdFromTweet={setUserIdFromTweet}
           />
         </div>
         <TabBar

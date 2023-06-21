@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import btnMsg from "../../../assets/btnMsg.svg";
 import btnNotfi from "../../../assets/btnNotfi.svg";
 import activeNotfi from "../../../assets/btn_notfi.svg";
 import "./UserOther.scss";
+
 
 const UserOtherItem = ({
   avatar,
@@ -11,9 +13,12 @@ const UserOtherItem = ({
   bio,
   followingCount,
   followersCount,
+  id,
+  setUserIdFromTweet,
 }) => {
   const [notificationIcon, setNotificationIcon] = useState(btnNotfi);
   const [isFollow, setIsFollow] = useState(false);
+  const navigate = useNavigate();
 
   const handleFollow = () => {
     setIsFollow(!isFollow);
@@ -25,6 +30,16 @@ const UserOtherItem = ({
     } else {
       setNotificationIcon(btnNotfi);
     }
+  };
+
+  const handleFollowingClick = () => {
+    setUserIdFromTweet(id);
+    navigate("/follow");
+  };
+
+  const handleFollowersClick = () => {
+    setUserIdFromTweet(id);
+    navigate("/follower");
   };
   return (
     <div className="userInfoContainer">
@@ -46,7 +61,6 @@ const UserOtherItem = ({
             >
               {isFollow ? "正在跟隨" : "跟隨"}
             </button>
-            {/* 要帶入API資料 */}
           </div>
         </div>
         <div className="lowerSection">
@@ -54,10 +68,16 @@ const UserOtherItem = ({
           <div className="accountName">@{accountName}</div>
           <div className="bio">{bio}</div>
           <div className="countSection">
-            <div className="count followingCount">
+            <div
+              className="count followingCount"
+              onClick={handleFollowingClick}
+            >
               {followingCount}位<span>跟隨中</span>
             </div>
-            <div className="count followersCount">
+            <div
+              className="count followersCount"
+              onClick={handleFollowersClick}
+            >
               {followersCount}位<span>跟隨者</span>
             </div>
           </div>

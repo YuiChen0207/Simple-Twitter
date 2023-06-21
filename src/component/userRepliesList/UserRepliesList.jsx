@@ -1,5 +1,4 @@
 
-import grayLogo from "../../assets/logoGray.svg";
 import { formatTime } from "../../utils/timeUtils";
 import UserPageTweet from "../userPageTweet/UserPageTweet";
 
