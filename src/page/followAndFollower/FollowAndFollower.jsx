@@ -21,8 +21,8 @@ const FollowAndFollower = () => {
   const [followShipList, setFollowShipList] = useState("");
   const navigate = useNavigate();
   const { isAuthenticated, currentMember } = useAuth();
-  const { userId } = useUserId();
-  const {name} = currentMember
+  const { userId, usernameFromContext } = useUserId();
+  const { name } = currentMember;
 
   useEffect(() => {
     const getFollowShipList = async () => {
@@ -66,8 +66,12 @@ const FollowAndFollower = () => {
     <div className="mainContainer">
       <Navbar />
       <div className="mainContent">
-        {/* 帶入API資料 */}
-        <Header username={name} tweetCount={25} pageName="user/self" />
+        {/* 帶入tweetCount資料 */}
+        <Header
+          username={usernameFromContext}
+          tweetCount={25}
+          pageName="user/self"
+        />
         <hr />
         <TabBar
           activePage="FollowAndFollower"
@@ -81,7 +85,7 @@ const FollowAndFollower = () => {
               <FollowAndFollowerTweet
                 index={i}
                 userName={list?.followerName}
-                intro="nkjehfhweohfoewho"
+                intro={list?.followerIntroduction}
                 avatar={list?.followerAvatar}
                 isFollowShip={list?.isFollowed}
                 followerId={list?.followerId}
@@ -95,7 +99,7 @@ const FollowAndFollower = () => {
               <FollowAndFollowerTweet
                 index={i}
                 userName={list?.followingName}
-                intro="nkjehfhweohfoewho"
+                intro={list?.followingIntroduction}
                 avatar={list?.followingAvatar}
                 isFollowShip={list?.isFollowing}
                 followerId={list?.followingId}

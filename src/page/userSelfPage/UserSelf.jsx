@@ -72,12 +72,6 @@ const UserSelf = () => {
         console.error("獲取熱門列表失敗：", error);
       }
       try {
-        const popularCards = await getPopularList();
-        setPopularCards(popularCards.map((users) => ({ ...users })));
-      } catch (error) {
-        console.error("獲取熱門列表失敗：", error);
-      }
-      try {
         const user = await getUserPageById(id);
         setUserData(user);
       } catch (error) {

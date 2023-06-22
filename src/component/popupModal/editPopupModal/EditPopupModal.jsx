@@ -46,6 +46,12 @@ const EditPopupModal = ({
     const file = e.target.files[0];
     setUserPhotoFile(file);
     setUserPhotoPreview(URL.createObjectURL(file));
+
+    const updatedData = {
+      ...updatedUserData,
+      photo: userPhotoPreview,
+    };
+    setUpdatedUserData(updatedData);
   };
 
   const handleRemoveBackgroundPhoto = () => {

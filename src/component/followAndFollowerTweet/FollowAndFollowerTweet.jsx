@@ -6,7 +6,7 @@ const FollowAndFollowerTweet = ({
   userName,
   intro,
   avatar,
-  followerId,
+  followingId,
   isFollowShip,
   allList,
   setList,
@@ -15,7 +15,7 @@ const FollowAndFollowerTweet = ({
   const handleFollow = async () => {
     if (isFollowShip) {
       try {
-        await unfollowing(String(followerId));
+        await unfollowing(String(followingId));
         const newList = allList.map((user, i) => {
           if (index === i) {
             return tabStatus === "followers"
@@ -31,7 +31,7 @@ const FollowAndFollowerTweet = ({
       }
     } else {
       try {
-        await following({ id: String(followerId) });
+        await following({ id: String(followingId) });
         const newList = allList.map((user, i) => {
           if (index === i) {
             return tabStatus === "followers"

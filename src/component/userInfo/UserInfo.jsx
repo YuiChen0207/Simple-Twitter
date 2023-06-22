@@ -39,12 +39,12 @@ const UserInfo = ({
   };
 
   const handleFollowingClick = () => {
-    setUserIdFromTweet(id);
+    setUserIdFromTweet(id, username);
     navigate("/follow");
   };
 
   const handleFollowersClick = () => {
-    setUserIdFromTweet(id);
+    setUserIdFromTweet(id, username);
     navigate("/follower");
   };
 
