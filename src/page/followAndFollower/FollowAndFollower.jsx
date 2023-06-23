@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 import { getPopularList } from "../../api/popularlist";
 import { getFollowerList, getFollowingList } from "../../api/followship";
 import { useUserId } from "../../contexts/UserIdContext";
@@ -20,9 +19,9 @@ const FollowAndFollower = () => {
   const [popularCards, setPopularCards] = useState([]);
   const [followShipList, setFollowShipList] = useState("");
   const navigate = useNavigate();
-  const { isAuthenticated, currentMember } = useAuth();
+  const { isAuthenticated } = useAuth();
   const { userId, usernameFromContext } = useUserId();
-  const { name } = currentMember;
+
 
   useEffect(() => {
     const getFollowShipList = async () => {
@@ -83,6 +82,7 @@ const FollowAndFollower = () => {
           if (activeTab === "followers") {
             return (
               <FollowAndFollowerTweet
+                key={list?.followerId}
                 index={i}
                 userName={list?.followerName}
                 intro={list?.followerIntroduction}
@@ -97,6 +97,7 @@ const FollowAndFollower = () => {
           } else {
             return (
               <FollowAndFollowerTweet
+                key={list?.followingId}
                 index={i}
                 userName={list?.followingName}
                 intro={list?.followingIntroduction}
