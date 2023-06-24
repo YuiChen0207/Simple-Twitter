@@ -24,7 +24,6 @@ const EditPopupModal = ({
 
   useEffect(() => {
     if (isSaving) {
-      // 当 isSaving 变为 true 时，执行保存逻辑
       saveUserData();
     }
   }, [isSaving]);
@@ -43,7 +42,7 @@ const EditPopupModal = ({
 
     const updatedData = {
       ...updatedUserData,
-      banner: backgroundPhotoFile,
+      banner: file,
     };
     setUpdatedUserData(updatedData);
   };
@@ -54,7 +53,7 @@ const EditPopupModal = ({
 
     const updatedData = {
       ...updatedUserData,
-      avatar: userPhotoFile,
+      avatar: file,
     };
     setUpdatedUserData(updatedData);
   };
@@ -93,6 +92,12 @@ const EditPopupModal = ({
     const updatedData = {
       ...userData.user,
       ...updatedUserData,
+      banner: backgroundPhotoFile
+        ? URL.createObjectURL(backgroundPhotoFile)
+        : userData.user.banner,
+      avatar: userPhotoFile
+        ? URL.createObjectURL(userPhotoFile)
+        : userData.user.avatar,
     };
 
     try {
@@ -126,7 +131,7 @@ const EditPopupModal = ({
       return;
     }
 
-    setIsSaving(true); // 设置 isSaving 为 true，触发保存逻辑
+    setIsSaving(true);
   };
 
   const popupContentStyle = {
