@@ -115,6 +115,7 @@ const UserSelf = () => {
             <UserTweetsList
               tweets={tweets}
               username={userData?.name}
+              userImage={userData?.avatar}
               className="tweetsSection"
             />
           )}
@@ -122,6 +123,7 @@ const UserSelf = () => {
             <UserRepliesList
               replies={replies}
               username={userData?.name}
+              userImage={userData?.avatar}
               className="tweetsSection"
             />
           )}
@@ -129,6 +131,7 @@ const UserSelf = () => {
             <UserLikesList
               likes={likes}
               username={userData?.name}
+              userImage={userData?.avatar}
               className="tweetsSection"
             />
           )}
