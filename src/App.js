@@ -1,4 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import { IdProvider } from "./contexts/IdContext";
+import { UserIdProvider } from "./contexts/UserIdContext";
 import MainPage from "./page/MainPage/MainPage";
 import UserSelf from "./page/UserSelfPage/UserSelf";
 import UserOtherPage from "./page/UserOtherPage/UserOtherPage";
@@ -13,9 +16,6 @@ import ReplyList from "./page/ReplyList/ReplyList";
 import FollowAndFollower from "./page/FollowAndFollower/FollowAndFollower";
 import "./base.scss";
 import "./reset.scss";
-import { AuthProvider } from "./contexts/AuthContext";
-import { IdProvider } from "./contexts/IdContext";
-import { UserIdProvider } from "./contexts/UserIdContext";
 
 const basename = process.env.PUBLIC_URL;
 /* import {LoginPage, MainPage, RegistPage} from './page' */
