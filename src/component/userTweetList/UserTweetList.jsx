@@ -8,8 +8,8 @@ const UserTweetsList = ({ tweets, username, userImage }) => {
       {tweets.map((tweet) => (
         <UserPageTweet
           key={tweet.id}
-          logo={userImage}
-          username={username}
+          logo={userImage ?? tweet.avatar}
+          username={username ?? tweet.name}
           accountName={tweet.account}
           postTime={formatTime(tweet.createdAt)}
           content={tweet.description}

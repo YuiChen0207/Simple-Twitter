@@ -105,7 +105,10 @@ const UserOther = () => {
         <hr />
         <div className="tweetsSection">
           {activeTab === "tweets" && (
-            <UserTweetsList tweets={tweets} className="tweetsSection" />
+            <UserTweetsList
+              tweets={tweets}
+              className="tweetsSection"
+            />
           )}
           {activeTab === "replies" && (
             <UserRepliesList replies={replies} className="tweetsSection" />

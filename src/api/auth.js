@@ -12,6 +12,7 @@ export const login = async ({ account, password }) => {
     });
 
     const { token } = data;
+    console.log(data);
     if (token) {
       return { success: true, ...data };
     }
