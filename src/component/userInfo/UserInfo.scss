@@ -6,9 +6,8 @@
   .background {
     width: 100%;
     height: 200px;
-    background-size: cover;
-    background-repeat: no-repeat;
     z-index: 1;
+    object-fit: cover;
   }
 
   .userContext {
@@ -26,6 +25,7 @@
         transform: translateY(-50%);
         border: 4px solid var(--white);
         background-color: var(--white);
+        object-fit: cover;
       }
 
       .whiteButton {

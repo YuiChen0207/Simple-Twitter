@@ -9,11 +9,12 @@ const AuthInput = ({
   onChange,
   accountError,
   passwordError,
+  error,
 }) => {
   return (
     <div
       className={`authContainer ${
-        accountError || passwordError ? "error" : ""
+        accountError || passwordError || error ? "error" : ""
       }`}
     >
       <div className="label">{label}</div>

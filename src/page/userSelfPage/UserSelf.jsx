@@ -7,6 +7,7 @@ import {
 import { useAuth } from "../../contexts/AuthContext";
 import { getPopularList } from "../../api/popularlist";
 import { getUserPageById } from "../../api/getUserPage";
+import { useNavigate } from "react-router-dom";
 import Header from "../../component/header/Header";
 import Navbar from "../../component/navbar/Navbar";
 import PopularList from "../../component/popularList/PopularList";
@@ -16,7 +17,6 @@ import UserTweetsList from "../../component/userTweetList/UserTweetList";
 import UserRepliesList from "../../component/userRepliesList/UserRepliesList";
 import UserLikesList from "../../component/userLikesList/UserLikesList";
 import "./UserSelf.scss";
-import { useNavigate } from "react-router-dom";
 
 const UserSelf = () => {
   const { currentMember, isAuthenticated } = useAuth();
@@ -43,14 +43,10 @@ const UserSelf = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!currentMember || !currentMember.id) {
-        return;
-      }
       const { id } = currentMember;
 
       try {
         const userTweets = await getUserTweets(id);
-        //console.log(userTweets);
         setTweets(userTweets.map((tweet) => ({ ...tweet })));
       } catch (error) {
         console.error("獲取用户推文失敗：", error);
@@ -58,7 +54,6 @@ const UserSelf = () => {
 
       try {
         const userReplies = await getUserRepliedTweets(id);
-        //console.log(userReplies);
         setReplies(userReplies.map((reply) => ({ ...reply })));
       } catch (error) {
         console.error("獲取用戶資料失敗：", error);
@@ -66,7 +61,6 @@ const UserSelf = () => {
 
       try {
         const userLikes = await getUserLikes(id);
-        //console.log(userLikes);
         setLikes(userLikes.map((like) => ({ ...like })));
       } catch (error) {
         console.error("獲取用户喜歡的推文失敗：", error);
@@ -78,14 +72,7 @@ const UserSelf = () => {
         console.error("獲取熱門列表失敗：", error);
       }
       try {
-        const popularCards = await getPopularList();
-        setPopularCards(popularCards.map((users) => ({ ...users })));
-      } catch (error) {
-        console.error("獲取熱門列表失敗：", error);
-      }
-      try {
         const user = await getUserPageById(id);
-        //console.log(user);
         setUserData(user);
       } catch (error) {
         console.error("獲取用户信息失敗：", error);
@@ -125,13 +112,28 @@ const UserSelf = () => {
         <hr />
         <div className="tweetsSection">
           {activeTab === "tweets" && (
-            <UserTweetsList tweets={tweets} className="tweetsSection" />
+            <UserTweetsList
+              tweets={tweets}
+              username={userData?.name}
+              userImage={userData?.avatar}
+              className="tweetsSection"
+            />
           )}
           {activeTab === "replies" && (
-            <UserRepliesList replies={replies} className="tweetsSection" />
+            <UserRepliesList
+              replies={replies}
+              username={userData?.name}
+              userImage={userData?.avatar}
+              className="tweetsSection"
+            />
           )}
           {activeTab === "likes" && (
-            <UserLikesList likes={likes} className="tweetsSection" />
+            <UserLikesList
+              likes={likes}
+              username={userData?.name}
+              userImage={userData?.avatar}
+              className="tweetsSection"
+            />
           )}
         </div>
       </div>

@@ -6,13 +6,17 @@ export const useUserId = () => useContext(UserIdContext);
 
 export const UserIdProvider = ({ children }) => {
   const [userId, setUserId] = useState(null);
+  const [usernameFromContext, setUsernameFromContext] = useState(null);
 
-  const setUserIdFromTweet = (userId) => {
+  const setUserIdFromTweet = (userId, username) => {
     setUserId(userId);
+    setUsernameFromContext(username);
   };
 
   return (
-    <UserIdContext.Provider value={{ userId, setUserIdFromTweet }}>
+    <UserIdContext.Provider
+      value={{ userId, usernameFromContext, setUserIdFromTweet }}
+    >
       {children}
     </UserIdContext.Provider>
   );

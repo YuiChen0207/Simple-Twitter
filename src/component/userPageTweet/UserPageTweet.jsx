@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import commitIcon from "../../assets/commit.svg";
 import heartIcon from "../../assets/heart.svg";
 import "./UserPageTweet.scss";

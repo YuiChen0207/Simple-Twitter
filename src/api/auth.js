@@ -12,6 +12,7 @@ export const login = async ({ account, password }) => {
     });
 
     const { token } = data;
+    console.log(data);
     if (token) {
       return { success: true, ...data };
     }
@@ -40,7 +41,7 @@ export const adminLogin = async ({ account, password }) => {
     return data;
   } catch (error) {
     console.error("[Login Failed]:", error);
-   return { success: false, error };
+    return { success: false, error };
   }
 };
 
@@ -60,7 +61,6 @@ export const register = async ({
       email,
     });
 
-
     if (data) {
       return { success: true };
     }
@@ -69,7 +69,6 @@ export const register = async ({
   } catch (error) {
     console.error("[Register Failed]: ", error.response.data.error);
     throw error.response.data.error;
-
   }
 };
 
