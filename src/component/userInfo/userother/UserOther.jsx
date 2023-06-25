@@ -13,7 +13,6 @@ const UserOtherItem = ({
   followingCount,
   followersCount,
   isFollowed,
-  userData, // 確認資料用
   followerId,
 }) => {
   const [notificationIcon, setNotificationIcon] = useState(btnNotfi);
@@ -24,7 +23,6 @@ const UserOtherItem = ({
   }, [isFollowed]);
 
   const handleFollow = async () => {
-    console.log(userData);
     if (isFollow === false) {
       try {
         await likePopularCard(followerId);
