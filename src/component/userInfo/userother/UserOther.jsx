@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { likePopularCard, unlikePopularCard } from "../../../api/popularlist";
 import btnMsg from "../../../assets/btnMsg.svg";
 import btnNotfi from "../../../assets/btnNotfi.svg";
 import activeNotfi from "../../../assets/btn_notfi.svg";
@@ -11,11 +12,33 @@ const UserOtherItem = ({
   bio,
   followingCount,
   followersCount,
+  isFollowed,
+  userData, // 確認資料用
+  followerId,
 }) => {
   const [notificationIcon, setNotificationIcon] = useState(btnNotfi);
-  const [isFollow, setIsFollow] = useState(false);
+  const [isFollow, setIsFollow] = useState(isFollowed);
 
-  const handleFollow = () => {
+  useEffect(() => {
+    setIsFollow(isFollowed);
+  }, [isFollowed]);
+
+  const handleFollow = async () => {
+    console.log(userData);
+    if (isFollow === false) {
+      try {
+        await likePopularCard(followerId);
+      } catch (error) {
+        console.log(error);
+        console.log("likePopularCard failed");
+      }
+    } else {
+      try {
+        await unlikePopularCard(followerId);
+      } catch (error) {
+        console.log(error);
+      }
+    }
     setIsFollow(!isFollow);
   };
 

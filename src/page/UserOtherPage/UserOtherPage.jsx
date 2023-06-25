@@ -97,6 +97,8 @@ const UserOther = () => {
             followingCount={userData?.followingCount}
             followersCount={userData?.followerCount}
             banner={userData?.banner}
+            isFollowed={userData?.isFollowing}
+            followerId={userData?.id}
           />
         </div>
         <TabBar
