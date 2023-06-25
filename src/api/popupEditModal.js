@@ -10,9 +10,13 @@ export const getUserEdit = async (userId) => {
   }
 };
 
-export const updateUser = async (userId, userData) => {
+export const updateUserProfile = async (userId, FormData) => {
   try {
-    const res = await axiosInstance.put(`${baseUrl}/users/${userId}`, userData);
+    const res = await axiosInstance.put(
+      `${baseUrl}/users/${userId}`,
+      FormData,
+      { headers: { "Content-type": "multipart/form-data" } }
+    );
     console.log(res.data);
     return res.data;
   } catch (error) {

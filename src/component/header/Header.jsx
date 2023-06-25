@@ -11,7 +11,7 @@ const Header = ({ username, tweetCount, pageName }) => {
     if (pageName) {
       navigate(`/${pageName}`);
     } else {
-      navigate("/mainPage");
+      navigate("/main");
     }
   };
   return (

@@ -3,14 +3,14 @@ import UserPageTweet from "../userPageTweet/UserPageTweet";
 import { formatTime } from "../../utils/timeUtils";
 
 
-const UserRepliesList = ({ likes }) => {
+const UserRepliesList = ({ likes, username, userImage }) => {
   return (
     <div className="tweetsListContainer">
       {likes.map((like) => (
         <UserPageTweet
           key={like.id}
-          logo={like.tweetOwnerAvatar ?? grayLogo}
-          username={like.tweetOwnerName}
+          logo={userImage}
+          username={username}
           accountName={like.tweetOwnerAccount}
           postTime={formatTime(like.createdAt)}
           content={like.description}

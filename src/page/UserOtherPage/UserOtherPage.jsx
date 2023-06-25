@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
 const UserOther = () => {
-  const { userId } = useUserId();
+  const { userId, setUserIdFromTweet } = useUserId();
   const [activeTab, setActiveTab] = useState("tweets");
   const [tweets, setTweets] = useState([]);
   const [replies, setReplies] = useState([]);
@@ -38,7 +38,6 @@ const UserOther = () => {
     const fetchData = async () => {
       try {
         const userTweets = await getUserTweets(userId);
-        //console.log(userTweets);
         setTweets(userTweets.map((tweet) => ({ ...tweet })));
       } catch (error) {
         console.error("获取用户推文失败：", error);
@@ -46,7 +45,6 @@ const UserOther = () => {
 
       try {
         const userReplies = await getUserRepliedTweets(userId);
-        //console.log(userReplies);
         setReplies(userReplies.map((reply) => ({ ...reply })));
       } catch (error) {
         console.error("獲取用戶資料失败：", error);
@@ -54,7 +52,6 @@ const UserOther = () => {
 
       try {
         const userLikes = await getUserLikes(userId);
-        console.log(userLikes);
         setLikes(userLikes.map((like) => ({ ...like })));
       } catch (error) {
         console.error("获取用户喜欢的推文失败：", error);
@@ -69,7 +66,6 @@ const UserOther = () => {
 
       try {
         const user = await getUserPageById(userId);
-        console.log(user);
         setUserData(user);
       } catch (error) {
         console.error("获取用户信息失败：", error);
@@ -90,6 +86,7 @@ const UserOther = () => {
         <Header username={userData?.name} tweetCount={userData?.TweetCount} />
         <div className="postSection">
           <UserOtherItem
+            id={userData?.id}
             avatar={userData?.avatar}
             username={userData?.name}
             accountName={userData?.account}
@@ -99,6 +96,7 @@ const UserOther = () => {
             banner={userData?.banner}
             isFollowed={userData?.isFollowing}
             followerId={userData?.id}
+            setUserIdFromTweet={setUserIdFromTweet}
           />
         </div>
         <TabBar
@@ -109,7 +107,10 @@ const UserOther = () => {
         <hr />
         <div className="tweetsSection">
           {activeTab === "tweets" && (
-            <UserTweetsList tweets={tweets} className="tweetsSection" />
+            <UserTweetsList
+              tweets={tweets}
+              className="tweetsSection"
+            />
           )}
           {activeTab === "replies" && (
             <UserRepliesList replies={replies} className="tweetsSection" />

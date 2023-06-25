@@ -16,17 +16,17 @@ const LoginPage = () => {
   const { login, isAuthenticated, currentMember } = useAuth();
 
   const handleClick = async () => {
-    if (account.length === 0 || account.length === 0) {
+    if (!account.length || !account.length) {
       setAccountError("請輸入帳號");
       setPasswordError("請輸入密碼");
       return;
     }
-    if (account.length === 0) {
+    if (!account.length) {
       setAccountError("請輸入帳號");
       setPasswordError("");
       return;
     }
-    if (password.length === 0) {
+    if (!password.length) {
       setPasswordError("請輸入密碼");
       setAccountError("");
       return;

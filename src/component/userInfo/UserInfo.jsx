@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import EditPopupModal from "../popupModal/editPopupModal/EditPopupModal";
 import { getUserEdit } from "../../api/popupEditModal";
 import { useAuth } from "../../contexts/AuthContext";
+import { useUserId } from "../../contexts/UserIdContext";
 import "./UserInfo.scss";
 
 const UserInfo = ({
@@ -19,15 +20,10 @@ const UserInfo = ({
   const [showModal, setShowModal] = useState(false);
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
-
-
+  const { setUserIdFromTweet } = useUserId();
+  const { id } = currentMember;
 
   const handleEditProfileClick = async () => {
-    if (!currentMember || !currentMember.id) {
-      return;
-    }
-    const { id } = currentMember;
-
     try {
       const userData = await getUserEdit(id);
       setUserData(userData);
@@ -38,17 +34,19 @@ const UserInfo = ({
   };
 
   const handleClosePopup = () => {
+    setUserIdFromTweet(id);
     setShowModal(false);
   };
 
   const handleFollowingClick = () => {
+    setUserIdFromTweet(id, username);
     navigate("/follow");
   };
 
   const handleFollowersClick = () => {
+    setUserIdFromTweet(id, username);
     navigate("/follower");
   };
-
 
   return (
     <div className="userInfoContainer">

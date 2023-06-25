@@ -4,7 +4,7 @@ import CloseIcon from "../../../assets/closeIcon.svg";
 import CameraIcon from "../../../assets/camera.svg";
 import WhiteCloseIcon from "../../../assets/whiteClose.svg";
 import "./EditPopupModal.scss";
-import { updateUser } from "../../../api/popupEditModal";
+import { updateUserProfile } from "../../../api/popupEditModal";
 
 const EditPopupModal = ({
   open,
@@ -13,44 +13,49 @@ const EditPopupModal = ({
   onUserDataUpdate,
   setUserData,
 }) => {
-  const [username, setUsername] = useState(userData.user.name || "");
-  const [intro, setIntro] = useState(userData.user.introduction || "");
+  const [username, setUsername] = useState(userData.user.name);
+  const [intro, setIntro] = useState(userData.user.introduction);
   const [backgroundPhotoFile, setBackgroundPhotoFile] = useState(null);
-  const [backgroundPhotoPreview, setBackgroundPhotoPreview] = useState(
-    userData.user.banner || null
-  );
   const [userPhotoFile, setUserPhotoFile] = useState(null);
-  const [userPhotoPreview, setUserPhotoPreview] = useState(
-    userData.user.avatar || null
-  );
   const [errorMessageUsername, setErrorMessageUsername] = useState(null);
   const [errorMessageIntro, setErrorMessageIntro] = useState(null);
   const [updatedUserData, setUpdatedUserData] = useState({});
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
-    setBackgroundPhotoPreview(userData.user.banner || null);
-    setUserPhotoPreview(userData.user.avatar || null);
-  }, [userData.user.banner, userData.user.avatar]);
+    if (isSaving) {
+      saveUserData();
+    }
+  }, [isSaving]);
 
   const handlePopupClose = () => {
     onClose();
   };
 
+  const handleRemoveBackgroundPhoto = () => {
+    setBackgroundPhotoFile(null);
+  };
+
   const handleBackgroundPhotoUpload = (e) => {
     const file = e.target.files[0];
     setBackgroundPhotoFile(file);
-    setBackgroundPhotoPreview(URL.createObjectURL(file));
+
+    const updatedData = {
+      ...updatedUserData,
+      banner: file,
+    };
+    setUpdatedUserData(updatedData);
   };
 
   const handleUserPhotoUpload = (e) => {
     const file = e.target.files[0];
     setUserPhotoFile(file);
-    setUserPhotoPreview(URL.createObjectURL(file));
-  };
 
-  const handleRemoveBackgroundPhoto = () => {
-    setBackgroundPhotoFile(null);
-    setBackgroundPhotoPreview(null);
+    const updatedData = {
+      ...updatedUserData,
+      avatar: file,
+    };
+    setUpdatedUserData(updatedData);
   };
 
   const handleUsernameChange = (e) => {
@@ -77,6 +82,35 @@ const EditPopupModal = ({
     setUpdatedUserData(updatedData);
   };
 
+  const saveUserData = async () => {
+    const formData = new FormData();
+    formData.append("avatar", userPhotoFile);
+    formData.append("banner", backgroundPhotoFile);
+    formData.append("name", username);
+    formData.append("introduction", intro);
+
+    const updatedData = {
+      ...userData.user,
+      ...updatedUserData,
+      banner: backgroundPhotoFile
+        ? URL.createObjectURL(backgroundPhotoFile)
+        : userData.user.banner,
+      avatar: userPhotoFile
+        ? URL.createObjectURL(userPhotoFile)
+        : userData.user.avatar,
+    };
+
+    try {
+      const response = await updateUserProfile(userData.user.id, formData);
+      console.log("用户信息更新成功:", response);
+      onUserDataUpdate(updatedData);
+      setUserData({ ...userData, user: updatedData });
+      onClose();
+    } catch (error) {
+      console.error("用户信息更新失败:", error);
+    }
+  };
+
   const handleSave = () => {
     if (username.length > 50 && intro.length > 160) {
       setErrorMessageUsername("字數超出上限!");
@@ -92,34 +126,12 @@ const EditPopupModal = ({
       return;
     }
 
-    if (
-      Object.keys(updatedUserData).length === 0 &&
-      !backgroundPhotoFile &&
-      !userPhotoFile
-    ) {
+    if (Object.keys(updatedUserData).length === 0) {
       onClose();
       return;
     }
 
-    const updatedData = {
-      ...userData.user,
-      ...updatedUserData,
-      banner: backgroundPhotoFile
-        ? backgroundPhotoPreview
-        : userData.user.banner,
-      avatar: userPhotoFile ? userPhotoPreview : userData.user.avatar,
-    };
-
-    updateUser(userData.user.id, updatedData)
-      .then((response) => {
-        console.log("用户信息更新成功:", response);
-        onUserDataUpdate(updatedData);
-        setUserData({ ...userData, user: updatedData });
-        onClose();
-      })
-      .catch((error) => {
-        console.error("用户信息更新失败:", error);
-      });
+    setIsSaving(true);
   };
 
   const popupContentStyle = {
@@ -161,9 +173,9 @@ const EditPopupModal = ({
         </div>
         <div className="modalBody">
           <div className="background">
-            {backgroundPhotoPreview ? (
+            {backgroundPhotoFile ? (
               <img
-                src={backgroundPhotoPreview}
+                src={URL.createObjectURL(backgroundPhotoFile)}
                 alt="background"
                 className="backgroundImage"
               />
@@ -185,17 +197,23 @@ const EditPopupModal = ({
                 />
                 <img src={CameraIcon} alt="camera" className="cameraIcon" />
               </label>
-              <img
-                src={WhiteCloseIcon}
-                alt="close"
-                className="whiteCloseIcon"
-                onClick={handleRemoveBackgroundPhoto}
-              />
+              {backgroundPhotoFile && (
+                <img
+                  src={WhiteCloseIcon}
+                  alt="close"
+                  className="whiteCloseIcon"
+                  onClick={handleRemoveBackgroundPhoto}
+                />
+              )}
             </div>
           </div>
           <div className="editUserAvatar">
-            {userPhotoPreview ? (
-              <img src={userPhotoPreview} alt="avatar" className="avatarIcon" />
+            {userPhotoFile ? (
+              <img
+                src={URL.createObjectURL(userPhotoFile)}
+                alt="avatar"
+                className="avatarIcon"
+              />
             ) : (
               <img
                 src={userData.user.avatar}
@@ -231,13 +249,11 @@ const EditPopupModal = ({
               className="nameInput"
               value={username}
               onChange={handleUsernameChange}
-              placeholder={userData.user.name || ""}
             />
-            <div className="inputInfo">{username.length}/50</div>
+            {errorMessageUsername && (
+              <p className="errorMessage">{errorMessageUsername}</p>
+            )}
           </div>
-          {errorMessageUsername && (
-            <div className="errorMessage">{errorMessageUsername}</div>
-          )}
           <div
             className={`introInputContainer ${
               errorMessageIntro ? "error" : ""
@@ -251,13 +267,11 @@ const EditPopupModal = ({
               className="introInput"
               value={intro}
               onChange={handleIntroChange}
-              placeholder={userData.user.introduction || ""}
             />
-            <div className="inputInfo">{intro.length}/160</div>
+            {errorMessageIntro && (
+              <p className="errorMessage">{errorMessageIntro}</p>
+            )}
           </div>
-          {errorMessageIntro && (
-            <div className="errorMessage">{errorMessageIntro}</div>
-          )}
         </div>
       </div>
     </Popup>

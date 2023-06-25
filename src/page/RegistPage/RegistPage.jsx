@@ -102,6 +102,7 @@ const RegistPage = () => {
           placeholder="請輸入帳號"
           name="account"
           value={account}
+          error={errors.account}
           onChange={(accountInputValue) => setAccount(accountInputValue)}
         />
         {errors.account && <p className="error">{errors.account}</p>}
@@ -111,6 +112,7 @@ const RegistPage = () => {
           placeholder="請輸入使用者名稱"
           name="name"
           value={name}
+          error={errors.name}
           onChange={(nameInputValue) => setName(nameInputValue)}
         />
         {errors.name && <p className="error">{errors.name}</p>}
@@ -120,6 +122,7 @@ const RegistPage = () => {
           placeholder="請輸入Email"
           name="email"
           value={email}
+          error={errors.email}
           onChange={(emailInputValue) => setEmail(emailInputValue)}
         />
         {errors.email && <p className="error">{errors.email}</p>}
@@ -130,6 +133,7 @@ const RegistPage = () => {
           placeholder="請設定密碼"
           name="password"
           value={password}
+          error={errors.password}
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
         {errors.password && <p className="error">{errors.password}</p>}
@@ -140,6 +144,7 @@ const RegistPage = () => {
           placeholder="請再次輸入密碼"
           name="checkPassword"
           value={checkPassword}
+          error={errors.checkPassword}
           onChange={(checkPasswordInputValue) =>
             setCheckPassword(checkPasswordInputValue)
           }
@@ -147,7 +152,6 @@ const RegistPage = () => {
         {errors.checkPassword && (
           <p className="error">{errors.checkPassword}</p>
         )}
-        {errors.common && <p className="error">{errors.common}</p>}
       </div>
       <button className="btn" onClick={handleClick}>
         註冊
