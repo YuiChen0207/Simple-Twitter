@@ -66,7 +66,7 @@ const LoginPage = () => {
       <div>
         <img className="logo" src={siteLogo} alt="logo" />
       </div>
-      <h1 className="title">登入Alphitter</h1>
+      <h1 className="title">登入AlphaTwitter</h1>
       <div className="inputContainer">
         <AuthInput
           label="帳號"
