@@ -9,8 +9,8 @@ const UserRepliesList = ({ replies, username, userImage }) => {
       {replies.map((reply) => (
         <UserPageTweet
           key={reply.id}
-          logo={userImage}
-          username={username}
+          logo={userImage ?? reply.replyAvatar}
+          username={username ?? reply.replyName}
           accountName={reply.replyAccount}
           postTime={formatTime(reply.createdAt)}
           content={reply.comment}

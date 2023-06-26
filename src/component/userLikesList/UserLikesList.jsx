@@ -1,26 +1,25 @@
-import grayLogo from "../../assets/logoGray.svg";
 import UserPageTweet from "../userPageTweet/UserPageTweet";
 import { formatTime } from "../../utils/timeUtils";
 
-
-const UserRepliesList = ({ likes, username, userImage }) => {
+const UserLikesList = ({ likes, username, userImage }) => {
   return (
     <div className="tweetsListContainer">
       {likes.map((like) => (
         <UserPageTweet
-          key={like.id}
-          logo={userImage}
-          username={username}
+          key={like.UserId}
+          logo={userImage ?? like.avatar}
+          username={username ?? like.tweetOwnerName}
           accountName={like.tweetOwnerAccount}
           postTime={formatTime(like.createdAt)}
           content={like.description}
           comments={like.replyCount}
           likes={like.likeCount}
-          isLike={true}
+          isLiked={like.isLiked}
+          tweetId={like.TweetId}
         />
       ))}
     </div>
   );
 };
 
-export default UserRepliesList;
+export default UserLikesList;

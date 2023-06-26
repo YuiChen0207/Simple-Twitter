@@ -4,7 +4,6 @@ import { likeTweet, unlikeTweet } from "../../api/likeAndUnlike";
 import "./UserPageTweet.scss";
 
 const UserPageTweet = ({
-  key,
   logo,
   username,
   accountName,

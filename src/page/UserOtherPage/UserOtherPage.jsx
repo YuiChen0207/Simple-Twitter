@@ -104,7 +104,6 @@ const UserOther = () => {
           activeTab={activeTab}
           onTabClick={handleTabClick}
         />
-        <hr />
         <div className="tweetsSection">
           {activeTab === "tweets" && (
             <UserTweetsList

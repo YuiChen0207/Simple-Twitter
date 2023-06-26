@@ -30,7 +30,7 @@ function App() {
                 <Route path="*" element={<HomePage />} />
                 <Route path="/mainPage" element={<MainPage />} />
                 <Route path="/user/self" element={<UserSelf />} />
-                <Route path="/user/other" element={<UserOtherPage />} />
+                <Route path="/user/:username" element={<UserOtherPage />} />
                 <Route path="/follow" element={<FollowAndFollower />} />
                 <Route path="/follower" element={<FollowAndFollower />} />
                 <Route path="/login_admin" element={<LoginAdmin />} />

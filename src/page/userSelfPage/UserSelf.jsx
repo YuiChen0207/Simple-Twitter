@@ -43,7 +43,7 @@ const UserSelf = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { id } = currentMember;
+      const id = currentMember?.id;
 
       try {
         const userTweets = await getUserTweets(id);
@@ -109,7 +109,6 @@ const UserSelf = () => {
           activeTab={activeTab}
           onTabClick={handleTabClick}
         />
-        <hr />
         <div className="tweetsSection">
           {activeTab === "tweets" && (
             <UserTweetsList
