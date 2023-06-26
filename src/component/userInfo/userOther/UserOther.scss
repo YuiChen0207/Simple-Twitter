@@ -7,8 +7,9 @@
     width: 100%;
     height: 200px;
     background-image: url(../../../assets//backgroundImage.svg);
+    background-size: cover;
+    background-position: center;
     z-index: 1;
-    object-fit: cover;
   }
 
   .userContext {
