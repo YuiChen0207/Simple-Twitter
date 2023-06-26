@@ -34,35 +34,38 @@ const Post = ({ setList }) => {
   };
 
   return (
-    <div className="postContainer">
-      <div className="postHeader">
-        <h4 className="medium">首頁</h4>
+    <>
+      <div className="postContainer">
+        <div className="postHeader">
+          <h4 className="medium">首頁</h4>
+        </div>
+        <hr />
+        <div className="postContent">
+          <div className="postBox" onClick={handleOpenModal}>
+            <img src={userLogo} alt="User Avatar" className="userAvatar" />
+            <div className="postTextContainer">
+              <input
+                type="text"
+                className="postTextInput"
+                placeholder={"有什麼新鮮事？"}
+              />
+            </div>
+          </div>
+          <button className="button orangeButton" onClick={handleOpenModal}>
+            推文
+          </button>
+        </div>
+        <hr className="thickBar" />
+        {showModal && (
+          <PopupModal
+            open={showModal}
+            setList={setList}
+            onClose={handleCloseModal}
+          />
+        )}
       </div>
       <hr />
-      <div className="postContent">
-        <div className="postBox" onClick={handleOpenModal}>
-          <img src={userLogo} alt="User Avatar" className="userAvatar" />
-          <div className="postTextContainer">
-            <input
-              type="text"
-              className="postTextInput"
-              placeholder={"有什麼新鮮事？"}
-            />
-          </div>
-        </div>
-        <button className="button orangeButton" onClick={handleOpenModal}>
-          推文
-        </button>
-      </div>
-      <hr className="thickBar" />
-      {showModal && (
-        <PopupModal
-          open={showModal}
-          setList={setList}
-          onClose={handleCloseModal}
-        />
-      )}
-    </div>
+    </>
   );
 };
 

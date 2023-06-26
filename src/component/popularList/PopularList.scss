@@ -1,4 +1,4 @@
-.popular-list {
+.popularList {
   width: 273px;
   height: 100vh;
   background-color: var(--gray-100);
@@ -15,9 +15,22 @@
     border: none;
   }
 
-  .popular-cards {
+  .popularCards {
     display: flex;
     flex-direction: column;
     gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .popularList {
+    display: none;
+  }
+}
+
+
+@media (max-width: 1024px) {
+  .popularList {
+  width: 223px;
   }
 }

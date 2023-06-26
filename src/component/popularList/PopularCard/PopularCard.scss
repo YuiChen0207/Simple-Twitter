@@ -19,7 +19,7 @@
     }
   }
 
-  .whiteButton  {
+  .whiteButton {
     margin-left: auto;
     padding: 8px 16px;
     border-radius: 50px;
@@ -27,6 +27,18 @@
     &.isFollow {
       background: var(--brand-color);
       color: var(--white);
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .popular-card {
+    .whiteButton {
+      padding: 4px 8px;
+      white-space: nowrap;
+      .popular-card-info {
+        margin: auto auto;
+      }
     }
   }
 }

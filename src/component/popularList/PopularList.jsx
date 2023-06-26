@@ -6,10 +6,10 @@ import "./PopularList.scss";
 
 const PopularList = ({ popularCards }) => {
   return (
-    <div className="popular-list">
+    <div className="popularList">
       <h4 className="medium">推薦跟隨</h4>
       <hr />
-      <div className="popular-cards">
+      <div className="popularCards">
         {popularCards.map((card) => (
           <PopularCard
             key={card.id}
