@@ -1,7 +1,5 @@
-import grayLogo from "../../assets/logoGray.svg";
 import UserPageTweet from "../userPageTweet/UserPageTweet";
 import { formatTime } from "../../utils/timeUtils";
-
 
 const UserRepliesList = ({ likes, username, userImage }) => {
   return (
@@ -9,8 +7,8 @@ const UserRepliesList = ({ likes, username, userImage }) => {
       {likes.map((like) => (
         <UserPageTweet
           key={like.id}
-          logo={userImage}
-          username={username}
+          logo={userImage ?? like.avatar}
+          username={username ?? like.name}
           accountName={like.tweetOwnerAccount}
           postTime={formatTime(like.createdAt)}
           content={like.description}
