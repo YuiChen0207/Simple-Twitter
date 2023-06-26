@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import "./Tweet.scss";
 import PopupReply from "../../popupReply/PopupReply";
 import { getSingleTweet } from "../../../api/tweets";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const Tweet = ({
   logo,
@@ -22,11 +23,14 @@ const Tweet = ({
   hideFooter,
   onGetUserIdFromTweet,
   setList,
+  tweet,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
   const { checkItemId } = useId();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const { currentMember } = useAuth();
+  const userId = currentMember?.id;
 
   const handleOneTweet = async () => {
     checkItemId(tweetId);
@@ -90,13 +94,13 @@ const Tweet = ({
         }
       }}
     >
-      <Link to={`/user/other`}>
-        <img
-          src={logo}
-          alt="Logo"
-          className="userLogo"
-          onClick={onGetUserIdFromTweet}
-        />
+      <Link
+        to={
+          userId === tweet.User.id ? "/user/self" : `/user/${tweet.User.name}`
+        }
+        onClick={onGetUserIdFromTweet}
+      >
+        <img src={logo} alt="Logo" className="userLogo" />
       </Link>
 
       <div className="tweetContent">

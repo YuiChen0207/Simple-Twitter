@@ -21,7 +21,7 @@ const UserInfo = ({
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   const { setUserIdFromTweet } = useUserId();
-  const { id } = currentMember;
+  const id = currentMember?.id;
 
   const handleEditProfileClick = async () => {
     try {
