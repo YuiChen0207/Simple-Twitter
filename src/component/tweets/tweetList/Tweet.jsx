@@ -118,8 +118,12 @@ const Tweet = ({
         <div className="tweetFooter">
           {!hideFooter && (
             <>
-              <div className="tweetComments">
-                <img src={commitIcon} alt="commit icon" />
+              <div className="tweetComments" onClick={() => handleOneTweet()}>
+                <img
+                  src={commitIcon}
+                  alt="commit icon"
+                  onClick={handleOpenModal}
+                />
                 <span className="commentCount">{comments}</span>
               </div>
               <div className="tweetLikes" onClick={handleLike}>
