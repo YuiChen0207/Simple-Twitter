@@ -25,22 +25,19 @@ export const login = async ({ account, password }) => {
 
 export const adminLogin = async ({ account, password }) => {
   try {
-    const {
-      data: { data },
-    } = await axios.post(`${authURL}/admin/signin`, {
+    const res = await axios.post(`${authURL}/admin/signin`, {
       account,
       password,
     });
 
-    console.log(data);
-
-    const { token } = data;
-    if (token) {
-      return { success: true, ...data };
+    const { status } = res.data;
+    if (status === "success") {
+      return { success: true, ...res.data.data };
     }
-    return data;
+    return res.data.data;
   } catch (error) {
     console.error("[Login Failed]:", error);
+    console.log(error);
     return { success: false, error };
   }
 };
