@@ -22,8 +22,8 @@ const Tweet = ({
   hideFooter,
   onGetUserIdFromTweet,
   setList,
+  isLiked,
 }) => {
-  const [isLiked, setIsLiked] = useState(false);
   const { checkItemId } = useId();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -53,12 +53,12 @@ const Tweet = ({
               return {
                 ...tweet,
                 LikesCount: tweet.LikesCount - 1,
+                isLiked: false,
               };
             }
             return { ...tweet };
           });
         });
-        setIsLiked(false);
       } else {
         await likeTweet(String(tweetId));
         setList?.((prev) => {
@@ -67,17 +67,16 @@ const Tweet = ({
               return {
                 ...tweet,
                 LikesCount: tweet.LikesCount + 1,
+                isLiked: true,
               };
             }
             return { ...tweet };
           });
         });
-        setIsLiked(true);
       }
     } catch (error) {
       console.error("喜歡推文失败:", error);
     }
-    setIsLiked(!isLiked);
   };
 
   return (
