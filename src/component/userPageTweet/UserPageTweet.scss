@@ -1,6 +1,6 @@
 .userImage {
   height: 50px;
-  width: 50px;
+  min-width: 50px;
   margin: 0 8px auto 0;
   border-radius: 50%;
   object-fit: cover;
@@ -10,12 +10,10 @@
   cursor: pointer;
 
   .redHeart {
-  background-image: url(../../assets/redHeart.svg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 14px;
-  width: 14px;
+    background-image: url(../../assets/redHeart.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 14px;
+    width: 14px;
+  }
 }
-}
-
-
