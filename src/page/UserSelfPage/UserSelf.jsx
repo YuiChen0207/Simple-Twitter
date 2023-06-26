@@ -116,6 +116,7 @@ const UserSelf = () => {
               username={userData?.name}
               userImage={userData?.avatar}
               className="tweetsSection"
+              setTweetsList={setTweets}
             />
           )}
           {activeTab === "replies" && (

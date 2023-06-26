@@ -1,8 +1,10 @@
 import commitIcon from "../../assets/commit.svg";
 import heartIcon from "../../assets/heart.svg";
+import { likeTweet, unlikeTweet } from "../../api/likeAndUnlike";
 import "./UserPageTweet.scss";
 
 const UserPageTweet = ({
+  key,
   logo,
   username,
   accountName,
@@ -13,8 +15,45 @@ const UserPageTweet = ({
   replyTo,
   hideFooter,
   onGetUserIdFromTweet,
-  isLike,
+  isLiked,
+  tweetId,
+  setList,
 }) => {
+  const handleLike = async () => {
+    try {
+      if (isLiked) {
+        await unlikeTweet(String(tweetId));
+        setList?.((prev) => {
+          return prev.map((tweet) => {
+            if (tweet.id === tweetId) {
+              return {
+                ...tweet,
+                likeCount: tweet.likeCount - 1,
+                isLiked: false,
+              };
+            }
+            return { ...tweet };
+          });
+        });
+      } else {
+        await likeTweet(String(tweetId));
+        setList?.((prev) => {
+          return prev.map((tweet) => {
+            if (tweet.id === tweetId) {
+              return {
+                ...tweet,
+                likeCount: tweet.likeCount + 1,
+                isLiked: true,
+              };
+            }
+            return { ...tweet };
+          });
+        });
+      }
+    } catch (error) {
+      console.error("喜歡推文失败:", error);
+    }
+  };
   return (
     <>
       <div className="tweetContainer">
@@ -49,11 +88,11 @@ const UserPageTweet = ({
                   <img src={commitIcon} alt="commit icon" />
                   <span className="commentCount">{comments}</span>
                 </div>
-                <div className="tweetLikes">
+                <div className="tweetLikes" onClick={handleLike}>
                   <img
                     src={heartIcon}
                     alt="heart icon"
-                    className={`${isLike ? "redHeart" : ""}`}
+                    className={`${isLiked ? "redHeart" : ""}`}
                   />
                   <span className="likeCount">{likes}</span>
                 </div>

@@ -109,6 +109,7 @@ const UserOther = () => {
             <UserTweetsList
               tweets={tweets}
               className="tweetsSection"
+              setTweetsList={setTweets}
             />
           )}
           {activeTab === "replies" && (

@@ -37,6 +37,7 @@ const TweetsList = ({ tweets, setTweetsList }) => {
                 );
               }}
               setList={setTweetsList}
+              isLiked={tweet.isLiked}
             />
           )
       )}

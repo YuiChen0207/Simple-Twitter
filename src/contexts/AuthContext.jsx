@@ -1,7 +1,7 @@
-import { login, register, adminLogin, checkPermission } from '../api/auth';
-import { createContext, useState, useEffect, useContext } from 'react';
-import { decodeToken } from 'react-jwt';
-import { useLocation } from 'react-router-dom';
+import { login, register, adminLogin, checkPermission } from "../api/auth";
+import { createContext, useState, useEffect, useContext } from "react";
+import { decodeToken } from "react-jwt";
+import { useLocation } from "react-router-dom";
 
 const defaultAuthContext = {
   isAuthenticated: false,
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   //IMPORTANT 之後還要跟後端確認是否有做/test-token api, 然後再作修改
   useEffect(() => {
     const checkTokenIsValid = async () => {
-      const authToken = localStorage.getItem('authToken');
+      const authToken = localStorage.getItem("authToken");
       if (authToken) {
         setIsAuthenticated(true);
         const tempPayload = decodeToken(authToken);
@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }) => {
           if (tempPayload) {
             setPayload(tempPayload);
             setIsAuthenticated(true);
-            localStorage.setItem('authToken', token);
+            localStorage.setItem("authToken", token);
           } else {
             setPayload(null);
             setIsAuthenticated(false);
@@ -88,7 +88,7 @@ export const AuthProvider = ({ children }) => {
           return success;
         },
         adminLogin: async (data) => {
-          const { success, token } = await adminLogin({
+          const { success, token, error } = await adminLogin({
             account: data.account,
             password: data.password,
           });
@@ -97,15 +97,15 @@ export const AuthProvider = ({ children }) => {
           if (tempPayload) {
             setPayload(tempPayload);
             setIsAuthenticated(true);
-            localStorage.setItem('authToken', token);
+            localStorage.setItem("authToken", token);
           } else {
             setPayload(null);
             setIsAuthenticated(false);
           }
-          return success;
+          return { success, error };
         },
         logout: () => {
-          localStorage.removeItem('authToken');
+          localStorage.removeItem("authToken");
           setPayload(null);
           setIsAuthenticated(false);
         },
