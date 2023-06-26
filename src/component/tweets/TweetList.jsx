@@ -23,6 +23,7 @@ const TweetsList = ({ tweets, setTweetsList }) => {
               likes={tweet.LikesCount}
               onGetUserIdFromTweet={() => setUserIdFromTweet(tweet.User.id)}
               setList={setTweetsList}
+              isLiked={tweet.isLiked}
             />
           )
       )}
