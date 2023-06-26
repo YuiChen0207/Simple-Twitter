@@ -2,7 +2,7 @@ import grayLogo from "../../assets/logoGray.svg";
 import { formatTime } from "../../utils/timeUtils";
 import UserPageTweet from "../userPageTweet/UserPageTweet";
 
-const UserTweetsList = ({ tweets, username, userImage }) => {
+const UserTweetsList = ({ tweets, username, userImage, setTweetsList }) => {
   return (
     <div className="tweetsListContainer">
       {tweets.map((tweet) => (
@@ -15,6 +15,9 @@ const UserTweetsList = ({ tweets, username, userImage }) => {
           content={tweet.description}
           comments={tweet.replyCount}
           likes={tweet.likeCount}
+          isLiked={tweet.isLiked}
+          tweetId={tweet.id}
+          setList={setTweetsList}
         />
       ))}
     </div>
