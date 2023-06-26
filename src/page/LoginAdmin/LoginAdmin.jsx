@@ -20,10 +20,13 @@ const LoginAdmin = () => {
     if (password.length === 0) {
       return;
     }
-    const success = await adminLogin({
+    const { success, error } = await adminLogin({
       account,
       password,
     });
+
+    console.log(error);
+
     if (success) {
       Swal.fire({
         position: "top",
@@ -38,7 +41,7 @@ const LoginAdmin = () => {
 
     Swal.fire({
       position: "top",
-      title: "登入失敗",
+      title: "此帳號不存在",
       timer: 1000,
       icon: "error",
       showConfirmButton: false,
