@@ -8,12 +8,14 @@
 
 .tweetLikes {
   cursor: pointer;
-}
 
-.redHeart {
+  .redHeart {
   background-image: url(../../assets/redHeart.svg);
   background-size: cover;
   background-repeat: no-repeat;
   height: 14px;
   width: 14px;
 }
+}
+
+
