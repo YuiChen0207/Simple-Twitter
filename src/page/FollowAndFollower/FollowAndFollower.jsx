@@ -31,7 +31,9 @@ const FollowAndFollower = () => {
             ? await getFollowerList(userId)
             : await getFollowingList(userId);
 
-        setFollowShipList([...list]);
+        activeTab === "followers"
+          ? setFollowShipList([...list.followers])
+          : setFollowShipList([...list.followings]);
       } catch (error) {
         console.error(error);
       }
