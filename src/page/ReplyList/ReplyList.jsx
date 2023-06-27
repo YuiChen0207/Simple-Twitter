@@ -8,8 +8,9 @@ import { getSingleTweet, getTweetReplies } from "../../api/tweets";
 import { useEffect, useState } from "react";
 import { useId } from "../../contexts/IdContext";
 import { getPopularList } from "../../api/popularlist";
-import "./ReplyList.scss";
 import { useAuth } from "../../contexts/AuthContext";
+import MobileMenu from "../../component/mobileMode/MobileMenu";
+import "./ReplyList.scss";
 
 const ReplyList = () => {
   const [singleTweet, setSingleTweet] = useState({});
@@ -92,6 +93,7 @@ const ReplyList = () => {
         />
       </div>
       <PopularList popularCards={popularCards} />
+      <MobileMenu />
     </div>
   );
 };

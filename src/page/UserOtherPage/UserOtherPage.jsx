@@ -52,6 +52,7 @@ const UserOther = () => {
 
       try {
         const userLikes = await getUserLikes(userId);
+        console.log(userLikes);
         setLikes(userLikes.map((like) => ({ ...like })));
       } catch (error) {
         console.error("获取用户喜欢的推文失败：", error);

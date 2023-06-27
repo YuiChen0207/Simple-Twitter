@@ -1,5 +1,4 @@
 import SingleReply from './singleReply/SingleReply';
-import profileImg from '../../assets/img/canadian-girl.jpg';
 import './ReplyListBox.scss';
 
 const ReplyListBox = ({ replies, replyTo }) => {

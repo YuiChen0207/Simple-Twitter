@@ -66,7 +66,7 @@
     display: flex;
     font-size: 19px;
     font-weight: 700;
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     gap: 24px;
     padding: 16px 0;
     margin: 0 16px 0 16px;
@@ -75,7 +75,7 @@
 
     .replyCount {
       &::after {
-        content: '回覆';
+        content: "回覆";
         color: var(--Secondary);
         padding-left: 4px;
       }
@@ -83,7 +83,7 @@
 
     .likeCount {
       &::after {
-        content: '喜歡次數';
+        content: "喜歡次數";
         color: var(--Secondary);
         padding-left: 4px;
       }
@@ -100,6 +100,54 @@
       width: auto;
       height: 25px;
       cursor: pointer;
+    }
+  }
+  .modalBody{
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .singleReplyBox {
+    .actionBox {
+      padding: 16px;
+      margin: 0;
+      gap: 40px;
+      border-bottom: 1px solid #e6ecf0;
+    }
+    .modalBody {
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      gap: 10px;
+      .userImg {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .tweetInput {
+        width: 100%;
+
+        &::placeholder {
+          font-size: 18px;
+          font-weight: 500px;
+          color: #9197a3;
+        }
+      }
+    }
+
+    .orangeButton {
+      width: 68px;
+      height: 42px;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 16px;
+      white-space: nowrap;
+    }
+    .countBox {
+      padding: 16px;
+      margin: 0;
     }
   }
 }
