@@ -68,15 +68,17 @@
   .postContainer {
     flex-direction: row-reverse;
     justify-content: flex-end;
-    align-items: end;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #e6ecf0;
     hr {
       display: none;
     }
     .postContent {
-      margin: 28px 0 0 15px;
+      margin: 10px 0 0 0;
       padding: 0;
     }
-    .postBox{
+    .postBox {
       padding-bottom: 10px;
     }
     .postTextInput {

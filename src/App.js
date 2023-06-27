@@ -16,6 +16,7 @@ import ReplyList from "./page/ReplyList/ReplyList";
 import FollowAndFollower from "./page/FollowAndFollower/FollowAndFollower";
 import "./base.scss";
 import "./reset.scss";
+import { TweetsProvider } from "./contexts/TweetsContext";
 
 const basename = process.env.PUBLIC_URL;
 /* import {LoginPage, MainPage, RegistPage} from './page' */
@@ -26,21 +27,23 @@ function App() {
         <AuthProvider>
           <UserIdProvider>
             <IdProvider>
-              <Routes>
-                <Route path="*" element={<HomePage />} />
-                <Route path="/mainPage" element={<MainPage />} />
-                <Route path="/user/self" element={<UserSelf />} />
-                <Route path="/user/:username" element={<UserOtherPage />} />
-                <Route path="/follow" element={<FollowAndFollower />} />
-                <Route path="/follower" element={<FollowAndFollower />} />
-                <Route path="/login_admin" element={<LoginAdmin />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup" element={<RegistPage />} />
-                <Route path="/settings" element={<SettingPage />} />
-                <Route path="/admin_main" element={<AdminMain />} />
-                <Route path="/admin_users" element={<UsersDashboard />} />
-                <Route path="/reply_list" element={<ReplyList />} />
-              </Routes>
+              <TweetsProvider>
+                <Routes>
+                  <Route path="*" element={<HomePage />} />
+                  <Route path="/mainPage" element={<MainPage />} />
+                  <Route path="/user/self" element={<UserSelf />} />
+                  <Route path="/user/:username" element={<UserOtherPage />} />
+                  <Route path="/follow" element={<FollowAndFollower />} />
+                  <Route path="/follower" element={<FollowAndFollower />} />
+                  <Route path="/login_admin" element={<LoginAdmin />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/signup" element={<RegistPage />} />
+                  <Route path="/settings" element={<SettingPage />} />
+                  <Route path="/admin_main" element={<AdminMain />} />
+                  <Route path="/admin_users" element={<UsersDashboard />} />
+                  <Route path="/reply_list" element={<ReplyList />} />
+                </Routes>
+              </TweetsProvider>
             </IdProvider>
           </UserIdProvider>
         </AuthProvider>

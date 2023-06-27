@@ -1,6 +1,6 @@
 .replyMainContainer {
   display: flex;
-  margin: 0 130px;
+  margin: auto 50px;
   gap: 24px;
 
   .subContainer {
@@ -34,5 +34,11 @@
         color: var(--gray-900);
       }
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .replyMainContainer {
+    margin: 0 50px 50px;
   }
 }
