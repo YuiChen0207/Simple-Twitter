@@ -4,7 +4,6 @@
   justify-content: center;
   align-items: center;
   margin: 69px auto 0 auto;
-  font-family: var(--main-font-family);
   width: 356px;
 
   .logo {
@@ -68,5 +67,14 @@
       background-color: black;
       border-radius: 50px;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .loginContainer {
+    margin: 0 auto;
+    width: 327px;
+    padding: 0 24px;
+    height: 100vh;
   }
 }

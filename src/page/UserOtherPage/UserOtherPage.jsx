@@ -52,7 +52,12 @@ const UserOther = () => {
 
       try {
         const userLikes = await getUserLikes(userId);
+
         setLikes(userLikes);
+
+        
+        
+
       } catch (error) {
         console.error("获取用户喜欢的推文失败：", error);
       }

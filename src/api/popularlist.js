@@ -11,8 +11,8 @@ import axiosInstance, { baseUrl } from './axiosInstance';
 export const getPopularList = async () => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/users/top`);
-    // console.log(res.data.users);
-    return res.data.users;
+    //console.log(res.data.topUsers);
+    return res.data.topUsers;
   } catch (error) {
     console.error('[Get getPopularList failed]: ', error);
   }

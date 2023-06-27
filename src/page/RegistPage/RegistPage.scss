@@ -1,10 +1,9 @@
-.signupContainer {
+.signUpContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 69px auto;
-  font-family: var(--main-font-family);
+  margin: 40px auto;
   width: 356px;
 
   .logo {
@@ -50,5 +49,13 @@
       border-bottom: 1px solid var(--Primary);
       cursor: pointer;
     }
+  }
+}
+
+
+@media (max-width: 768px) {
+  .signUpContainer {
+    width: 327px;
+    padding: 0 24px;
   }
 }

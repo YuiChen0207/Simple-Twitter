@@ -130,8 +130,6 @@ const UserSelf = () => {
           {activeTab === "likes" && (
             <UserLikesList
               likes={likes}
-              username={userData?.name}
-              userImage={userData?.avatar}
               className="tweetsSection"
               setTweetsList={setLikes}
             />

@@ -12,7 +12,7 @@
     width: 100%;
     border: none;
   }
-  
+
   .postContent {
     display: flex;
     justify-content: space-between;
@@ -27,7 +27,7 @@
     padding-bottom: 30px;
     cursor: pointer;
 
-    .userAvatar{
+    .userAvatar {
       width: 50px;
       height: 50px;
       border-radius: 50%;
@@ -50,5 +50,45 @@
 
   .thickBar {
     height: 10px;
+  }
+}
+
+@media (max-width: 835px) {
+  .postContainer {
+    .postTextInput {
+      font-size: 14px;
+    }
+    .orangeButton {
+      padding: 4px 8px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .postContainer {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #e6ecf0;
+    hr {
+      display: none;
+    }
+    .postContent {
+      margin: 10px 0 0 0;
+      padding: 0;
+    }
+    .postBox {
+      padding-bottom: 10px;
+    }
+    .postTextInput {
+      display: none;
+    }
+    .orangeButton {
+      display: none;
+    }
+    .thickBar {
+      display: none;
+    }
   }
 }

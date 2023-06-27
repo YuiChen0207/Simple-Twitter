@@ -7,6 +7,7 @@ import { getPopularList } from "../../api/popularlist.js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import MobileMenu from "../../component/mobileMode/MobileMenu";
 import "./MainPage.scss";
 
 const Main = () => {
@@ -33,7 +34,7 @@ const Main = () => {
     const getPopularCardsAsync = async () => {
       try {
         const popularCards = await getPopularList();
-        setPopularCards(popularCards.map((users) => ({ ...users })));
+        setPopularCards(popularCards);
       } catch (error) {
         console.error(error);
       }
@@ -50,6 +51,7 @@ const Main = () => {
   return (
     <div className="mainContainer">
       <Navbar setList={setTweets} />
+      <MobileMenu />
       <div className="mainContent">
         <div className="postSection">
           <Post setList={setTweets} />

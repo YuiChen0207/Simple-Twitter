@@ -91,7 +91,7 @@ const RegistPage = () => {
   }, [navigate, isAuthenticated]);
 
   return (
-    <div className="signupContainer">
+    <div className="signUpContainer">
       <div>
         <img className="logo" src={siteLogo} alt="logo" />
       </div>
