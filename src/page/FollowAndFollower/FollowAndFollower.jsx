@@ -71,7 +71,11 @@ const FollowAndFollower = () => {
         <Header
           username={usernameFromContext}
           tweetCount={25}
-          pageName="user/self"
+          pageName={
+            currentMember.id === userId
+              ? "user/self"
+              : `/user/${usernameFromContext}`
+          }
         />
         <hr />
         <TabBar
