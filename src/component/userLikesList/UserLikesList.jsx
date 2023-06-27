@@ -4,7 +4,7 @@ import { formatTime } from "../../utils/timeUtils";
 
 
 
-const UserLikesList = ({ likes, username, userImage, setTweetsList }) => {
+const UserLikesList = ({ likes, setTweetsList }) => {
 
   return (
     <div className="tweetsListContainer">
