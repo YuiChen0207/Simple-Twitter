@@ -40,12 +40,12 @@ const UserInfo = ({
 
   const handleFollowingClick = () => {
     setUserIdFromTweet(id, username);
-    navigate("/follow");
+    navigate("/follower");
   };
 
   const handleFollowersClick = () => {
     setUserIdFromTweet(id, username);
-    navigate("/follower");
+    navigate("/follow");
   };
 
   return (
@@ -67,13 +67,13 @@ const UserInfo = ({
               className="count followingCount"
               onClick={handleFollowingClick}
             >
-              {followingCount}位<span>跟隨中</span>
+              {followersCount}位<span>跟隨中</span>
             </div>
             <div
               className="count followersCount"
               onClick={handleFollowersClick}
             >
-              {followersCount}位<span>跟隨者</span>
+              {followingCount}位<span>跟隨者</span>
             </div>
           </div>
         </div>
