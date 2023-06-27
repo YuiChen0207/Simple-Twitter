@@ -133,6 +133,7 @@ const UserSelf = () => {
               username={userData?.name}
               userImage={userData?.avatar}
               className="tweetsSection"
+              setTweetsList={setLikes}
             />
           )}
         </div>
