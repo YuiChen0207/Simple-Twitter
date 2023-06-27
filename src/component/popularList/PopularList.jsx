@@ -1,6 +1,6 @@
 import React from "react";
 import PopularCard from "./PopularCard/PopularCard";
-import "./PopularList.scss";
+import "./popularList.scss";
 
 /* 等待api串接10名推薦跟隨，順序follower由多到少 */
 
@@ -13,7 +13,8 @@ const PopularList = ({ popularCards }) => {
         {popularCards.map((card) => (
           <PopularCard
             key={card.id}
-            userName={card.name ? card.name : "user"}
+            userName={card.name}
+            avatar={card.avatar}
             account={card.account}
             isFollowed={card.isFollowed}
             followerId={card.id}

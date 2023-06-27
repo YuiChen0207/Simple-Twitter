@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import {likePopularCard, unlikePopularCard} from '../../../api/popularlist'
-import grayLogo from "../../../assets/logoGray.svg";
+import { likePopularCard, unlikePopularCard } from "../../../api/popularlist";
+import defaultLogo from "../../../assets/logoGray.svg"
 import "./PopularCard.scss";
 
-const PopularCard = ({ followerId, userName, account, isFollowed }) => {
+const PopularCard = ({ followerId, userName, account, isFollowed, avatar }) => {
   const [isFollow, setIsFollow] = useState(isFollowed);
 
-    //  加入更新資料的邏輯
-  const handleFollow = async() => {
+  //  加入更新資料的邏輯
+  const handleFollow = async () => {
     if (isFollow === false) {
       try {
         await likePopularCard(followerId);
@@ -27,7 +27,11 @@ const PopularCard = ({ followerId, userName, account, isFollowed }) => {
 
   return (
     <div className="popular-card">
-      <img src={grayLogo} alt="logo-gray" className="popular-card-logo" />
+      <img
+        src={avatar ?? defaultLogo}
+        alt="logo-gray"
+        className="popular-card-logo"
+      />
       <div className="popular-card-info">
         <h4 className="popular-card-userName">{userName}</h4>
         <p className="popular-card-account">{account}</p>

@@ -34,7 +34,7 @@ const Main = () => {
     const getPopularCardsAsync = async () => {
       try {
         const popularCards = await getPopularList();
-        setPopularCards(popularCards.map((users) => ({ ...users })));
+        setPopularCards(popularCards);
       } catch (error) {
         console.error(error);
       }

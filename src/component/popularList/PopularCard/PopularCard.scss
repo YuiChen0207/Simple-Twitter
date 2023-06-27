@@ -6,6 +6,10 @@
 
   .popular-card-logo {
     margin-right: 16px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
   }
 
   .popular-card-info {
