@@ -21,6 +21,7 @@ const FollowAndFollower = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const { userId, usernameFromContext } = useUserId();
+  const { currentMember } = useAuth();
 
   useEffect(() => {
     const getFollowShipList = async () => {
