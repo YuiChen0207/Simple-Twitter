@@ -57,6 +57,7 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
             return {
               ...tweet,
               RepliesCount: tweet.RepliesCount + 1,
+              replyCount: tweet.replyCount + 1,
             };
           }
           return { ...tweet };

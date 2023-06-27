@@ -1,6 +1,10 @@
+import React, { useState } from "react";
 import commitIcon from "../../assets/commit.svg";
 import heartIcon from "../../assets/heart.svg";
 import { likeTweet, unlikeTweet } from "../../api/likeAndUnlike";
+import { useNavigate } from "react-router-dom";
+import { useId } from "../../contexts/IdContext";
+import PopupReply from "../popupReply/PopupReply";
 import "./UserPageTweet.scss";
 
 const UserPageTweet = ({
@@ -18,6 +22,22 @@ const UserPageTweet = ({
   tweetId,
   setList,
 }) => {
+  const { checkItemId } = useId();
+  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOneTweet = async () => {
+    checkItemId(tweetId);
+  };
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   const handleLike = async () => {
     try {
       if (isLiked) {
@@ -55,7 +75,15 @@ const UserPageTweet = ({
   };
   return (
     <>
-      <div className="tweetContainer">
+      <div
+        className="tweetContainer"
+        onClick={(e) => {
+          if (e.target.tagName !== "IMG") {
+            checkItemId(tweetId);
+            navigate("/reply_list");
+          }
+        }}
+      >
         <img
           src={logo}
           alt="Logo"
@@ -83,8 +111,12 @@ const UserPageTweet = ({
           <div className="tweetFooter">
             {!hideFooter && (
               <>
-                <div className="tweetComments">
-                  <img src={commitIcon} alt="commit icon" />
+                <div className="tweetComments" onClick={() => handleOneTweet()}>
+                  <img
+                    src={commitIcon}
+                    alt="commit icon"
+                    onClick={handleOpenModal}
+                  />
                   <span className="commentCount">{comments}</span>
                 </div>
                 <div className="tweetLikes" onClick={handleLike}>
@@ -98,9 +130,15 @@ const UserPageTweet = ({
               </>
             )}
           </div>
+          {showModal && (
+            <PopupReply
+              open={showModal}
+              onClose={handleCloseModal}
+              setList={setList}
+            />
+          )}
         </div>
       </div>
-      <hr />
     </>
   );
 };

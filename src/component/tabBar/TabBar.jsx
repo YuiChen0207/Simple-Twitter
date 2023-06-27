@@ -7,7 +7,7 @@ const tabOptions = [
 ];
 
 const tabOptionsFollow = [
-  { id: "followers", label: "跟隨者" },
+  { id: "followers", label: "追隨者" },
   { id: "following", label: "正在追隨" },
 ];
 
