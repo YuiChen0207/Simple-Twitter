@@ -15,7 +15,7 @@ const SettingPage = () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordCheck, setPasswordCheck] = useState("");
+  const [checkPassword, setCheckPassword] = useState("");
 
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
@@ -27,7 +27,7 @@ const SettingPage = () => {
       account: account,
       email: email,
       password: password,
-      checkPassword: passwordCheck,
+      checkPassword: checkPassword,
     };
     try {
       const res = await putUseSettingInfo(userChangeData);
@@ -35,8 +35,7 @@ const SettingPage = () => {
       if (res.status === 200) {
         console.log("success");
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -59,7 +58,7 @@ const SettingPage = () => {
       </div>
       <div className="settingContainer">
         <PageTag title="帳戶設定" />
-        <form className="inputContainer" >
+        <form className="inputContainer">
           <UserSettingInput
             label="帳號"
             placeholder="請輸入帳號"
@@ -89,8 +88,10 @@ const SettingPage = () => {
             type="password"
             label="密碼確認"
             placeholder="請再次輸入密碼"
-            value={passwordCheck}
-            onChange={(passwordCheck) => setPasswordCheck(passwordCheck)}
+            value={checkPassword}
+            onChange={(checkPasswordInputValue) =>
+              setCheckPassword(checkPasswordInputValue)
+            }
           />
           <button className="btn" onClick={handleSubmit}>
             儲存
