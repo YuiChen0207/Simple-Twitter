@@ -9,6 +9,8 @@ import { useAuth } from "../../contexts/AuthContext";
 const LoginAdmin = () => {
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
+  const [accountError, setAccountError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
 
   const { adminLogin, isAuthenticated, currentMember } = useAuth();
@@ -35,17 +37,10 @@ const LoginAdmin = () => {
         icon: "success",
         showConfirmButton: false,
       });
-
-      return;
+    } else {
+      setAccountError("帳號或密碼不存在");
+      setPasswordError("帳號或密碼不存在");
     }
-
-    Swal.fire({
-      position: "top",
-      title: "此帳號不存在",
-      timer: 1000,
-      icon: "error",
-      showConfirmButton: false,
-    });
   };
 
   useEffect(() => {
@@ -64,17 +59,21 @@ const LoginAdmin = () => {
         <AuthInput
           label="帳號"
           placeholder="請輸入帳號"
+          accountError={accountError}
           value={account}
           onChange={(nameInputValue) => setAccount(nameInputValue)}
         />
+        {accountError && <p className="error">{accountError}</p>}
 
         <AuthInput
           type="password"
           label="密碼"
           placeholder="請輸入密碼"
+          passwordError={passwordError}
           value={password}
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
+        {passwordError && <p className="error">{passwordError}</p>}
       </div>
       <button className="btn" onClick={handleClick}>
         登入
