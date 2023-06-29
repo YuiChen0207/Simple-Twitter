@@ -2,6 +2,7 @@ import './AdminTweet.scss';
 import deleteIcon from '../../../assets/delete.svg';
 import { DeleteTweetByAdmin } from '../../../api/admin';
 import { formatTime } from "../../../utils/timeUtils";
+import Swal from "sweetalert2";
 
 const AdminTweet = ({
   tweetId,
@@ -14,11 +15,24 @@ const AdminTweet = ({
 }) => {
   const handleDelete = async () => {
     try {
-      await DeleteTweetByAdmin(tweetId);
-      setList((prev) => {
-        return prev.filter((tweet) => {
-          return tweet.id !== tweetId;
-        });
+      await Swal.fire({
+        title: "確認要刪除該則推文?",
+        text: "此動作無法還原！！！",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("已刪除！", "推文已刪除", "success");
+          DeleteTweetByAdmin(tweetId);
+          setList((prev) => {
+            return prev.filter((tweet) => {
+              return tweet.id !== tweetId;
+            });
+          });
+        }
       });
     } catch (error) {
       console.error(error);
