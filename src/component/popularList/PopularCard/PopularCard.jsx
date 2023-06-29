@@ -16,7 +16,7 @@ const PopularCard = ({ followerId, userName, account, isFollowed, avatar }) => {
 
     const userData = await getUserPageById(followerId);
     if (userData) {
-      console.log(userData);
+      console.log(followerId);
       navigate(`/user/${userData.name}`);
     }
   };

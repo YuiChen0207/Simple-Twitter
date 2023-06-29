@@ -73,7 +73,7 @@ const UserOther = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     if (!isAuthenticated) {
