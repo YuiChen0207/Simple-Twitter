@@ -5,7 +5,7 @@ import './AdminMain.scss';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { gettweetsByAdmin } from '../../api/admin';
+import { getTweetsByAdmin } from '../../api/admin';
 
 const AdminMain = () => {
   const [allTweets, setAllTweets] = useState([]);
@@ -16,7 +16,7 @@ const AdminMain = () => {
   useEffect(() => {
     const getAllTweets = async () => {
       try {
-        const list = await gettweetsByAdmin();
+        const list = await getTweetsByAdmin();
         console.log(list);
         setAllTweets(list);
       } catch (error) {

@@ -29,11 +29,11 @@ export const getUsersByAdmin = async () => {
   }
 };
 
-export const gettweetsByAdmin = async () => {
+export const getTweetsByAdmin = async () => {
   try {
-    const { data } = await axiosInstance.get(`${baseUrl}/admin/tweets`);
-    console.log(data);
-    return data.tweets;
+    const  res = await axiosInstance.get(`${baseUrl}/admin/tweets`);
+    console.log(res);
+    return res.data.tweetsData;
   } catch (error) {
     console.error('[Get Tweets failed]: ', error);
   }
