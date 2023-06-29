@@ -1,10 +1,25 @@
 import React, { useState } from "react";
 import { likePopularCard, unlikePopularCard } from "../../../api/popularlist";
-import defaultLogo from "../../../assets/logoGray.svg"
+import defaultLogo from "../../../assets/logoGray.svg";
 import "./PopularCard.scss";
+import { useNavigate } from "react-router-dom";
+import { getUserPageById } from "../../../api/getUserPage";
+import { useUserId } from "../../../contexts/UserIdContext";
 
 const PopularCard = ({ followerId, userName, account, isFollowed, avatar }) => {
   const [isFollow, setIsFollow] = useState(isFollowed);
+  const navigate = useNavigate();
+  const { setUserIdFromTweet } = useUserId();
+
+  const handleUserPage = async () => {
+    setUserIdFromTweet(followerId);
+
+    const userData = await getUserPageById(followerId);
+    if (userData) {
+      console.log(userData);
+      navigate(`/user/${userData.name}`);
+    }
+  };
 
   //  加入更新資料的邏輯
   const handleFollow = async () => {
@@ -26,15 +41,16 @@ const PopularCard = ({ followerId, userName, account, isFollowed, avatar }) => {
   };
 
   return (
-    <div className="popular-card">
+    <div className="popularCard">
       <img
         src={avatar ?? defaultLogo}
-        alt="logo-gray"
-        className="popular-card-logo"
+        alt="user"
+        className="popularCardLogo"
+        onClick={handleUserPage}
       />
-      <div className="popular-card-info">
-        <h4 className="popular-card-userName">{userName}</h4>
-        <p className="popular-card-account">{account}</p>
+      <div className="popularCardInfo">
+        <h4 className="popularCardUserName">{userName}</h4>
+        <p className="popularCardAccount">{account}</p>
       </div>
       <button
         className={`whiteButton  ${isFollow ? "isFollow" : ""}`}

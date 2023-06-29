@@ -1,23 +1,24 @@
-.popular-card {
+.popularCard {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px;
 
-  .popular-card-logo {
+  .popularCardLogo {
     margin-right: 16px;
     height: 50px;
     width: 50px;
     border-radius: 50%;
     object-fit: cover;
+    cursor: pointer;
   }
 
-  .popular-card-info {
+  .popularCardInfo {
     display: flex;
     flex-direction: column;
     margin: auto 8px;
 
-    .popular-card-account {
+    .popularCardAccount {
       font-size: 14px;
       color: var(--gray-600);
     }
@@ -36,12 +37,12 @@
 }
 
 @media (max-width: 1024px) {
-  .popular-card {
+  .popularCard {
     .whiteButton {
       padding: 4px 8px;
       white-space: nowrap;
       font-size: 14px;
-      .popular-card-info {
+      .popularCardInfo {
         margin: auto auto;
       }
     }

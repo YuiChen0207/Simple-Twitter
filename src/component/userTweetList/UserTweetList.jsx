@@ -4,9 +4,8 @@ import UserPageTweet from "../userPageTweet/UserPageTweet";
 const UserTweetsList = ({ tweets, username, userImage, setTweetsList }) => {
   return (
     <div className="tweetsListContainer">
-      {tweets.map((tweet) => (
+      {tweets?.map((tweet) => (
         <UserPageTweet
-
           key={tweet?.id}
           logo={userImage ?? tweet?.avatar}
           username={username ?? tweet?.name}
@@ -17,7 +16,6 @@ const UserTweetsList = ({ tweets, username, userImage, setTweetsList }) => {
           likes={tweet?.likeCount}
           isLiked={tweet?.currentUserIsLiked}
           tweetId={tweet?.id}
-
           setList={setTweetsList}
         />
       ))}
