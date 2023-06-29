@@ -5,7 +5,7 @@ import { formatTime } from "../../../utils/timeUtils";
 
 const AdminTweet = ({
   tweetId,
-  img,
+  tweetOwnerAvatar,
   username,
   accountName,
   postTime,
@@ -24,10 +24,9 @@ const AdminTweet = ({
       console.error(error);
     }
   };
-
   return (
-    <div key={tweetId} className="adminTweetContainer">
-      <img className="userImg" src={img} alt="user-img" />
+    <div userTweetId={tweetId} className="adminTweetContainer">
+      <img className="userImg" src={tweetOwnerAvatar} alt="user-img" />
       <div className="adminMainContent">
         <div className="adminTweetContent">
           <span className="name">{username}</span>

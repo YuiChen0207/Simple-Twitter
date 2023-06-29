@@ -2,17 +2,17 @@ import AdminTweet from "./adminTweet/AdminTweet";
 import "./AdminTweetList.scss";
 
 const AdminTweetList = ({ tweets, setList }) => {
-  // console.log(tweets);
+  console.log(tweets);
   return (
     <div className="adminTweetsListContainer">
       {tweets.map((tweet) => (
         <AdminTweet
-          key={tweet.id}
-          tweetId={tweet.UserId}
-          img={tweet.tweetOwnerAvatar}
+          tweetId={tweet.id}
+          userId={tweet.UserId}
+          tweetOwnerAvatar={tweet.tweetOwnerAvatar}
           username={tweet.tweetOwnerName}
           accountName={tweet.tweetOwnerAccount}
-          postTime={tweet.updatedAt}
+          postTime={tweet.createdAt}
           content={tweet.description}
           setList={setList}
         />
