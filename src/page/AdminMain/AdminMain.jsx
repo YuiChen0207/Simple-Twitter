@@ -17,7 +17,7 @@ const AdminMain = () => {
     const getAllTweets = async () => {
       try {
         const list = await getTweetsByAdmin();
-        console.log(list);
+        // console.log(list);
         setAllTweets(list);
       } catch (error) {
         console.error(error);

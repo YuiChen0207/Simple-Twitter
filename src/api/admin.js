@@ -22,7 +22,7 @@ axiosInstance.interceptors.request.use(
 export const getUsersByAdmin = async () => {
   try {
     const { data } = await axiosInstance.get(`${baseUrl}/admin/users`);
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     console.error('[Get Users failed]: ', error);
@@ -32,7 +32,7 @@ export const getUsersByAdmin = async () => {
 export const getTweetsByAdmin = async () => {
   try {
     const  res = await axiosInstance.get(`${baseUrl}/admin/tweets`);
-    console.log(res);
+    // console.log(res);
     return res.data.tweetsData;
   } catch (error) {
     console.error('[Get Tweets failed]: ', error);

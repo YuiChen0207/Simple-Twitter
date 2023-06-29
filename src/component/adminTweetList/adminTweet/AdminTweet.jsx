@@ -16,7 +16,7 @@ const AdminTweet = ({
   const handleDelete = async () => {
     try {
       await Swal.fire({
-        title: "確認要刪除該則推文?",
+        title: "確認刪除該則推文?",
         text: "此動作無法還原！！！",
         icon: "warning",
         showCancelButton: true,
@@ -39,7 +39,7 @@ const AdminTweet = ({
     }
   };
   return (
-    <div userTweetId={tweetId} className="adminTweetContainer">
+    <div key={tweetId} className="adminTweetContainer">
       <img className="userImg" src={tweetOwnerAvatar} alt="user-img" />
       <div className="adminMainContent">
         <div className="adminTweetContent">

@@ -2,11 +2,11 @@ import AdminTweet from "./adminTweet/AdminTweet";
 import "./AdminTweetList.scss";
 
 const AdminTweetList = ({ tweets, setList }) => {
-  console.log(tweets);
   return (
     <div className="adminTweetsListContainer">
       {tweets.map((tweet) => (
         <AdminTweet
+          key={tweet.id}
           tweetId={tweet.id}
           userId={tweet.UserId}
           tweetOwnerAvatar={tweet.tweetOwnerAvatar}
