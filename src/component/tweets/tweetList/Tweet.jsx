@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./Tweet.scss";
 import PopupReply from "../../popupReply/PopupReply";
-import { getSingleTweet } from "../../../api/tweets";
 import { useAuth } from "../../../contexts/AuthContext";
 
 const Tweet = ({
