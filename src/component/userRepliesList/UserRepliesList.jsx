@@ -15,6 +15,7 @@ const UserRepliesList = ({ replies, username, userImage }) => {
           postTime={formatTime(reply.createdAt)}
           content={reply.comment}
           replyTo={reply.Tweet?.User?.account}
+          tweetId={reply?.TweetId}
           hideFooter={true}
         />
       ))}

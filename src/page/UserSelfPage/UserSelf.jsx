@@ -55,6 +55,7 @@ const UserSelf = () => {
 
       try {
         const userReplies = await getUserRepliedTweets(id);
+        console.log(userReplies);
         setReplies(userReplies);
       } catch (error) {
         console.error("獲取用戶資料失敗：", error);
