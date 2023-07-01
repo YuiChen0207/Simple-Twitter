@@ -31,6 +31,7 @@ const FollowAndFollower = () => {
           activeTab === "followers"
             ? await getFollowerList(userId)
             : await getFollowingList(userId);
+            console.log(list);
 
         activeTab === "followers"
           ? setFollowShipList([...list.followers])

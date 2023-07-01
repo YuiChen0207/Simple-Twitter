@@ -8,6 +8,7 @@ import commentIcon from "../../assets/commit.svg";
 import emptyHeart from "../../assets/heart.svg";
 import fullHeart from "../../assets/like-heart.svg";
 import PopupReply from "../popupReply/PopupReply";
+import grayLogo from "../../assets/logoGray.svg";
 import "./MainReply.scss";
 
 const MainReply = ({ tweet, repliesSet, tweetSet, setTweet }) => {
@@ -97,7 +98,7 @@ const MainReply = ({ tweet, repliesSet, tweetSet, setTweet }) => {
         <div className="replyContentBox">
           <img
             className="userImg"
-            src={tweet.tweetOwnerAvatar}
+            src={tweet.tweetOwnerAvatar ?? grayLogo}
             alt="user-img"
           />
           <div className="replyContent">

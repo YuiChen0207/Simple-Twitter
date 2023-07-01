@@ -68,7 +68,7 @@ const UserSelf = () => {
       }
       try {
         const popularCards = await getPopularList();
-        setPopularCards(popularCards.map((users) => ({ ...users })));
+        setPopularCards(popularCards);
       } catch (error) {
         console.error("獲取熱門列表失敗：", error);
       }

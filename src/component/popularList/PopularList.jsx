@@ -3,7 +3,7 @@ import PopularCard from "./PopularCard/PopularCard";
 import "./popularList.scss";
 
 
-const PopularList = ({ popularCards }) => {
+const PopularList = ({ popularCards, setPopularCards }) => {
   return (
     <div className="popularList">
       <h4 className="medium">推薦跟隨</h4>
@@ -17,6 +17,7 @@ const PopularList = ({ popularCards }) => {
             account={card.account}
             isFollowed={card.isFollowed}
             followerId={card.id}
+            setPopularCards={setPopularCards}
           />
         ))}
       </div>
