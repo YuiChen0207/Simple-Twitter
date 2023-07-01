@@ -7,6 +7,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { getSingleTweet } from "../../api/tweets";
 import grayLogo from "../../assets/logoGray.svg";
 import "./PopupReply.scss";
+import { formatTime } from "../../utils/timeUtils";
 
 
 const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
@@ -126,9 +127,9 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
           <div className="singleReplyMainContent">
             <div className="singleReplyContent">
               <span className="name">{tweet.tweetOwnerName}</span>
-              <span className="account">{tweet.tweetOwnerAccount}</span>
+              <span className="account">@{tweet.tweetOwnerAccount}</span>
               <span className="dot"></span>
-              <span className="date">{tweet.updatedAt}</span>
+              <span className="date">{formatTime(tweet.updatedAt)}</span>
             </div>
             <div className="content">{tweet.description}</div>
             <span className="replyTo">@{tweet.tweetOwnerAccount}</span>

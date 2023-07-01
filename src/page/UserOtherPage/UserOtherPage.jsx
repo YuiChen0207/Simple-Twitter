@@ -52,7 +52,6 @@ const UserOther = () => {
 
       try {
         const userLikes = await getUserLikes(userId);
-        console.log(userLikes);
         setLikes(userLikes);
       } catch (error) {
         console.error("获取用户喜欢的推文失败：", error);
@@ -73,7 +72,7 @@ const UserOther = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -98,6 +97,7 @@ const UserOther = () => {
             isFollowed={userData?.isFollowing}
             followerId={userData?.id}
             setUserIdFromTweet={setUserIdFromTweet}
+            setPopularCards={setPopularCards}
           />
         </div>
         <TabBar
@@ -125,7 +125,10 @@ const UserOther = () => {
           )}
         </div>
       </div>
-      <PopularList popularCards={popularCards} />
+      <PopularList
+        popularCards={popularCards}
+        setPopularCards={setPopularCards}
+      />
     </div>
   );
 };

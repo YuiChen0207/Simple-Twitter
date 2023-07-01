@@ -29,6 +29,7 @@ const ReplyList = () => {
     const getTweet = async () => {
       try {
         const tweet = await getSingleTweet(currentId);
+        console.log(currentId);
         console.log(tweet);
         setSingleTweet(tweet);
       } catch (error) {

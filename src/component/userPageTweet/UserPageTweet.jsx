@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import commitIcon from "../../assets/commit.svg";
 import heartIcon from "../../assets/heart.svg";
+import grayLogo from "../../assets/logoGray.svg";
 import { likeTweet, unlikeTweet } from "../../api/likeAndUnlike";
 import { useNavigate } from "react-router-dom";
 import { useId } from "../../contexts/IdContext";
@@ -87,7 +88,7 @@ const UserPageTweet = ({
         }}
       >
         <img
-          src={logo}
+          src={logo ?? grayLogo}
           alt="Logo"
           className="userImage"
           onClick={onGetUserIdFromTweet}

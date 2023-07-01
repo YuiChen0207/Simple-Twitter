@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { likePopularCard, unlikePopularCard } from "../../../api/popularlist";
 import { useNavigate } from "react-router-dom";
-
+import grayLogo from "../../../assets/logoGray.svg";
 import btnMsg from "../../../assets/btnMsg.svg";
 import btnNotfi from "../../../assets/btnNotfi.svg";
 import activeNotfi from "../../../assets/btn_notfi.svg";
@@ -19,32 +19,54 @@ const UserOtherItem = ({
   followerId,
   id,
   setUserIdFromTweet,
+  setPopularCards,
 }) => {
   const [notificationIcon, setNotificationIcon] = useState(btnNotfi);
   const [isFollow, setIsFollow] = useState(isFollowed);
+  const [follow, setFollow] = useState(isFollowed);
+  const [unFollow, setUnFollow] = useState(isFollowed);
   const navigate = useNavigate();
 
   useEffect(() => {
     setIsFollow(isFollowed);
   }, [isFollowed]);
 
-  const handleFollow = async () => {
-    if (isFollow === false) {
-      try {
-        await likePopularCard(followerId);
-      } catch (error) {
-        console.log(error);
-        console.log("likePopularCard failed");
-      }
-    } else {
-      try {
-        await unlikePopularCard(followerId);
-      } catch (error) {
-        console.log(error);
-      }
+const handleFollow = async () => {
+  if (isFollow === false) {
+    try {
+      const followResult = await likePopularCard(followerId);
+      console.log(Number(followResult.followingId));
+      setFollow(followResult);
+      setPopularCards((prevCards) =>
+        prevCards.map((popularCard) =>
+          popularCard.id === Number(follow?.followingId)
+            ? { ...popularCard, isFollowed: true }
+            : popularCard
+        )
+      );
+    } catch (error) {
+      console.log("likePopularCard failed", error);
     }
-    setIsFollow(!isFollow);
-  };
+  } else {
+    try {
+      const unFollowResult = await unlikePopularCard(followerId);
+      console.log(Number(unFollowResult.followingId));
+      setUnFollow(unFollowResult);
+      setPopularCards((prevCards) =>
+        prevCards.map((popularCard) =>
+          popularCard.id === Number(unFollow?.followingId)
+            ? { ...popularCard, isFollowed: false }
+            : popularCard
+        )
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  setIsFollow(!isFollow);
+};
+
 
   const handleNotificationClick = () => {
     if (notificationIcon === btnNotfi) {
@@ -68,7 +90,11 @@ const UserOtherItem = ({
       <div className="background" />
       <div className="userContext">
         <div className="upSection">
-          <img src={avatar} alt="User Icon" className="userAvatar" />
+          <img
+            src={avatar ?? grayLogo}
+            alt="User Icon"
+            className="userAvatar"
+          />
           <div className="btnSection">
             <img src={btnMsg} alt="msg" className="msgIcon" />
             <img

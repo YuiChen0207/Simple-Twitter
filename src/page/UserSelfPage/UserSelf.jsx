@@ -55,6 +55,7 @@ const UserSelf = () => {
 
       try {
         const userReplies = await getUserRepliedTweets(id);
+        console.log(userReplies);
         setReplies(userReplies);
       } catch (error) {
         console.error("獲取用戶資料失敗：", error);
@@ -68,7 +69,7 @@ const UserSelf = () => {
       }
       try {
         const popularCards = await getPopularList();
-        setPopularCards(popularCards.map((users) => ({ ...users })));
+        setPopularCards(popularCards);
       } catch (error) {
         console.error("獲取熱門列表失敗：", error);
       }
