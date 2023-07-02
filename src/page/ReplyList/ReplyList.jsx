@@ -52,7 +52,8 @@ const ReplyList = () => {
     const getReplies = async () => {
       try {
         const replies = await getTweetReplies(currentId);
-        setTweetReplies([...replies]);
+        setTweetReplies(replies);
+        console.log(replies);
       } catch (error) {
         console.error(error);
       }

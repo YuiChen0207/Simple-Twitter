@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { likePopularCard, unlikePopularCard } from "../../../api/popularlist";
 import defaultLogo from "../../../assets/logoGray.svg";
 import "./PopularCard.scss";
@@ -6,10 +6,21 @@ import { useNavigate } from "react-router-dom";
 import { getUserPageById } from "../../../api/getUserPage";
 import { useUserId } from "../../../contexts/UserIdContext";
 
-const PopularCard = ({ followerId, userName, account, isFollowed, avatar }) => {
+const PopularCard = ({
+  followerId,
+  userName,
+  account,
+  isFollowed,
+  avatar,
+  isFollowedFromUserPage,
+}) => {
   const [isFollow, setIsFollow] = useState(isFollowed);
   const navigate = useNavigate();
   const { setUserIdFromTweet } = useUserId();
+
+  useEffect(() => {
+    setIsFollow(isFollowed);
+  }, [isFollowedFromUserPage]);
 
   const handleUserPage = async () => {
     setUserIdFromTweet(followerId);
