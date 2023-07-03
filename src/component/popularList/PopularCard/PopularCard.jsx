@@ -13,6 +13,7 @@ const PopularCard = ({
   isFollowed,
   avatar,
   isFollowedFromUserPage,
+  onFollowerIdChange,
 }) => {
   const [isFollow, setIsFollow] = useState(isFollowed);
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ const PopularCard = ({
         console.log(error);
       }
     }
+    onFollowerIdChange(followerId);
     setIsFollow(!isFollow);
   };
 
