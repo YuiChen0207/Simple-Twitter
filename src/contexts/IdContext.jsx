@@ -16,7 +16,6 @@ export const IdProvider = ({ children }) => {
         currentId,
         checkItemId: (key) => {
           setCurrentId(key);
-          console.log(key);
         },
       }}
     >

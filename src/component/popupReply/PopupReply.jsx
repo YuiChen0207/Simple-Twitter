@@ -72,7 +72,7 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
           ...prev,
           {
             ...response.data,
-            User: { ...currentMember },
+            user: { ...currentMember },
           },
         ];
       });
@@ -136,7 +136,11 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
           </div>
         </div>
         <div className="modalBody">
-          <img className="userImg" src={currentMember.avatar} alt="avatar" />
+          <img
+            className="userImg"
+            src={currentMember?.avatar ?? grayLogo}
+            alt="avatar"
+          />
           <textarea
             className="tweetInput"
             value={replyMsg}

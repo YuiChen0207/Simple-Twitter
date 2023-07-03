@@ -2,8 +2,12 @@ import React from "react";
 import PopularCard from "./PopularCard/PopularCard";
 import "./popularList.scss";
 
-
-const PopularList = ({ popularCards, setPopularCards }) => {
+const PopularList = ({
+  popularCards,
+  setPopularCards,
+  isFollowedFromUserPage,
+  follow,
+}) => {
   return (
     <div className="popularList">
       <h4 className="medium">推薦跟隨</h4>
@@ -18,6 +22,8 @@ const PopularList = ({ popularCards, setPopularCards }) => {
             isFollowed={card.isFollowed}
             followerId={card.id}
             setPopularCards={setPopularCards}
+            isFollowedFromUserPage={isFollowedFromUserPage}
+            follow={follow}
           />
         ))}
       </div>

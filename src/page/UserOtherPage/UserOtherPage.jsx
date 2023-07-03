@@ -9,7 +9,11 @@ import Navbar from "../../component/navbar/Navbar";
 import PopularList from "../../component/popularList/PopularList";
 import TabBar from "../../component/tabBar/TabBar";
 import UserOtherItem from "../../component/userInfo/userOther/UserOther";
-import { getPopularList } from "../../api/popularlist.js";
+import {
+  getPopularList,
+  likePopularCard,
+  unlikePopularCard,
+} from "../../api/popularlist.js";
 import { getUserPageById } from "../../api/getUserPage";
 import { useUserId } from "../../contexts/UserIdContext";
 import UserTweetsList from "../../component/userTweetList/UserTweetList";
@@ -29,6 +33,28 @@ const UserOther = () => {
   const [userData, setUserData] = useState(null);
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const [isFollow, setIsFollow] = useState(userData?.isFollowing);
+  const [follow, setFollow] = useState(userData?.isFollowing);
+
+  const handleFollow = async () => {
+    if (isFollow === false) {
+      try {
+        const followResult = await likePopularCard(userData?.id);
+        setFollow(followResult.isFollowed);
+      } catch (error) {
+        console.log("likePopularCard failed", error);
+      }
+    } else {
+      try {
+        const followResult = await unlikePopularCard(userData?.id);
+        setFollow(followResult.isFollowed);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    setIsFollow(!isFollow);
+  };
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -72,7 +98,7 @@ const UserOther = () => {
       }
     };
     fetchData();
-  }, [userId]);
+  }, [userId, follow]);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -98,6 +124,9 @@ const UserOther = () => {
             followerId={userData?.id}
             setUserIdFromTweet={setUserIdFromTweet}
             setPopularCards={setPopularCards}
+            handleFollow={handleFollow}
+            isFollow={isFollow}
+            setIsFollow={setIsFollow}
           />
         </div>
         <TabBar
@@ -127,7 +156,8 @@ const UserOther = () => {
       </div>
       <PopularList
         popularCards={popularCards}
-        setPopularCards={setPopularCards}
+        isFollowedFromUserPage={userData?.isFollowing}
+        follow={follow}
       />
     </div>
   );

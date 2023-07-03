@@ -24,7 +24,7 @@ export const postTweet = async ({ tweetText }) => {
 export const getSingleTweet = async (id) => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/tweets/${id}`);
-    //console.log(res.data);
+    console.log(res.data);
     return res.data;
   } catch (error) {
     console.error("[Get Tweet failed]: ", error);

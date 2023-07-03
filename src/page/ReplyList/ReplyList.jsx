@@ -11,6 +11,8 @@ import { getPopularList } from "../../api/popularlist";
 import { useAuth } from "../../contexts/AuthContext";
 import MobileMenu from "../../component/mobileMode/MobileMenu";
 import "./ReplyList.scss";
+import { getUserPageById } from "../../api/getUserPage";
+import { useUserId } from "../../contexts/UserIdContext";
 
 const ReplyList = () => {
   const [singleTweet, setSingleTweet] = useState({});
@@ -20,18 +22,25 @@ const ReplyList = () => {
   const tweet = { ...singleTweet };
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
+  const { setUserIdFromTweet, userId } = useUserId();
 
   const handlePrevPage = () => {
     window.history.back();
   };
 
+  const handleUserPage = async () => {
+    const userData = await getUserPageById(userId);
+    if (userData) {
+      console.log(userId);
+      navigate(`/user/${userData.name}`);
+    }
+  };
   useEffect(() => {
     const getTweet = async () => {
       try {
         const tweet = await getSingleTweet(currentId);
-        console.log(currentId);
-        console.log(tweet);
         setSingleTweet(tweet);
+        setUserIdFromTweet(tweet.UserId);
       } catch (error) {
         console.error(error);
       }
@@ -43,8 +52,8 @@ const ReplyList = () => {
     const getReplies = async () => {
       try {
         const replies = await getTweetReplies(currentId);
+        setTweetReplies(replies);
         console.log(replies);
-        setTweetReplies([...replies]);
       } catch (error) {
         console.error(error);
       }
@@ -87,6 +96,7 @@ const ReplyList = () => {
           tweetSet={setSingleTweet}
           repliesSet={setTweetReplies}
           setTweet={setSingleTweet}
+          onHandleUserPage={handleUserPage}
         />
         <ReplyListBox
           replies={tweetReplies}
