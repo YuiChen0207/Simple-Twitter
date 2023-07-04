@@ -16,7 +16,7 @@ const SingleReply = ({
       <div className="singleReplyMainContent">
         <div className="singleReplyContent">
           <span className="name">{username}</span>
-          <span className="account">{accountName}</span>
+          <span className="account">@{accountName}</span>
           <span className="dot" />
           <span className="date">{formatTime(postTime)}</span>
         </div>

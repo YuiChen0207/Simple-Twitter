@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { likePopularCard, unlikePopularCard } from "../../../api/popularlist";
 import { useNavigate } from "react-router-dom";
 import grayLogo from "../../../assets/logoGray.svg";
 import btnMsg from "../../../assets/btnMsg.svg";
@@ -7,6 +6,7 @@ import btnNotfi from "../../../assets/btnNotfi.svg";
 import activeNotfi from "../../../assets/btn_notfi.svg";
 import "./UserOther.scss";
 import MobileMenu from "../../mobileMode/MobileMenu";
+import defaultBanner from "../../../assets/backgroundImage.svg";
 
 const UserOtherItem = ({
   avatar,
@@ -48,7 +48,11 @@ const UserOtherItem = ({
   };
   return (
     <div className="userInfoContainer">
-      <div className="background" />
+      <img
+        src={defaultBanner}
+        alt="banner"
+        className="background"
+      />
       <div className="userContext">
         <div className="upSection">
           <img

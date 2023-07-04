@@ -76,6 +76,7 @@ const UserSelf = () => {
       try {
         const user = await getUserPageById(id);
         setUserData(user);
+        console.log(userData);
       } catch (error) {
         console.error("獲取用户信息失敗：", error);
       }
@@ -102,7 +103,6 @@ const UserSelf = () => {
             bio={userData?.introduction}
             followingCount={userData?.followingCount}
             followersCount={userData?.followerCount}
-            banner={userData?.banner}
             handleUserDataUpdate={handleUserDataUpdate}
           />
         </div>
