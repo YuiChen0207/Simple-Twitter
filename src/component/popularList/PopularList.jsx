@@ -7,6 +7,7 @@ const PopularList = ({
   setPopularCards,
   isFollowedFromUserPage,
   follow,
+  onFollowerIdChange,
 }) => {
   return (
     <div className="popularList">
@@ -24,6 +25,7 @@ const PopularList = ({
             setPopularCards={setPopularCards}
             isFollowedFromUserPage={isFollowedFromUserPage}
             follow={follow}
+            onFollowerIdChange={onFollowerIdChange}
           />
         ))}
       </div>
