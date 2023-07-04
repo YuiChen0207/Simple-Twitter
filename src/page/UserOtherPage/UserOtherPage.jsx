@@ -52,16 +52,16 @@ const UserOther = () => {
         console.log(error);
       }
     }
-
     setIsFollow(!isFollow);
   };
 
-  const handleFollowerIdChange = (followerId) => {
-    if (followerId===userData?.id) {
-      handleFollow(userData?.id);
+
+  /*   const handleFollowerIdChange = (followerId) => {
+    if (followerId === userData?.id) {
+      handleFollow();
     }
     console.log("Received followerId from child:", followerId);
-  };
+  }; */
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -164,8 +164,9 @@ const UserOther = () => {
       <PopularList
         popularCards={popularCards}
         isFollowedFromUserPage={userData?.isFollowing}
-        follow={follow}
-        onFollowerIdChange={handleFollowerIdChange}
+        userData={userData}
+        setFollow={setFollow}
+        //onFollowerIdChange={handleFollowerIdChange}
       />
     </div>
   );

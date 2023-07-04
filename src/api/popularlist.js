@@ -28,7 +28,6 @@ export const likePopularCard = async (followerId) => {
     return res.data;
   } catch (error) {
     console.error('[Like PopularCard failed]: ', error);
-    throw error;
   }
 };
 
@@ -42,6 +41,5 @@ export const unlikePopularCard = async (followerId) => {
     return res.data;
   } catch (error) {
     console.error('[Unlike PopularCard failed]: ', error);
-    throw error;
   }
 };
