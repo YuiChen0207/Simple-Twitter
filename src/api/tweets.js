@@ -3,7 +3,7 @@ import axiosInstance, { baseUrl } from "./axiosInstance";
 export const getTweets = async () => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/tweets`);
-    //console.log(res.data);
+    console.log(res.data);
     return res.data;
   } catch (error) {
     console.error("[Get Tweets failed]: ", error);
@@ -56,7 +56,7 @@ export const postReply = async ({ id, comment }) => {
 export const getUserTweets = async (userId) => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/users/${userId}/tweets`);
-    //console.log(res.data);
+    console.log(res.data);
     return res.data;
   } catch (error) {
     console.error("[Get User Tweets failed]: ", error);

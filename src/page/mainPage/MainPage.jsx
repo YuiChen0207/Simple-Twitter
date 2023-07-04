@@ -7,7 +7,7 @@ import { getPopularList } from "../../api/popularlist.js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import MobileMenu from "../../component/mobileMode/MobileMenu";
+import MobileMenu from "../../component/mobileMode/mobileMenu/MobileMenu";
 import "./MainPage.scss";
 
 const Main = () => {
@@ -51,7 +51,7 @@ const Main = () => {
   return (
     <div className="mainContainer">
       <Navbar setList={setTweets} />
-      <MobileMenu />
+      <MobileMenu setList={setTweets} />
       <div className="mainContent">
         <div className="postSection">
           <Post setList={setTweets} />
