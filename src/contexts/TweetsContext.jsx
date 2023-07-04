@@ -8,12 +8,8 @@ export const TweetsProvider = ({ children }) => {
 
   useEffect(() => {
     const getTweetsAsync = async () => {
-      try {
-        const tweets = await getTweets();
-        setTweets(tweets);
-      } catch (error) {
-        console.error(error);
-      }
+      const tweets = await getTweets();
+      setTweets(tweets);
     };
     getTweetsAsync();
   }, []);

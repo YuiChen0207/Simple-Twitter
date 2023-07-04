@@ -16,8 +16,8 @@ import UserInfo from "../../component/userInfo/UserInfo";
 import UserTweetsList from "../../component/userTweetList/UserTweetList";
 import UserRepliesList from "../../component/userRepliesList/UserRepliesList";
 import UserLikesList from "../../component/userLikesList/UserLikesList";
+import MobileMenu from "../../component/mobileMode/mobileMenu/MobileMenu";
 import "./UserSelf.scss";
-import MobileMenu from "../../component/mobileMode/MobileMenu";
 
 const UserSelf = () => {
   const { currentMember, isAuthenticated } = useAuth();
@@ -55,7 +55,6 @@ const UserSelf = () => {
 
       try {
         const userReplies = await getUserRepliedTweets(id);
-        console.log(userReplies);
         setReplies(userReplies);
       } catch (error) {
         console.error("獲取用戶資料失敗：", error);
@@ -102,7 +101,6 @@ const UserSelf = () => {
             bio={userData?.introduction}
             followingCount={userData?.followingCount}
             followersCount={userData?.followerCount}
-            banner={userData?.banner}
             handleUserDataUpdate={handleUserDataUpdate}
           />
         </div>
@@ -139,7 +137,7 @@ const UserSelf = () => {
         </div>
       </div>
       <PopularList popularCards={popularCards} />
-      <MobileMenu />
+      <MobileMenu setTweetsList={setTweets} />
     </div>
   );
 };

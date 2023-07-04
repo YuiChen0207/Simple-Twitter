@@ -8,7 +8,7 @@ import commentIcon from "../../assets/commit.svg";
 import emptyHeart from "../../assets/heart.svg";
 import fullHeart from "../../assets/like-heart.svg";
 import PopupReply from "../popupReply/PopupReply";
-import grayLogo from "../../assets/logoGray.svg";
+import defaultLogo from "../../assets/logoGray.svg";
 import "./MainReply.scss";
 
 const MainReply = ({
@@ -92,7 +92,6 @@ const MainReply = ({
         return { ...prev, tweetReplyCount: prev.tweetReplyCount + 1 };
       });
 
-      //window.location.reload(); //可在優化
     } catch (error) {
       console.error("發佈推文失败:", error);
     }
@@ -104,7 +103,7 @@ const MainReply = ({
         <div className="replyContentBox">
           <img
             className="userImg"
-            src={tweet.tweetOwnerAvatar ?? grayLogo}
+            src={tweet.tweetOwnerAvatar ?? defaultLogo}
             alt="user-img"
             onClick={onHandleUserPage}
           />
@@ -133,7 +132,11 @@ const MainReply = ({
         />
       </div>
       <div className="modalBody">
-        <img className="userImg" src={currentMember?.avatar} alt="avatar" />
+        <img
+          className="userImg"
+          src={currentMember?.avatar ?? defaultLogo}
+          alt="avatar"
+        />
         <input
           className="tweetInput"
           value={replyMsg}

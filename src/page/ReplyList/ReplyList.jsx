@@ -9,10 +9,11 @@ import { useEffect, useState } from "react";
 import { useId } from "../../contexts/IdContext";
 import { getPopularList } from "../../api/popularlist";
 import { useAuth } from "../../contexts/AuthContext";
-import MobileMenu from "../../component/mobileMode/MobileMenu";
-import "./ReplyList.scss";
+import MobileMenu from "../../component/mobileMode/mobileMenu/MobileMenu";
 import { getUserPageById } from "../../api/getUserPage";
 import { useUserId } from "../../contexts/UserIdContext";
+import "./ReplyList.scss";
+
 
 const ReplyList = () => {
   const [singleTweet, setSingleTweet] = useState({});

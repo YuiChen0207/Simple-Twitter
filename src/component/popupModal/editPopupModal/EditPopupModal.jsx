@@ -5,6 +5,8 @@ import CameraIcon from "../../../assets/camera.svg";
 import WhiteCloseIcon from "../../../assets/whiteClose.svg";
 import "./EditPopupModal.scss";
 import { updateUserProfile } from "../../../api/popupEditModal";
+import defaultBanner from "../../../assets/backgroundImage.svg";
+import defaultUserLogo from "../../../assets/logoGray.svg";
 
 const EditPopupModal = ({
   open,
@@ -112,7 +114,7 @@ const EditPopupModal = ({
   };
 
   const handleSave = () => {
-    if (username.length > 50 && intro.length > 160) {
+    if (username.length > 50 && intro?.length > 160) {
       setErrorMessageUsername("字數超出上限!");
       setErrorMessageIntro("字數超出上限!");
       return;
@@ -120,7 +122,7 @@ const EditPopupModal = ({
       setErrorMessageUsername("字數超出上限!");
       setErrorMessageIntro(null);
       return;
-    } else if (intro.length > 160) {
+    } else if (intro?.length > 160) {
       setErrorMessageIntro("字數超出上限!");
       setErrorMessageUsername(null);
       return;
@@ -181,7 +183,7 @@ const EditPopupModal = ({
               />
             ) : (
               <img
-                src={userData.user.banner}
+                src={defaultBanner}
                 alt="background"
                 className="backgroundImage"
               />
@@ -215,11 +217,7 @@ const EditPopupModal = ({
                 className="avatarIcon"
               />
             ) : (
-              <img
-                src={userData.user.avatar}
-                alt="avatar"
-                className="avatarIcon"
-              />
+              <img src={defaultUserLogo} alt="avatar" className="avatarIcon" />
             )}
             <div className="editUserAvatarOverlay">
               <label htmlFor="userPhotoInput">

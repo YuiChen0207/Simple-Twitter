@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { likePopularCard, unlikePopularCard } from "../../../api/popularlist";
 import defaultLogo from "../../../assets/logoGray.svg";
 import "./PopularCard.scss";
 import { useNavigate } from "react-router-dom";
 import { getUserPageById } from "../../../api/getUserPage";
 import { useUserId } from "../../../contexts/UserIdContext";
+import { likePopularCard, unlikePopularCard } from "../../../api/popularlist";
 
 const PopularCard = ({
   followerId,
@@ -13,7 +13,9 @@ const PopularCard = ({
   isFollowed,
   avatar,
   isFollowedFromUserPage,
-  onFollowerIdChange,
+  userData,
+  setFollow,
+  //onFollowerIdChange,
 }) => {
   const [isFollow, setIsFollow] = useState(isFollowed);
   const navigate = useNavigate();
@@ -33,8 +35,22 @@ const PopularCard = ({
     }
   };
 
+  const handleCardFollow = async () => {
+    if (followerId === userData?.id) {
+      if (isFollowed === false) {
+        const followResult = await likePopularCard(userData?.id);
+        setFollow(followResult.isFollowed);
+      } else {
+        const followResult = await unlikePopularCard(userData?.id);
+        setFollow(followResult.isFollowed);
+      }
+    }
+
+    setIsFollow(!isFollow);
+  };
+
   //  加入更新資料的邏輯
-  const handleFollow = async () => {
+  /*   const handleFollow = async () => {
     if (isFollow === false) {
       try {
         await likePopularCard(followerId);
@@ -49,10 +65,10 @@ const PopularCard = ({
         console.log(error);
       }
     }
-    onFollowerIdChange(followerId);
+    //onFollowerIdChange(followerId);
     setIsFollow(!isFollow);
   };
-
+ */
   return (
     <div className="popularCard">
       <img
@@ -67,7 +83,7 @@ const PopularCard = ({
       </div>
       <button
         className={`whiteButton  ${isFollow ? "isFollow" : ""}`}
-        onClick={handleFollow}
+        onClick={handleCardFollow}
       >
         {isFollow ? "正在跟隨" : "跟隨"}
       </button>

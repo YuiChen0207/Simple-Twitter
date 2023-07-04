@@ -5,6 +5,7 @@ import { getUserEdit } from "../../api/popupEditModal";
 import { useAuth } from "../../contexts/AuthContext";
 import { useUserId } from "../../contexts/UserIdContext";
 import grayLogo from "../../assets/logoGray.svg";
+import defaultBanner from "../../assets/backgroundImage.svg";
 import "./UserInfo.scss";
 
 const UserInfo = ({
@@ -14,7 +15,6 @@ const UserInfo = ({
   bio,
   followingCount,
   followersCount,
-  banner,
   handleUserDataUpdate,
 }) => {
   const { currentMember } = useAuth();
@@ -51,7 +51,7 @@ const UserInfo = ({
 
   return (
     <div className="userInfoContainer">
-      <img src={banner} className="background" alt="banner" />
+      <img src={defaultBanner} className="background" alt="banner" />
       <div className="userContext">
         <div className="upSection">
           <img
