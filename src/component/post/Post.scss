@@ -14,68 +14,75 @@
   }
 
   .postContent {
-    display: flex;
     justify-content: space-between;
     align-items: end;
     padding: 16px 16px 10px 16px;
     border-radius: 8px;
-  }
+    .postBox {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 30px;
 
-  .postBox {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding-bottom: 30px;
+      .userAvatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+      }
+    }
+    .postTextInput {
+      width: 100%;
+      color: var(--Secondary);
+      font-size: 18px;
+      font-weight: 700;
+      border: none;
+      resize: none;
+      scrollbar-width: thin;
+      scrollbar-color: transparent transparent;
+    }
 
-    .userAvatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin-bottom: 20px;
+    textarea::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    textarea::-webkit-scrollbar-thumb {
+      background-color: #eed4c3;
+      border-radius: 4px;
+    }
+
+    textarea::-webkit-scrollbar-thumb:hover {
+      background-color: #ff6600;
     }
   }
-
-  .postTextInput {
-    width: 100%;
+  .characterLimit {
+    padding: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--Error);
+  }
+  .tweetCount {
+    padding: 7px;
+    margin-right: auto;
+    font-size: 14px;
+    letter-spacing: 1px;
     color: var(--Secondary);
-    font-size: 18px;
-    font-weight: 700;
-    border: none;
-    resize: none;
-    scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
   }
-
-  textarea::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  textarea::-webkit-scrollbar-thumb {
-    background-color: #eed4c3;
-    border-radius: 4px;
-  }
-
-  textarea::-webkit-scrollbar-thumb:hover {
-    background-color: #ff6600;
-  }
-
   .orangeButton {
     padding: 8px 16px;
-    margin-top: auto;
     white-space: nowrap;
   }
 
   .thickBar {
     height: 10px;
   }
-}
 
-.characterLimit {
-  padding: 8px;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--Error);
-  text-wrap: nowrap;
+  .ButtonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 16px;
+  }
 }
 
 @media (max-width: 835px) {
@@ -95,6 +102,7 @@
     justify-content: flex-end;
     align-items: center;
     padding: 15px;
+    margin-left: -30px;
     border-bottom: 1px solid #e6ecf0;
     hr {
       display: none;
@@ -102,14 +110,20 @@
     .postContent {
       margin: 10px 0 0 0;
       padding: 0;
-    }
-    .postBox {
-      padding-bottom: 10px;
-    }
-    .postTextInput {
-      display: none;
+      .postBox {
+        padding-bottom: 0px;
+        .userAvatar {
+          margin-bottom: 10px;
+        }
+      }
+      .postTextInput {
+        display: none;
+      }
     }
     .orangeButton {
+      display: none;
+    }
+    .tweetCount {
       display: none;
     }
     .thickBar {

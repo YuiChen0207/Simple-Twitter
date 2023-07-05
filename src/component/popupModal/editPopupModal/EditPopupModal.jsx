@@ -126,6 +126,9 @@ const EditPopupModal = ({
       setErrorMessageIntro("字數超出上限!");
       setErrorMessageUsername(null);
       return;
+    } else if (!username.length) {
+      setErrorMessageUsername("Name can not be empty!");
+      return;
     }
 
     if (Object.keys(updatedUserData).length === 0) {
@@ -248,10 +251,10 @@ const EditPopupModal = ({
               value={username}
               onChange={handleUsernameChange}
             />
-            {errorMessageUsername && (
-              <p className="errorMessage">{errorMessageUsername}</p>
-            )}
           </div>
+          {errorMessageUsername && (
+            <p className="errorMessage">{errorMessageUsername}</p>
+          )}
           <div
             className={`introInputContainer ${
               errorMessageIntro ? "error" : ""
@@ -266,10 +269,10 @@ const EditPopupModal = ({
               value={intro}
               onChange={handleIntroChange}
             />
-            {errorMessageIntro && (
-              <p className="errorMessage">{errorMessageIntro}</p>
-            )}
           </div>
+          {errorMessageIntro && (
+            <p className="errorMessage">{errorMessageIntro}</p>
+          )}
         </div>
       </div>
     </Popup>

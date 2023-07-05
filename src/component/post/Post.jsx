@@ -63,6 +63,12 @@ const Post = ({ setList }) => {
     }
   };
 
+  const calculateRemainingCharacters = () => {
+    const maxCharacters = 140;
+    const remainingCharacters = maxCharacters - tweetText.length;
+    return remainingCharacters >= 0 ? remainingCharacters : 0;
+  };
+  
   return (
     <div className="postContainer">
       <div className="postHeader">
@@ -76,20 +82,25 @@ const Post = ({ setList }) => {
             alt="User Avatar"
             className="userAvatar"
           />
-          <div className="postTextContainer">
-            <textarea
-              className="postTextInput"
-              value={tweetText}
-              placeholder="有什麼新鮮事？"
-              onChange={handleTweetTextChange}
-            />
-          </div>
+          <textarea
+            className="postTextInput"
+            value={tweetText}
+            placeholder="有什麼新鮮事？"
+            onChange={handleTweetTextChange}
+          />
+        </div>
+      </div>
+      <div className="ButtonContainer">
+        <div className="tweetCount">
+          Remaining : {calculateRemainingCharacters()}
         </div>
         {errorMessage && <p className="characterLimit">{errorMessage}</p>}
+
         <button className="button orangeButton" onClick={handleTweet}>
           推文
         </button>
       </div>
+
       <hr className="thickBar" />
       {/* {showModal && (
         <PopupModal
