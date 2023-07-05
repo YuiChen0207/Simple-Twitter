@@ -33,6 +33,7 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
   }, []);
 
   const handleTweetTextChange = ({ target: { value } }) => {
+    setErrorMessage("");
     setReplyMsg(value);
   };
 
@@ -154,7 +155,6 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
             <button className="btn" onClick={handleTweet}>
               回覆
             </button>
-            {/* 點擊推文按鈕後可以新增reply，等待api串接 */}
           </div>
         </div>
       </div>

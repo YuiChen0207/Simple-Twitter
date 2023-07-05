@@ -14,7 +14,6 @@ import { getUserPageById } from "../../api/getUserPage";
 import { useUserId } from "../../contexts/UserIdContext";
 import "./ReplyList.scss";
 
-
 const ReplyList = () => {
   const [singleTweet, setSingleTweet] = useState({});
   const [tweetReplies, setTweetReplies] = useState([]);
@@ -24,6 +23,7 @@ const ReplyList = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const { setUserIdFromTweet, userId } = useUserId();
+  const { currentMember } = useAuth();
 
   const handlePrevPage = () => {
     window.history.back();
@@ -31,8 +31,9 @@ const ReplyList = () => {
 
   const handleUserPage = async () => {
     const userData = await getUserPageById(userId);
-    if (userData) {
-      console.log(userId);
+    if (userId === currentMember.id) {
+      navigate("/user/self");
+    } else {
       navigate(`/user/${userData.name}`);
     }
   };

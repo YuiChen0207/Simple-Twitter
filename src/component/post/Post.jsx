@@ -68,7 +68,7 @@ const Post = ({ setList }) => {
     const remainingCharacters = maxCharacters - tweetText.length;
     return remainingCharacters >= 0 ? remainingCharacters : 0;
   };
-  
+
   return (
     <div className="postContainer">
       <div className="postHeader">
@@ -102,13 +102,6 @@ const Post = ({ setList }) => {
       </div>
 
       <hr className="thickBar" />
-      {/* {showModal && (
-        <PopupModal
-          open={showModal}
-          setList={setList}
-          onClose={handleCloseModal}
-        />
-     )} */}
     </div>
   );
 };

@@ -26,12 +26,20 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
   }, []);
 
   const handleTweetTextChange = (event) => {
+    setErrorMessage("");
     setTweetText(event.target.value);
+    console.log("handleTweetTextChange is called");
   };
 
   const handlePopupClose = () => {
     setTweetText("");
     onClose();
+  };
+
+  const calculateRemainingCharacters = () => {
+    const maxCharacters = 140;
+    const remainingCharacters = maxCharacters - tweetText.length;
+    return remainingCharacters >= 0 ? remainingCharacters : 0;
   };
 
   const handleTweet = async () => {
@@ -123,6 +131,9 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
           />
         </div>
         <div className="modalFooter">
+          <div className="tweetCount">
+            Remaining : {calculateRemainingCharacters()}
+          </div>
           {errorMessage && <p className="characterLimit">{errorMessage}</p>}
           <button className="orangeButton" onClick={handleTweet}>
             推文
