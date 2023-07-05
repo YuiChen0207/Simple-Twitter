@@ -1,14 +1,12 @@
-// 元件
+import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getUseSettingInfo, putUseSettingInfo } from "../../api/userSetting";
 import Navbar from "../../component/navbar/Navbar";
 import PageTag from "../../component/pageTag/PageTag";
 import UserSettingInput from "../../component/userSetting/UserSettingInput";
 import "../SettingPage/SettingPage.scss";
-import { useAuth } from "../../contexts/AuthContext";
-// Hook
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-// api
-import { getUseSettingInfo, putUseSettingInfo } from "../../api/userSetting";
+import MobileMenu from "../../component/mobileMode/mobileMenu/MobileMenu";
 
 const SettingPage = () => {
   const [account, setAccount] = useState("");
@@ -16,9 +14,8 @@ const SettingPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
-
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,6 +33,10 @@ const SettingPage = () => {
         console.log("success");
       }
     } catch (error) {}
+  };
+
+  const handleClick = () => {
+    logout();
   };
 
   useEffect(() => {
@@ -97,7 +98,13 @@ const SettingPage = () => {
             儲存
           </button>
         </form>
+        <div className="logoutBtn">
+          <h5 className="logout" onClick={handleClick}>
+            登出
+          </h5>
+        </div>
       </div>
+      <MobileMenu />
     </div>
   );
 };
