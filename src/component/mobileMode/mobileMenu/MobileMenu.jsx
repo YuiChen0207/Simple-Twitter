@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import home from "../../../assets/home.svg";
 import tweet from "../../../assets/tweet-mobile.svg";
 import profile from "../../../assets/userInfo.svg";
 import setting from "../../../assets/setting.svg";
 import homeActive from "../../../assets/homeActive.svg";
-import userInfoActive from "../../../assets/userInfoActive.svg";
+import profileActive from "../../../assets/userInfoActive.svg";
 import settingActive from "../../../assets/settingActive.svg";
 import MobileTweet from "../mobileTweet/MobileTweet";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./MobileMenu.scss";
 
 const MobileMenu = ({ setList, setTweetsList }) => {
-  const [currentPage, setCurrentPage] = useState("home");
+  const location = useLocation();
+  const { pathname } = location;
+  const [activeItem, setActiveItem] = useState(pathname.substring(1));
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+  const handlePageChange = (page, path) => {
+    if (activeItem !== page) {
+      setActiveItem(page);
+      navigate(path);
+    }
   };
 
   const handleTweetIconClick = () => {
@@ -27,8 +34,11 @@ const MobileMenu = ({ setList, setTweetsList }) => {
 
   return (
     <div className="mobileMenuContainer">
-      <div className="menuIcon" onClick={() => handlePageChange("home")}>
-        <img src={currentPage === "home" ? homeActive : home} alt="home icon" />
+      <div
+        className={`menuIcon`}
+        onClick={() => handlePageChange("home", "/mainPage")}
+      >
+        <img src={activeItem === "home" ? homeActive : home} alt="home icon" />
       </div>
       <div className="menuIcon">
         <img src={tweet} alt="tweet icon" onClick={handleTweetIconClick} />
@@ -41,15 +51,21 @@ const MobileMenu = ({ setList, setTweetsList }) => {
           setTweetsList={setTweetsList}
         />
       )}
-      <div className="menuIcon" onClick={() => handlePageChange("profile")}>
+      <div
+        className={`menuIcon`}
+        onClick={() => handlePageChange("profile", "/user/self")}
+      >
         <img
-          src={currentPage === "profile" ? userInfoActive : profile}
+          src={activeItem === "profile" ? profileActive : profile}
           alt="profile icon"
         />
       </div>
-      <div className="menuIcon" onClick={() => handlePageChange("setting")}>
+      <div
+        className={`menuIcon`}
+        onClick={() => handlePageChange("setting", "/settings")}
+      >
         <img
-          src={currentPage === "setting" ? settingActive : setting}
+          src={activeItem === "setting" ? settingActive : setting}
           alt="setting icon"
         />
       </div>

@@ -16,7 +16,8 @@
   .postContent {
     display: flex;
     justify-content: space-between;
-    padding: 16px;
+    align-items: end;
+    padding: 16px 16px 10px 16px;
     border-radius: 8px;
   }
 
@@ -25,21 +26,37 @@
     align-items: center;
     gap: 12px;
     padding-bottom: 30px;
-    cursor: pointer;
 
     .userAvatar {
       width: 50px;
       height: 50px;
       border-radius: 50%;
+      margin-bottom: 20px;
     }
   }
 
   .postTextInput {
-    color: var(--Secondary);
-    outline: none;
     width: 100%;
+    color: var(--Secondary);
     font-size: 18px;
     font-weight: 700;
+    border: none;
+    resize: none;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+
+  textarea::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  textarea::-webkit-scrollbar-thumb {
+    background-color: #eed4c3;
+    border-radius: 4px;
+  }
+
+  textarea::-webkit-scrollbar-thumb:hover {
+    background-color: #ff6600;
   }
 
   .orangeButton {
@@ -51,6 +68,14 @@
   .thickBar {
     height: 10px;
   }
+}
+
+.characterLimit {
+  padding: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--Error);
+  text-wrap: nowrap;
 }
 
 @media (max-width: 835px) {

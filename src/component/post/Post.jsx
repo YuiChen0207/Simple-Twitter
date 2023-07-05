@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import PopupModal from "../popupModal/PopupModal";
-import { getPostTweet } from "../../api/tweets";
+import { getPostTweet, postTweet } from "../../api/tweets";
 import grayLogo from "../../assets/logoGray.svg";
+import { useAuth } from "../../contexts/AuthContext";
 import "./Post.scss";
 
 const Post = ({ setList }) => {
-  //const [postContent, setPostContent] = useState('');
-  const [showModal, setShowModal] = useState(false);
   const [userLogo, setUserLogo] = useState("");
+  const [tweetText, setTweetText] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const { currentMember } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,16 +23,44 @@ const Post = ({ setList }) => {
     fetchData();
   }, []);
 
-  // const handlePostContentChange = (e) => {
-  //   setPostContent(e.target.value);
-  // };
-
-  const handleOpenModal = () => {
-    setShowModal(true);
+  const handleTweetTextChange = (event) => {
+    setErrorMessage("");
+    setTweetText(event.target.value);
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const handleTweet = async () => {
+    if (tweetText.length > 140) {
+      setErrorMessage("字數不可超過140字");
+      return;
+    }
+
+    if (tweetText.length === 0) {
+      setErrorMessage("內容不可空白");
+      return;
+    }
+    try {
+      const response = await postTweet({ tweetText });
+      console.log("推文已發布:", response);
+
+      setList?.((prev) => {
+        return [
+          {
+            Likes: [],
+            LikesCount: 0,
+            Replies: [],
+            RepliesCount: 0,
+            ...response.data,
+            User: { ...currentMember },
+          },
+          ...prev,
+        ];
+      });
+
+      setTweetText("");
+      setErrorMessage("");
+    } catch (error) {
+      console.error("發佈推文失败:", error);
+    }
   };
 
   return (
@@ -41,32 +70,34 @@ const Post = ({ setList }) => {
       </div>
       <hr />
       <div className="postContent">
-        <div className="postBox" onClick={handleOpenModal}>
+        <div className="postBox">
           <img
             src={userLogo ?? grayLogo}
             alt="User Avatar"
             className="userAvatar"
           />
           <div className="postTextContainer">
-            <input
-              type="text"
+            <textarea
               className="postTextInput"
-              placeholder={"有什麼新鮮事？"}
+              value={tweetText}
+              placeholder="有什麼新鮮事？"
+              onChange={handleTweetTextChange}
             />
           </div>
         </div>
-        <button className="button orangeButton" onClick={handleOpenModal}>
+        {errorMessage && <p className="characterLimit">{errorMessage}</p>}
+        <button className="button orangeButton" onClick={handleTweet}>
           推文
         </button>
       </div>
       <hr className="thickBar" />
-      {showModal && (
+      {/* {showModal && (
         <PopupModal
           open={showModal}
           setList={setList}
           onClose={handleCloseModal}
         />
-      )}
+     )} */}
     </div>
   );
 };
