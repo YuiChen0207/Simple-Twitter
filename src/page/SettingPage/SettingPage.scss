@@ -14,7 +14,7 @@
     .inputContainer {
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 25px;
       width: 100%;
       padding: 24px 23px 0 23px;
     }
@@ -27,8 +27,44 @@
       font-size: 400;
       border-radius: 50px;
       align-self: flex-end;
-      // margin: 40px 23px 0 0;
       cursor: pointer;
+    }
+    .logoutBtn {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .settingMainContainer {
+    margin: unset;
+    gap: unset;
+    .settingContainer {
+      width: 70%;
+      margin: 0 auto;
+      .logoutBtn {
+        color: var(--Primary);
+        margin-left: auto;
+        padding: 22px 25px;
+        cursor: pointer;
+        display: block;
+        .logout {
+          font-size: 16px;
+          font-weight: 400;
+          border-bottom: 1px solid var(--Primary);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 426px) {
+  .settingMainContainer {
+    .settingContainer {
+      width: 100%;
+      .inputContainer {
+        gap: 6px;
+      }
     }
   }
 }

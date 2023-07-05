@@ -24,6 +24,7 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
         const tweet = await getSingleTweet(currentId);
         console.log(tweet);
         setSingleTweet(tweet);
+        console.log(currentMember);
       } catch (error) {
         console.error(error);
       }
@@ -81,7 +82,6 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
         return { ...prev, tweetReplyCount: prev.tweetReplyCount + 1 };
       });
 
-      //window.location.reload(); //可在優化
     } catch (error) {
       console.error("發佈推文失败:", error);
     }
