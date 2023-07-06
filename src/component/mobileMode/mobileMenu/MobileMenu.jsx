@@ -10,13 +10,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 import PopupModal from "../../popupModal/PopupModal";
 import "./MobileMenu.scss";
 
-
 const MobileMenu = ({ setList, setTweetsList }) => {
   const location = useLocation();
   const { pathname } = location;
   const [activeItem, setActiveItem] = useState(pathname.substring(1));
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setActiveItem(pathname.substring(1));
+  }, [pathname]);
 
   const handlePageChange = (page, path) => {
     if (activeItem !== page) {

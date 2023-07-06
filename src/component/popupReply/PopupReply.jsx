@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Popup from "reactjs-popup";
 import CloseIcon from "../../assets/closeIcon.svg";
-import { postReply } from "../../api/tweets";
+import { getPostTweet, postReply } from "../../api/tweets";
 import { useId } from "../../contexts/IdContext";
 import { useAuth } from "../../contexts/AuthContext";
 import { getSingleTweet } from "../../api/tweets";
@@ -13,6 +13,7 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
   const [replyMsg, setReplyMsg] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [avatar, setAvatar] = useState("");
   const { currentId } = useId();
   const { currentMember } = useAuth();
   const [singleTweet, setSingleTweet] = useState({});
@@ -22,9 +23,13 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
     const getTweet = async () => {
       try {
         const tweet = await getSingleTweet(currentId);
-        console.log(tweet);
         setSingleTweet(tweet);
-        console.log(currentMember);
+      } catch (error) {
+        console.error(error);
+      }
+      try {
+        const avatar = await getPostTweet();
+        setAvatar(avatar);
       } catch (error) {
         console.error(error);
       }
@@ -146,11 +151,7 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
           </div>
         </div>
         <div className="modalBody">
-          <img
-            className="userImg"
-            src={currentMember?.avatar ?? grayLogo}
-            alt="avatar"
-          />
+          <img className="userImg" src={avatar ?? grayLogo} alt="avatar" />
           <textarea
             className="tweetInput"
             value={replyMsg}

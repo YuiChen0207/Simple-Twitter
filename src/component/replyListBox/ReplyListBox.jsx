@@ -1,15 +1,15 @@
-import SingleReply from './singleReply/SingleReply';
-import './ReplyListBox.scss';
+import SingleReply from "./singleReply/SingleReply";
+import "./ReplyListBox.scss";
 
-const ReplyListBox = ({ replies, replyTo }) => {
+const ReplyListBox = ({ replies, replyTo, userData }) => {
   return (
     <div className="replyListBox">
       {replies.map((reply) => (
         <SingleReply
           key={reply.id}
-          img={reply?.User?.avatar}
-          username={reply?.User?.name}
-          accountName={reply?.User?.account}
+          img={userData.avatar ?? reply.User.avatar}
+          username={userData.name ?? reply.User.name}
+          accountName={userData.account ?? reply.User.account}
           postTime={reply.updatedAt}
           content={reply.comment}
           replyTo={replyTo}

@@ -23,6 +23,7 @@ const EditPopupModal = ({
   const [errorMessageIntro, setErrorMessageIntro] = useState(null);
   const [updatedUserData, setUpdatedUserData] = useState({});
   const [isSaving, setIsSaving] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
     if (isSaving) {
@@ -139,16 +140,26 @@ const EditPopupModal = ({
     setIsSaving(true);
   };
 
-  const popupContentStyle = {
-    position: "absolute",
-    top: "56px",
-    left: "50%",
-    width: "634px",
-    height: "650px",
-    borderRadius: "14px",
-    background: "var(--white)",
-    transform: "translateX(-50%)",
-  };
+  const popupContentStyle = isMobile
+    ? {
+        position: "absolute",
+        top: "0",
+        left: "0",
+        width: "100%",
+        height: "100%",
+        borderRadius: "0",
+        background: "var(--white)",
+      }
+    : {
+        position: "absolute",
+        top: "56px",
+        left: "50%",
+        width: "634px",
+        height: "auto",
+        borderRadius: "14px",
+        background: "var(--white)",
+        transform: "translateX(-50%)",
+      };
 
   const overlayStyle = {
     background: "rgba(0, 0, 0, 0.5)",
@@ -186,7 +197,7 @@ const EditPopupModal = ({
               />
             ) : (
               <img
-                src={defaultBanner}
+                src={userData.user.banner ?? defaultBanner}
                 alt="background"
                 className="backgroundImage"
               />
@@ -220,7 +231,11 @@ const EditPopupModal = ({
                 className="avatarIcon"
               />
             ) : (
-              <img src={defaultUserLogo} alt="avatar" className="avatarIcon" />
+              <img
+                src={userData.user.avatar ?? defaultUserLogo}
+                alt="avatar"
+                className="avatarIcon"
+              />
             )}
             <div className="editUserAvatarOverlay">
               <label htmlFor="userPhotoInput">
