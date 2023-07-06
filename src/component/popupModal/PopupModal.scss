@@ -37,6 +37,14 @@
     margin-left: auto;
     margin-top: auto;
 
+    .tweetCount {
+      padding: 7px;
+      margin-right: auto;
+      font-size: 14px;
+      letter-spacing: 1px;
+      color: var(--Secondary);
+    }
+
     .characterLimit {
       padding: 10px;
       margin-right: 25px;

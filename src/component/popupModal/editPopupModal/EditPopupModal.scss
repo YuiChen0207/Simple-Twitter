@@ -161,3 +161,10 @@
     color: var(--Error);
   }
 }
+
+.successMessage{
+  font-size: 24px;
+  color: var(--brand-color);
+  text-align: center;
+  padding: 10px;
+}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Popup from "reactjs-popup";
 import CloseIcon from "../../assets/closeIcon.svg";
-import { postReply } from "../../api/tweets";
+import { getPostTweet, postReply } from "../../api/tweets";
 import { useId } from "../../contexts/IdContext";
 import { useAuth } from "../../contexts/AuthContext";
 import { getSingleTweet } from "../../api/tweets";
@@ -9,10 +9,11 @@ import grayLogo from "../../assets/logoGray.svg";
 import "./PopupReply.scss";
 import { formatTime } from "../../utils/timeUtils";
 
-
 const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
   const [replyMsg, setReplyMsg] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [avatar, setAvatar] = useState("");
   const { currentId } = useId();
   const { currentMember } = useAuth();
   const [singleTweet, setSingleTweet] = useState({});
@@ -22,9 +23,13 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
     const getTweet = async () => {
       try {
         const tweet = await getSingleTweet(currentId);
-        console.log(tweet);
         setSingleTweet(tweet);
-        console.log(currentMember);
+      } catch (error) {
+        console.error(error);
+      }
+      try {
+        const avatar = await getPostTweet();
+        setAvatar(avatar);
       } catch (error) {
         console.error(error);
       }
@@ -33,6 +38,7 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
   }, []);
 
   const handleTweetTextChange = ({ target: { value } }) => {
+    setErrorMessage("");
     setReplyMsg(value);
   };
 
@@ -81,22 +87,31 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
       tweetSet?.((prev) => {
         return { ...prev, tweetReplyCount: prev.tweetReplyCount + 1 };
       });
-
     } catch (error) {
       console.error("發佈推文失败:", error);
     }
   };
 
-  const popupContentStyle = {
-    position: "absolute",
-    top: "56px",
-    left: "50%",
-    width: "634px",
-    height: "auto",
-    borderRadius: "14px",
-    background: "var(--white)",
-    transform: "translateX(-50%)",
-  };
+  const popupContentStyle = isMobile
+    ? {
+        position: "absolute",
+        top: "0",
+        left: "0",
+        width: "100%",
+        height: "100%",
+        borderRadius: "0",
+        background: "var(--white)",
+      }
+    : {
+        position: "absolute",
+        top: "56px",
+        left: "50%",
+        width: "634px",
+        height: "auto",
+        borderRadius: "14px",
+        background: "var(--white)",
+        transform: "translateX(-50%)",
+      };
 
   const overlayStyle = {
     background: "rgba(0, 0, 0, 0.5)",
@@ -136,11 +151,7 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
           </div>
         </div>
         <div className="modalBody">
-          <img
-            className="userImg"
-            src={currentMember?.avatar ?? grayLogo}
-            alt="avatar"
-          />
+          <img className="userImg" src={avatar ?? grayLogo} alt="avatar" />
           <textarea
             className="tweetInput"
             value={replyMsg}
@@ -154,7 +165,6 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
             <button className="btn" onClick={handleTweet}>
               回覆
             </button>
-            {/* 點擊推文按鈕後可以新增reply，等待api串接 */}
           </div>
         </div>
       </div>

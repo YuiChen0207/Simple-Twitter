@@ -48,7 +48,6 @@ const FollowAndFollowerTweet = ({
     }
   };
 
-  //若url是follow render跟隨者頁面
   return (
     <>
       <div key={index} className="followAndFollowerTweetContainer">

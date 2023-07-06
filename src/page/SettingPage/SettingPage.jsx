@@ -26,13 +26,11 @@ const SettingPage = () => {
       password: password,
       checkPassword: checkPassword,
     };
-    try {
-      const res = await putUseSettingInfo(userChangeData);
-      // console.log(res.data);
-      if (res.status === 200) {
-        console.log("success");
-      }
-    } catch (error) {}
+
+    const res = await putUseSettingInfo(userChangeData);
+    if (res.status === 200) {
+      console.log("success");
+    }
   };
 
   const handleClick = () => {
@@ -99,9 +97,9 @@ const SettingPage = () => {
           </button>
         </form>
         <div className="logoutBtn">
-          <h5 className="logout" onClick={handleClick}>
+          <span className="logout" onClick={handleClick}>
             登出
-          </h5>
+          </span>
         </div>
       </div>
       <MobileMenu />

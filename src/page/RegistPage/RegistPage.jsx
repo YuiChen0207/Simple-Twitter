@@ -24,26 +24,40 @@ const RegistPage = () => {
 
     if (!account.length) {
       newErrors.account = "請輸入帳號";
+    } else if (account.length < 6) {
+      newErrors.account = "帳號長度需至少為6個字符";
+    } else if (!/^[a-zA-Z0-9]+$/.test(account)) {
+      newErrors.account = "帳號只能包含字母和數字";
     }
 
     if (!name.length) {
       newErrors.name = "請輸入名稱";
     } else if (name.length > 50) {
       newErrors.name = "名字不可超過50個字";
+    } else if (!/^[a-zA-Z0-9\s]+$/.test(name)) {
+      newErrors.name = "名稱只能包含字母、數字和空格";
     }
 
     if (!email.length) {
       newErrors.email = "請輸入Email";
+    } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+      newErrors.email = "請輸入有效的Email地址";
     }
 
     if (!password.length) {
       newErrors.password = "請輸入密碼";
+    } else if (password.length < 8) {
+      newErrors.password = "密碼長度需至少為8個字符";
+    } else if (!/(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!]).*$/.test(password)) {
+      newErrors.password = "密碼需包含字母、數字和特殊字符";
     }
 
     if (!checkPassword.length) {
+      newErrors.checkPassword = "請再次輸入密碼";
+    } else if (checkPassword !== password) {
       newErrors.checkPassword = "密碼不一致";
     }
-
+    
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;

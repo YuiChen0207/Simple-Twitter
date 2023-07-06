@@ -1,6 +1,8 @@
 import UserCard from "../../component/userCard/UserCard";
 import Navbar from "../../component/navbar/Navbar";
 import PageTag from "../../component/pageTag/PageTag";
+import defaultLogo from "../../assets/logoGray.svg";
+import defaultBanner from "../../assets/backgroundImage.svg";
 import { useEffect, useState } from "react";
 import { getUsersByAdmin } from "../../api/admin";
 import "./UsersDashboard.scss";
@@ -16,6 +18,7 @@ const UsersDashboard = () => {
     const getUserData = async () => {
       try {
         const list = await getUsersByAdmin();
+        console.log(list);
         setAllUsersData(list);
       } catch (error) {
         console.error(error);
@@ -42,12 +45,12 @@ const UsersDashboard = () => {
               <UserCard
                 name={user.name}
                 account={user.account}
-                avatar={user.avatar}
+                avatar={user.avatar ?? defaultLogo}
                 tweetNum={user.tweetsCount}
                 likeNum={user.likedTweetsCount}
                 followingNum={user.followingsCount}
                 followerNum={user.followersCount}
-                bgImg={user.banner}
+                bgImg={user.banner ?? defaultBanner}
               ></UserCard>
             );
           })}

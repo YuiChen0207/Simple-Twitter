@@ -6,8 +6,8 @@ import setting from "../../../assets/setting.svg";
 import homeActive from "../../../assets/homeActive.svg";
 import profileActive from "../../../assets/userInfoActive.svg";
 import settingActive from "../../../assets/settingActive.svg";
-import MobileTweet from "../mobileTweet/MobileTweet";
 import { useLocation, useNavigate } from "react-router-dom";
+import PopupModal from "../../popupModal/PopupModal";
 import "./MobileMenu.scss";
 
 const MobileMenu = ({ setList, setTweetsList }) => {
@@ -16,6 +16,10 @@ const MobileMenu = ({ setList, setTweetsList }) => {
   const [activeItem, setActiveItem] = useState(pathname.substring(1));
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setActiveItem(pathname.substring(1));
+  }, [pathname]);
 
   const handlePageChange = (page, path) => {
     if (activeItem !== page) {
@@ -35,7 +39,7 @@ const MobileMenu = ({ setList, setTweetsList }) => {
   return (
     <div className="mobileMenuContainer">
       <div
-        className={`menuIcon`}
+        className="menuIcon"
         onClick={() => handlePageChange("home", "/mainPage")}
       >
         <img src={activeItem === "home" ? homeActive : home} alt="home icon" />
@@ -44,7 +48,7 @@ const MobileMenu = ({ setList, setTweetsList }) => {
         <img src={tweet} alt="tweet icon" onClick={handleTweetIconClick} />
       </div>
       {isPopupOpen && (
-        <MobileTweet
+        <PopupModal
           open={isPopupOpen}
           onClose={handleCloseModal}
           setList={setList}

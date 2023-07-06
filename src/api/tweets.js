@@ -3,7 +3,6 @@ import axiosInstance, { baseUrl } from "./axiosInstance";
 export const getTweets = async () => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/tweets`);
-    console.log(res.data);
     return res.data;
   } catch (error) {
     console.error("[Get Tweets failed]: ", error);
@@ -24,7 +23,6 @@ export const postTweet = async ({ tweetText }) => {
 export const getSingleTweet = async (id) => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/tweets/${id}`);
-    console.log(res.data);
     return res.data;
   } catch (error) {
     console.error("[Get Tweet failed]: ", error);
@@ -34,7 +32,6 @@ export const getSingleTweet = async (id) => {
 export const getTweetReplies = async (id) => {
   try {
     const { data } = await axiosInstance.get(`${baseUrl}/tweets/${id}/replies`);
-    //console.log(data);
     return data;
   } catch (error) {
     console.error("[Get Tweet failed]: ", error);
@@ -56,7 +53,6 @@ export const postReply = async ({ id, comment }) => {
 export const getUserTweets = async (userId) => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/users/${userId}/tweets`);
-    console.log(res.data);
     return res.data;
   } catch (error) {
     console.error("[Get User Tweets failed]: ", error);
@@ -68,7 +64,6 @@ export const getUserRepliedTweets = async (userId) => {
     const res = await axiosInstance.get(
       `${baseUrl}/users/${userId}/replied_tweets`
     );
-    //console.log(res.data);
     return res.data;
   } catch (error) {
     console.error("[Get User Replied Tweets failed]: ", error);
@@ -78,7 +73,6 @@ export const getUserRepliedTweets = async (userId) => {
 export const getUserLikes = async (userId) => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/users/${userId}/likes`);
-    console.log(res.data);
     return res.data;
   } catch (error) {
     console.error("[Get User Likes failed]: ", error);
@@ -88,7 +82,6 @@ export const getUserLikes = async (userId) => {
 export const getPostTweet = async () => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/tweets/postTweet`);
-    //console.log(res.data);
     return res.data;
   } catch (error) {
     console.error("[Get Tweets failed]: ", error);

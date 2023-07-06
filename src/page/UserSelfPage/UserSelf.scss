@@ -8,8 +8,17 @@
 // }
 
 .postSection {
+  position: relative;
   width: 100%;
   flex: 20%;
+  p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--brand-color);
+    font-size: 24px;
+  }
 }
 
 .tweetsSection {

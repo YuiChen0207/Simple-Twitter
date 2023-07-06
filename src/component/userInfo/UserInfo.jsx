@@ -51,7 +51,11 @@ const UserInfo = ({
 
   return (
     <div className="userInfoContainer">
-      <img src={defaultBanner} className="background" alt="banner" />
+      <img
+        src={userData?.user?.banner ?? defaultBanner}
+        className="background"
+        alt="banner"
+      />
       <div className="userContext">
         <div className="upSection">
           <img

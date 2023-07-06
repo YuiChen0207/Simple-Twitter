@@ -71,7 +71,7 @@
         font-size: 14px;
         font-weight: 400;
         &::after {
-          content: '跟隨中';
+          content: "跟隨中";
           color: var(--Secondary);
         }
       }
@@ -80,10 +80,23 @@
         font-size: 14px;
         font-weight: 400;
         &::after {
-          content: '跟隨者';
+          content: "跟隨者";
           color: var(--Secondary);
         }
       }
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .userInfoContainer {
+    margin: 0 auto;
+  }
+}
+
+
+@media (max-width: 426px) {
+  .userCardContainer{
+    margin: 0 auto;
   }
 }

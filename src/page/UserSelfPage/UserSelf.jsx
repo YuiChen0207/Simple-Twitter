@@ -17,6 +17,7 @@ import UserTweetsList from "../../component/userTweetList/UserTweetList";
 import UserRepliesList from "../../component/userRepliesList/UserRepliesList";
 import UserLikesList from "../../component/userLikesList/UserLikesList";
 import MobileMenu from "../../component/mobileMode/mobileMenu/MobileMenu";
+import Skeleton from "react-loading-skeleton";
 import "./UserSelf.scss";
 
 const UserSelf = () => {
@@ -94,15 +95,22 @@ const UserSelf = () => {
       <div className="mainContent">
         <Header username={userData?.name} tweetCount={userData?.TweetCount} />
         <div className="postSection">
-          <UserInfo
-            avatar={userData?.avatar}
-            username={userData?.name}
-            accountName={userData?.account}
-            bio={userData?.introduction}
-            followingCount={userData?.followingCount}
-            followersCount={userData?.followerCount}
-            handleUserDataUpdate={handleUserDataUpdate}
-          />
+          {userData ? (
+            <UserInfo
+              avatar={userData?.avatar}
+              username={userData?.name}
+              accountName={userData?.account}
+              bio={userData?.introduction}
+              followingCount={userData?.followingCount}
+              followersCount={userData?.followerCount}
+              handleUserDataUpdate={handleUserDataUpdate}
+            />
+          ) : (
+            <>
+              <Skeleton count={15} />
+              <p>Loading...</p>
+            </>
+          )}
         </div>
         <TabBar
           activePage="UserSelf"
@@ -132,6 +140,7 @@ const UserSelf = () => {
               likes={likes}
               className="tweetsSection"
               setTweetsList={setLikes}
+              userImage={userData?.avatar}
             />
           )}
         </div>

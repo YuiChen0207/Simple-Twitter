@@ -14,16 +14,17 @@ import { getUserPageById } from "../../api/getUserPage";
 import { useUserId } from "../../contexts/UserIdContext";
 import "./ReplyList.scss";
 
-
 const ReplyList = () => {
   const [singleTweet, setSingleTweet] = useState({});
   const [tweetReplies, setTweetReplies] = useState([]);
   const [popularCards, setPopularCards] = useState([]);
+  const [userData, setUserData] = useState("");
   const { currentId } = useId();
   const tweet = { ...singleTweet };
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const { setUserIdFromTweet, userId } = useUserId();
+  const { currentMember } = useAuth();
 
   const handlePrevPage = () => {
     window.history.back();
@@ -31,54 +32,38 @@ const ReplyList = () => {
 
   const handleUserPage = async () => {
     const userData = await getUserPageById(userId);
-    if (userData) {
-      console.log(userId);
+    if (userId === currentMember.id) {
+      navigate("/user/self");
+    } else {
       navigate(`/user/${userData.name}`);
     }
   };
+  
   useEffect(() => {
-    const getTweet = async () => {
+    const fetchData = async () => {
       try {
         const tweet = await getSingleTweet(currentId);
+        const replies = await getTweetReplies(currentId);
+        const userData = await getUserPageById(currentMember?.id);
+        const popularCards = await getPopularList();
+
         setSingleTweet(tweet);
         setUserIdFromTweet(tweet.UserId);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getTweet();
-  }, [currentId]);
-
-  useEffect(() => {
-    const getReplies = async () => {
-      try {
-        const replies = await getTweetReplies(currentId);
         setTweetReplies(replies);
-        console.log(replies);
+        setUserData(userData);
+        setPopularCards(popularCards);
+
+        if (!isAuthenticated) {
+          navigate("/login");
+        }
       } catch (error) {
         console.error(error);
       }
     };
-    getReplies();
-  }, [currentId]);
 
-  useEffect(() => {
-    const getPopularCardsAsync = async () => {
-      try {
-        const popularCards = await getPopularList();
-        setPopularCards(popularCards.map((users) => ({ ...users })));
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getPopularCardsAsync();
-  }, []);
+    fetchData();
+  }, [currentId, currentMember?.id, isAuthenticated, navigate]);
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
-    }
-  }, [navigate, isAuthenticated]);
   return (
     <div className="replyMainContainer">
       <Navbar />
@@ -100,6 +85,7 @@ const ReplyList = () => {
           onHandleUserPage={handleUserPage}
         />
         <ReplyListBox
+          userData={userData}
           replies={tweetReplies}
           replyTo={tweet.tweetOwnerAccount}
         />

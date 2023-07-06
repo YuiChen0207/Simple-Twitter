@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { unlikeTweet, likeTweet } from "../../api/likeAndUnlike";
 import { useAuth } from "../../contexts/AuthContext";
-import { postReply } from "../../api/tweets";
+import { getPostTweet, postReply } from "../../api/tweets";
 import { TweetsContext } from "../../contexts/TweetsContext";
 import { formatDate } from "../../utils/timeUtils";
 import commentIcon from "../../assets/commit.svg";
@@ -20,9 +20,19 @@ const MainReply = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [replyMsg, setReplyMsg] = useState("");
+  const [avatar, setAvatar] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { currentMember } = useAuth();
   const { setTweets } = useContext(TweetsContext);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const getAvatarFromPost = await getPostTweet();
+      setAvatar(getAvatarFromPost);
+    };
+
+    fetchData();
+  }, []);
 
   const handleTweetTextChange = ({ target: { value } }) => {
     setReplyMsg(value);
@@ -91,7 +101,6 @@ const MainReply = ({
       tweetSet?.((prev) => {
         return { ...prev, tweetReplyCount: prev.tweetReplyCount + 1 };
       });
-
     } catch (error) {
       console.error("發佈推文失败:", error);
     }
@@ -132,11 +141,7 @@ const MainReply = ({
         />
       </div>
       <div className="modalBody">
-        <img
-          className="userImg"
-          src={currentMember?.avatar ?? defaultLogo}
-          alt="avatar"
-        />
+        <img className="userImg" src={avatar ?? defaultLogo} alt="avatar" />
         <input
           className="tweetInput"
           value={replyMsg}

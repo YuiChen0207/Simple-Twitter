@@ -4,6 +4,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { getPopularList } from "../../api/popularlist";
 import { getFollowerList, getFollowingList } from "../../api/followship";
 import { useUserId } from "../../contexts/UserIdContext";
+import defaultLogo from "../../assets/logoGray.svg";
 import Header from "../../component/header/Header";
 import TabBar from "../../component/tabBar/TabBar";
 import Navbar from "../../component/navbar/Navbar";
@@ -31,7 +32,6 @@ const FollowAndFollower = () => {
           activeTab === "followers"
             ? await getFollowerList(userId)
             : await getFollowingList(userId);
-            console.log(list);
 
         activeTab === "followers"
           ? setFollowShipList([...list.followers])
@@ -94,7 +94,7 @@ const FollowAndFollower = () => {
                 index={i}
                 userName={list?.followerName}
                 intro={list?.followerIntroduction}
-                avatar={list?.followerAvatar}
+                avatar={defaultLogo ?? list.followerAvatar}
                 isFollowShip={list?.isFollowed}
                 followerId={list?.followerId}
                 setList={setFollowShipList}
