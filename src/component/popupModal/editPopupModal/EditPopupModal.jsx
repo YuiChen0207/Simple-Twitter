@@ -24,6 +24,7 @@ const EditPopupModal = ({
   const [updatedUserData, setUpdatedUserData] = useState({});
   const [isSaving, setIsSaving] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isEditSuccess, setIsEditSuccess] = useState(false);
 
   useEffect(() => {
     if (isSaving) {
@@ -136,7 +137,7 @@ const EditPopupModal = ({
       onClose();
       return;
     }
-
+    setIsEditSuccess(true);
     setIsSaving(true);
   };
 
@@ -175,6 +176,7 @@ const EditPopupModal = ({
       overlayStyle={overlayStyle}
     >
       <div className="editModal">
+        {isEditSuccess && <div className="successMessage">編輯成功!</div>}
         <div className="modalHeader">
           <img
             src={CloseIcon}
