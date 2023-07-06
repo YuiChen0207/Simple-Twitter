@@ -1,6 +1,6 @@
 .AdminUserContainer {
   display: flex;
-  margin: 0 auto 0 130px;
+  margin: 0 50px;
   height: 100vh;
   gap: 24px;
 
@@ -12,10 +12,24 @@
     overflow-y: scroll;
 
     .cardList {
-      margin: 16px;
-      display: flex;
+      margin: 24px;
+      display: grid;
       flex-wrap: wrap;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       grid-gap: 16px;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .AdminUserContainer {
+    gap: unset;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 426px) {
+  .AdminUserContainer {
+    margin: unset;
   }
 }

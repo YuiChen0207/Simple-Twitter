@@ -97,9 +97,9 @@ const SettingPage = () => {
           </button>
         </form>
         <div className="logoutBtn">
-          <h5 className="logout" onClick={handleClick}>
+          <span className="logout" onClick={handleClick}>
             登出
-          </h5>
+          </span>
         </div>
       </div>
       <MobileMenu />

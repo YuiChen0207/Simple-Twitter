@@ -42,9 +42,13 @@
     .settingContainer {
       width: 70%;
       margin: 0 auto;
+      .inputContainer {
+        gap: unset;
+        padding: 10px 23px;
+      }
       .logoutBtn {
         color: var(--Primary);
-        margin-left: auto;
+        margin-top: -56px;
         padding: 22px 25px;
         cursor: pointer;
         display: block;
@@ -58,13 +62,10 @@
   }
 }
 
-@media (max-width: 426px) {
+@media (max-width: 425px) {
   .settingMainContainer {
     .settingContainer {
       width: 100%;
-      .inputContainer {
-        gap: 6px;
-      }
     }
   }
 }

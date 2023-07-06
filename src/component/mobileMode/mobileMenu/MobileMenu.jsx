@@ -39,7 +39,7 @@ const MobileMenu = ({ setList, setTweetsList }) => {
   return (
     <div className="mobileMenuContainer">
       <div
-        className={`menuIcon`}
+        className="menuIcon"
         onClick={() => handlePageChange("home", "/mainPage")}
       >
         <img src={activeItem === "home" ? homeActive : home} alt="home icon" />

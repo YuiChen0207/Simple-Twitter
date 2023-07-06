@@ -1,5 +1,3 @@
-import profileImg from '../../assets/img/canadian-girl.jpg';
-import profileBg from '../../assets/img/maple-leaf.jpg';
 import featherIcon from '../../assets/feather.svg';
 import heartIcon from '../../assets/heart.svg';
 import './UserCard.scss';
