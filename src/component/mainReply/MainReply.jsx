@@ -38,6 +38,13 @@ const MainReply = ({
     setReplyMsg(value);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13 && !event.shiftKey) {
+      event.preventDefault();
+      handleTweet();
+    }
+  };
+
   const handleOpenModal = () => {
     setShowModal(true);
   };
@@ -146,6 +153,7 @@ const MainReply = ({
           className="tweetInput"
           value={replyMsg}
           onChange={handleTweetTextChange}
+          onKeyDown={handleKeyDown}
           placeholder="推你的回覆"
         />
 

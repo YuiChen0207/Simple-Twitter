@@ -29,7 +29,13 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
   const handleTweetTextChange = (event) => {
     setErrorMessage("");
     setTweetText(event.target.value);
-    console.log("handleTweetTextChange is called");
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13 && !event.shiftKey) {
+      event.preventDefault();
+      handleTweet();
+    }
   };
 
   const handlePopupClose = () => {
@@ -109,7 +115,7 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
         top: "56px",
         left: "50%",
         width: "634px",
-        height: "auto",
+        height: "300px",
         borderRadius: "14px",
         background: "var(--white)",
         transform: "translateX(-50%)",
@@ -139,6 +145,7 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
             className="tweetInput"
             value={tweetText}
             onChange={handleTweetTextChange}
+            onKeyDown={handleKeyDown}
             placeholder="有什麼新鮮事？"
           />
         </div>
