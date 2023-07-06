@@ -10,6 +10,7 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
   const [tweetText, setTweetText] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [userLogo, setUserLogo] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const { currentMember } = useAuth();
 
   useEffect(() => {
@@ -92,16 +93,27 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
       console.error("發佈推文失败:", error);
     }
   };
-  const popupContentStyle = {
-    position: "absolute",
-    top: "56px",
-    left: "50%",
-    width: "634px",
-    height: "300px",
-    borderRadius: "14px",
-    background: "var(--white)",
-    transform: "translateX(-50%)",
-  };
+
+  const popupContentStyle = isMobile
+    ? {
+        position: "absolute",
+        top: "0",
+        left: "0",
+        width: "100%",
+        height: "100%",
+        borderRadius: "0",
+        background: "var(--white)",
+      }
+    : {
+        position: "absolute",
+        top: "56px",
+        left: "50%",
+        width: "634px",
+        height: "auto",
+        borderRadius: "14px",
+        background: "var(--white)",
+        transform: "translateX(-50%)",
+      };
 
   const overlayStyle = {
     background: "rgba(0, 0, 0, 0.5)",

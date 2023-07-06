@@ -33,7 +33,7 @@ const TweetsList = ({ tweets, setTweetsList }) => {
                   setUserIdFromTweet(tweet.User.id);
                 }
                 navigate(
-                  isCurrentUser ? "/user/self" : `/user/${tweet.User.name}`
+                  isCurrentUser ? "/user/self" : `/user/${tweet.ㄌ.name}`
                 );
               }}
               setList={setTweetsList}
