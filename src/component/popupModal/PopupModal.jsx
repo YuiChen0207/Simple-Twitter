@@ -5,11 +5,14 @@ import Popup from "reactjs-popup";
 import CloseIcon from "../../assets/closeIcon.svg";
 import grayLogo from "../../assets/logoGray.svg";
 import "./PopupModal.scss";
+import { getUserPageById } from "../../api/getUserPage";
 
 const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
   const [tweetText, setTweetText] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [userLogo, setUserLogo] = useState("");
+  const [name, setName] = useState("");
+  const [account, setAccount] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const { currentMember } = useAuth();
 
@@ -25,6 +28,13 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
 
     fetchData();
   }, []);
+
+  const getName = async () => {
+    const getNameFromPage = await getUserPageById(currentMember?.id);
+    setName(getNameFromPage.name);
+    setAccount(getNameFromPage.account)
+  };
+  getName();
 
   const handleTweetTextChange = (event) => {
     setErrorMessage("");
@@ -71,7 +81,11 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
             Replies: [],
             RepliesCount: 0,
             ...response.data,
-            User: { ...currentMember },
+            User: {
+              ...currentMember,
+              avatar: userLogo,
+              name: name,
+            },
           },
           ...prev,
         ];
@@ -81,11 +95,11 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
         return [
           {
             ...response.data,
-            account: currentMember.account,
-            avatar: currentMember.avatar,
+            account: account,
+            avatar: userLogo,
             currentUserIsLiked: false,
             likeCount: 0,
-            name: currentMember.name,
+            name: name,
             replyCount: 0,
           },
           ...prev,
