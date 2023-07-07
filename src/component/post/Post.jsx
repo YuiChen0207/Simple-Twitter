@@ -28,6 +28,13 @@ const Post = ({ setList }) => {
     setTweetText(event.target.value);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13 && !event.shiftKey) {
+      event.preventDefault();
+      handleTweet();
+    }
+  };
+
   const handleTweet = async () => {
     if (tweetText.length > 140) {
       setErrorMessage("字數不可超過140字");
@@ -87,6 +94,7 @@ const Post = ({ setList }) => {
             value={tweetText}
             placeholder="有什麼新鮮事？"
             onChange={handleTweetTextChange}
+            onKeyDown={handleKeyDown}
           />
         </div>
       </div>

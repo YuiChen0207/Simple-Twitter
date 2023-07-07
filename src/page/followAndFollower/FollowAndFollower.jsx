@@ -94,7 +94,7 @@ const FollowAndFollower = () => {
                 index={i}
                 userName={list?.followerName}
                 intro={list?.followerIntroduction}
-                avatar={defaultLogo ?? list.followerAvatar}
+                avatar={list.followerAvatar ?? defaultLogo}
                 isFollowShip={list?.isFollowed}
                 followerId={list?.followerId}
                 setList={setFollowShipList}
