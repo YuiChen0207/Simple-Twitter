@@ -42,6 +42,13 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
     setReplyMsg(value);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13 && !event.shiftKey) {
+      event.preventDefault();
+      handleTweet();
+    }
+  };
+
   const handlePopupClose = () => {
     setReplyMsg("");
     onClose();
@@ -156,6 +163,7 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
             className="tweetInput"
             value={replyMsg}
             onChange={handleTweetTextChange}
+            onKeyDown={handleKeyDown}
             placeholder="推你的回覆"
           />
         </div>

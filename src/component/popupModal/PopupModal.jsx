@@ -5,11 +5,14 @@ import Popup from "reactjs-popup";
 import CloseIcon from "../../assets/closeIcon.svg";
 import grayLogo from "../../assets/logoGray.svg";
 import "./PopupModal.scss";
+import { getUserPageById } from "../../api/getUserPage";
 
 const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
   const [tweetText, setTweetText] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [userLogo, setUserLogo] = useState("");
+  const [name, setName] = useState("");
+  const [account, setAccount] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const { currentMember } = useAuth();
 
@@ -26,10 +29,23 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
     fetchData();
   }, []);
 
+  const getName = async () => {
+    const getNameFromPage = await getUserPageById(currentMember?.id);
+    setName(getNameFromPage.name);
+    setAccount(getNameFromPage.account)
+  };
+  getName();
+
   const handleTweetTextChange = (event) => {
     setErrorMessage("");
     setTweetText(event.target.value);
-    console.log("handleTweetTextChange is called");
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13 && !event.shiftKey) {
+      event.preventDefault();
+      handleTweet();
+    }
   };
 
   const handlePopupClose = () => {
@@ -65,7 +81,11 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
             Replies: [],
             RepliesCount: 0,
             ...response.data,
-            User: { ...currentMember },
+            User: {
+              ...currentMember,
+              avatar: userLogo,
+              name: name,
+            },
           },
           ...prev,
         ];
@@ -75,11 +95,11 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
         return [
           {
             ...response.data,
-            account: currentMember.account,
-            avatar: currentMember.avatar,
+            account: account,
+            avatar: userLogo,
             currentUserIsLiked: false,
             likeCount: 0,
-            name: currentMember.name,
+            name: name,
             replyCount: 0,
           },
           ...prev,
@@ -109,7 +129,7 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
         top: "56px",
         left: "50%",
         width: "634px",
-        height: "auto",
+        height: "300px",
         borderRadius: "14px",
         background: "var(--white)",
         transform: "translateX(-50%)",
@@ -139,6 +159,7 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
             className="tweetInput"
             value={tweetText}
             onChange={handleTweetTextChange}
+            onKeyDown={handleKeyDown}
             placeholder="有什麼新鮮事？"
           />
         </div>

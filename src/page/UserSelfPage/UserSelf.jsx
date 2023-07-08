@@ -108,7 +108,7 @@ const UserSelf = () => {
           ) : (
             <>
               <Skeleton count={15} />
-              <p>Loading...</p>
+              <p className="loading">Loading...</p>
             </>
           )}
         </div>

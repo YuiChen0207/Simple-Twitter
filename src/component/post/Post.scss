@@ -68,9 +68,16 @@
     letter-spacing: 1px;
     color: var(--Secondary);
   }
+
   .orangeButton {
     padding: 8px 16px;
     white-space: nowrap;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .orangeButton:active {
+    transform: scale(0.9);
+    box-shadow: none;
   }
 
   .thickBar {
