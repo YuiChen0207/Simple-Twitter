@@ -20,7 +20,7 @@ const Header = ({ username, tweetCount, pageName }) => {
       </button>
       <div className="userInfo">
         <h5 className="medium">{username}</h5>
-        <div className="tweetCount">{tweetCount} 推文</div>
+        <div className="tweetCount">{tweetCount} Tweets</div>
       </div>
     </header>
   );

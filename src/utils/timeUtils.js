@@ -6,9 +6,9 @@ export function formatTime(timestamp) {
   const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
 
   if (diffInHours < 1) {
-    return "剛剛";
+    return "Just now";
   } else {
-    return `${diffInHours}小時`;
+    return `${diffInHours} hours ago`;
   }
 }
 
@@ -21,10 +21,26 @@ export const formatDate = (timeString) => {
   const month = date.getMonth() + 1;
   const day = date.getDate();
 
-  const period = hours < 12 ? "上午" : "下午";
+  const period = hours < 12 ? "AM" : "PM";
 
   const formattedHours = String(hours).padStart(2, "0");
   const formattedMinutes = String(minutes).padStart(2, "0");
 
-  return `${period} ${formattedHours}:${formattedMinutes} ‧ ${year}年${month}月${day}日`;
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const monthName = monthNames[month];
+
+  return `${formattedHours}:${formattedMinutes} ${period} ‧ ${monthName} ${day}, ${year}`;
 };

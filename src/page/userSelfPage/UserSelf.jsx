@@ -5,7 +5,7 @@ import {
   getUserTweets,
 } from "../../api/tweets";
 import { useAuth } from "../../contexts/AuthContext";
-import { getPopularList } from "../../api/popularlist";
+import { getPopularList } from "../../api/popularList";
 import { getUserPageById } from "../../api/getUserPage";
 import { useNavigate } from "react-router-dom";
 import Header from "../../component/header/Header";
@@ -47,38 +47,20 @@ const UserSelf = () => {
     const fetchData = async () => {
       const id = currentMember?.id;
 
-      try {
-        const userTweets = await getUserTweets(id);
-        setTweets(userTweets);
-      } catch (error) {
-        console.error("獲取用户推文失敗：", error);
-      }
+      const userTweets = await getUserTweets(id);
+      setTweets(userTweets);
 
-      try {
-        const userReplies = await getUserRepliedTweets(id);
-        setReplies(userReplies);
-      } catch (error) {
-        console.error("獲取用戶資料失敗：", error);
-      }
+      const userReplies = await getUserRepliedTweets(id);
+      setReplies(userReplies);
 
-      try {
-        const userLikes = await getUserLikes(id);
-        setLikes(userLikes);
-      } catch (error) {
-        console.error("獲取用户喜歡的推文失敗：", error);
-      }
-      try {
-        const popularCards = await getPopularList();
-        setPopularCards(popularCards);
-      } catch (error) {
-        console.error("獲取熱門列表失敗：", error);
-      }
-      try {
-        const user = await getUserPageById(id);
-        setUserData(user);
-      } catch (error) {
-        console.error("獲取用户信息失敗：", error);
-      }
+      const userLikes = await getUserLikes(id);
+      setLikes(userLikes);
+
+      const popularCards = await getPopularList();
+      setPopularCards(popularCards);
+
+      const user = await getUserPageById(id);
+      setUserData(user);
     };
     fetchData();
   }, [currentMember]);

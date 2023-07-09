@@ -17,10 +17,9 @@ export const putUseSettingInfo = async (requestData) => {
       `${baseUrl}/users/setting`,
       requestData
     );
-    // console.log(res.data);
     Swal.fire({
       position: "top",
-      title: "更改成功!",
+      title: "Update successful!",
       timer: 1000,
       icon: "success",
       showConfirmButton: false,
@@ -29,11 +28,10 @@ export const putUseSettingInfo = async (requestData) => {
   } catch (error) {
     Swal.fire({
       position: "top",
-      title: "更改失敗!",
+      title: "Update failed!",
       text: `${error.response.data.error}`,
       icon: "error",
       showConfirmButton: true,
     });
-    // console.error("[Put UseSettingInfo failed]: ", error);
   }
 };

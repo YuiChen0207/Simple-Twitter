@@ -106,30 +106,30 @@ const EditPopupModal = ({
 
     try {
       const response = await updateUserProfile(userData.user.id, formData);
-      console.log("用户信息更新成功:", response);
+      console.log("Update successful:", response);
       onUserDataUpdate(updatedData);
       setUserData({ ...userData, user: updatedData });
       onClose();
     } catch (error) {
-      console.error("用户信息更新失败:", error);
+      console.error("Update failed:", error);
     }
   };
 
   const handleSave = () => {
     if (username.length > 50 && intro?.length > 160) {
-      setErrorMessageUsername("字數超出上限!");
-      setErrorMessageIntro("字數超出上限!");
+      setErrorMessageUsername("Exceeded character limit!");
+      setErrorMessageIntro("Exceeded character limit!");
       return;
     } else if (username.length > 50) {
-      setErrorMessageUsername("字數超出上限!");
+      setErrorMessageUsername("Exceeded character limit!");
       setErrorMessageIntro(null);
       return;
     } else if (intro?.length > 160) {
-      setErrorMessageIntro("字數超出上限!");
+      setErrorMessageIntro("Exceeded character limit!");
       setErrorMessageUsername(null);
       return;
     } else if (!username.length) {
-      setErrorMessageUsername("Name can not be empty!");
+      setErrorMessageUsername("Name cannot be empty!");
       return;
     }
 
@@ -176,7 +176,9 @@ const EditPopupModal = ({
       overlayStyle={overlayStyle}
     >
       <div className="editModal">
-        {isEditSuccess && <div className="successMessage">編輯成功!</div>}
+        {isEditSuccess && (
+          <div className="successMessage">Edit successful!</div>
+        )}
         <div className="modalHeader">
           <img
             src={CloseIcon}
@@ -184,9 +186,9 @@ const EditPopupModal = ({
             className="close"
             onClick={handlePopupClose}
           />
-          <h5 className="medium">編輯個人資料</h5>
+          <h5 className="medium">Edit profile</h5>
           <button type="submit" className="orangeButton" onClick={handleSave}>
-            儲存
+            Save
           </button>
         </div>
         <div className="modalBody">
@@ -260,7 +262,7 @@ const EditPopupModal = ({
             }`}
           >
             <label htmlFor="nameInput" className="inputLabel nameLabel">
-              名稱
+              Name
             </label>
             <input
               id="nameInput"
@@ -278,7 +280,7 @@ const EditPopupModal = ({
             }`}
           >
             <label htmlFor="introInput" className="inputLabel introLabel">
-              自我介紹
+              Bio
             </label>
             <textarea
               id="introInput"

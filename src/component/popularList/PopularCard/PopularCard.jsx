@@ -4,7 +4,7 @@ import "./PopularCard.scss";
 import { useNavigate } from "react-router-dom";
 import { getUserPageById } from "../../../api/getUserPage";
 import { useUserId } from "../../../contexts/UserIdContext";
-import { likePopularCard, unlikePopularCard } from "../../../api/popularlist";
+import { likePopularCard, unlikePopularCard } from "../../../api/popularList";
 
 const PopularCard = ({
   followerId,
@@ -15,7 +15,6 @@ const PopularCard = ({
   isFollowedFromUserPage,
   userData,
   setFollow,
-  //onFollowerIdChange,
 }) => {
   const [isFollow, setIsFollow] = useState(isFollowed);
   const navigate = useNavigate();
@@ -49,26 +48,6 @@ const PopularCard = ({
     setIsFollow(!isFollow);
   };
 
-  //  加入更新資料的邏輯
-  /*   const handleFollow = async () => {
-    if (isFollow === false) {
-      try {
-        await likePopularCard(followerId);
-      } catch (error) {
-        console.log(error);
-        console.log("likePopularCard failed");
-      }
-    } else {
-      try {
-        await unlikePopularCard(followerId);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    //onFollowerIdChange(followerId);
-    setIsFollow(!isFollow);
-  };
- */
   return (
     <div className="popularCard">
       <img
@@ -85,7 +64,7 @@ const PopularCard = ({
         className={`whiteButton  ${isFollow ? "isFollow" : ""}`}
         onClick={handleCardFollow}
       >
-        {isFollow ? "正在跟隨" : "跟隨"}
+        {isFollow ? "Following" : "Follow"}
       </button>
     </div>
   );

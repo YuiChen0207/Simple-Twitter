@@ -13,15 +13,16 @@ import {
   getPopularList,
   likePopularCard,
   unlikePopularCard,
-} from "../../api/popularlist.js";
+} from "../../api/popularList.js";
 import { getUserPageById } from "../../api/getUserPage";
 import { useUserId } from "../../contexts/UserIdContext";
 import UserTweetsList from "../../component/userTweetList/UserTweetList";
 import UserRepliesList from "../../component/userRepliesList/UserRepliesList";
 import UserLikesList from "../../component/userLikesList/UserLikesList";
-import "../MainPage/MainPage.scss";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import Skeleton from "react-loading-skeleton";
+import "../MainPage/MainPage.scss";
 
 const UserOther = () => {
   const { userId, setUserIdFromTweet } = useUserId();
@@ -55,54 +56,26 @@ const UserOther = () => {
     setIsFollow(!isFollow);
   };
 
-
-  /*   const handleFollowerIdChange = (followerId) => {
-    if (followerId === userData?.id) {
-      handleFollow();
-    }
-    console.log("Received followerId from child:", followerId);
-  }; */
-
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const userTweets = await getUserTweets(userId);
-        setTweets(userTweets);
-      } catch (error) {
-        console.error("获取用户推文失败：", error);
-      }
+      const userTweets = await getUserTweets(userId);
+      setTweets(userTweets);
 
-      try {
-        const userReplies = await getUserRepliedTweets(userId);
-        setReplies(userReplies);
-      } catch (error) {
-        console.error("獲取用戶資料失败：", error);
-      }
+      const userReplies = await getUserRepliedTweets(userId);
+      setReplies(userReplies);
 
-      try {
-        const userLikes = await getUserLikes(userId);
-        setLikes(userLikes);
-      } catch (error) {
-        console.error("获取用户喜欢的推文失败：", error);
-      }
+      const userLikes = await getUserLikes(userId);
+      setLikes(userLikes);
 
-      try {
-        const popularCards = await getPopularList();
-        setPopularCards(popularCards);
-      } catch (error) {
-        console.error("获取热门列表失败：", error);
-      }
+      const popularCards = await getPopularList();
+      setPopularCards(popularCards);
 
-      try {
-        const user = await getUserPageById(userId);
-        setUserData(user);
-      } catch (error) {
-        console.error("获取用户信息失败：", error);
-      }
+      const user = await getUserPageById(userId);
+      setUserData(user);
     };
     fetchData();
   }, [userId, follow]);
@@ -118,23 +91,30 @@ const UserOther = () => {
       <div className="mainContent">
         <Header username={userData?.name} tweetCount={userData?.TweetCount} />
         <div className="postSection">
-          <UserOtherItem
-            id={userData?.id}
-            avatar={userData?.avatar}
-            username={userData?.name}
-            accountName={userData?.account}
-            bio={userData?.introduction}
-            followingCount={userData?.followingCount}
-            followersCount={userData?.followerCount}
-            banner={userData?.banner}
-            isFollowed={userData?.isFollowing}
-            followerId={userData?.id}
-            setUserIdFromTweet={setUserIdFromTweet}
-            setPopularCards={setPopularCards}
-            handleFollow={handleFollow}
-            isFollow={isFollow}
-            setIsFollow={setIsFollow}
-          />
+          {userData ? (
+            <UserOtherItem
+              id={userData?.id}
+              avatar={userData?.avatar}
+              username={userData?.name}
+              accountName={userData?.account}
+              bio={userData?.introduction}
+              followingCount={userData?.followingCount}
+              followersCount={userData?.followerCount}
+              banner={userData?.banner}
+              isFollowed={userData?.isFollowing}
+              followerId={userData?.id}
+              setUserIdFromTweet={setUserIdFromTweet}
+              setPopularCards={setPopularCards}
+              handleFollow={handleFollow}
+              isFollow={isFollow}
+              setIsFollow={setIsFollow}
+            />
+          ) : (
+            <>
+              <Skeleton count={15} />
+              <p className="loading">Loading...</p>
+            </>
+          )}
         </div>
         <TabBar
           activePage="UserOther"

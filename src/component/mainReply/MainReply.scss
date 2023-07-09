@@ -70,7 +70,7 @@
 
     .replyCount {
       &::after {
-        content: "回覆";
+        content: "Reply";
         color: var(--Secondary);
         padding-left: 4px;
       }
@@ -78,7 +78,7 @@
 
     .likeCount {
       &::after {
-        content: "喜歡次數";
+        content: "Like";
         color: var(--Secondary);
         padding-left: 4px;
       }

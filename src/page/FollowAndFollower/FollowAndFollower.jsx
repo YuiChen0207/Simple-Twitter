@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import { getPopularList } from "../../api/popularlist";
-import { getFollowerList, getFollowingList } from "../../api/followship";
+import { getPopularList } from "../../api/popularList";
+import { getFollowerList, getFollowingList } from "../../api/followShip";
 import { useUserId } from "../../contexts/UserIdContext";
 import defaultLogo from "../../assets/logoGray.svg";
 import Header from "../../component/header/Header";
@@ -46,12 +46,8 @@ const FollowAndFollower = () => {
 
   useEffect(() => {
     const getPopularCardsAsync = async () => {
-      try {
-        const popularCards = await getPopularList();
-        setPopularCards(popularCards);
-      } catch (error) {
-        console.error(error);
-      }
+      const popularCards = await getPopularList();
+      setPopularCards(popularCards);
     };
     getPopularCardsAsync();
   }, []);
@@ -91,7 +87,6 @@ const FollowAndFollower = () => {
             return (
               <FollowAndFollowerTweet
                 key={list?.followerId}
-                index={i}
                 userName={list?.followerName}
                 intro={list?.followerIntroduction}
                 avatar={list.followerAvatar ?? defaultLogo}
@@ -106,7 +101,6 @@ const FollowAndFollower = () => {
             return (
               <FollowAndFollowerTweet
                 key={list?.followingId}
-                index={i}
                 userName={list?.followingName}
                 intro={list?.followingIntroduction}
                 avatar={list?.followingAvatar}

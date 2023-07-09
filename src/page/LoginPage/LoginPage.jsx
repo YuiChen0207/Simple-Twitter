@@ -16,18 +16,18 @@ const LoginPage = () => {
   const { login, isAuthenticated, currentMember } = useAuth();
 
   const handleClick = async () => {
-    if (!account.length || !account.length) {
-      setAccountError("請輸入帳號");
-      setPasswordError("請輸入密碼");
+    if (!account.length && !password.length) {
+      setAccountError("Please enter an account");
+      setPasswordError("Please enter a password");
       return;
     }
     if (!account.length) {
-      setAccountError("請輸入帳號");
+      setAccountError("Please enter an account");
       setPasswordError("");
       return;
     }
     if (!password.length) {
-      setPasswordError("請輸入密碼");
+      setPasswordError("Please enter a password");
       setAccountError("");
       return;
     }
@@ -41,14 +41,14 @@ const LoginPage = () => {
       if (success) {
         Swal.fire({
           position: "top",
-          title: "登入成功!",
+          title: "Login Successful!",
           timer: 1000,
           icon: "success",
           showConfirmButton: false,
         });
       } else {
-        setAccountError("帳號或密碼不存在");
-        setPasswordError("帳號或密碼不存在");
+        setAccountError("Account or password does not exist");
+        setPasswordError("Account or password does not exist");
       }
     } catch (error) {
       console.error("[Login Failed]:", error);
@@ -66,12 +66,12 @@ const LoginPage = () => {
       <div>
         <img className="logo" src={siteLogo} alt="logo" />
       </div>
-      <h1 className="title">登入AlphaTwitter</h1>
+      <h1 className="title">Login to AlphaTwitter</h1>
       <div className="inputContainer">
         <AuthInput
-          label="帳號"
+          label="Account"
           value={account}
-          placeholder={"請輸入帳號"}
+          placeholder={"Please enter an account"}
           accountError={accountError}
           onChange={(accountInputValue) => setAccount(accountInputValue)}
         />
@@ -79,24 +79,24 @@ const LoginPage = () => {
 
         <AuthInput
           type="password"
-          label="密碼"
+          label="Password"
           value={password}
-          placeholder={"請輸入密碼"}
+          placeholder={"Please enter a password"}
           passwordError={passwordError}
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
         {passwordError && <p className="error">{passwordError}</p>}
       </div>
       <button className="btn" onClick={handleClick}>
-        登入
+        Login
       </button>
       <div className="switchSec">
         <Link to="/signup">
-          <span className="signupSwitch">註冊</span>
+          <span className="signupSwitch">Sign Up</span>
         </Link>
         <span className="dot"></span>
         <Link to="/login_admin">
-          <span className="adminSwitch">後台登入</span>
+          <span className="adminSwitch">Admin Login</span>
         </Link>
       </div>
     </div>

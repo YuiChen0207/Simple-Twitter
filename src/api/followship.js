@@ -22,7 +22,6 @@ axiosInstance.interceptors.request.use(
 export const getFollowerList = async (id) => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/users/${id}/followers`);
-    console.log(res);
     return res.data;
   } catch (error) {
     console.error('[Get List failed]: ', error);
@@ -32,7 +31,6 @@ export const getFollowerList = async (id) => {
 export const getFollowingList = async (id) => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/users/${id}/followings`);
-    console.log(res);
     return res.data;
   } catch (error) {
     console.error('[Get List failed]: ', error);
@@ -42,17 +40,15 @@ export const getFollowingList = async (id) => {
 export const following = async ({ id }) => {
   try {
     const res = await axiosInstance.post(`${baseUrl}/followships`, { id });
-    console.log(res);
     return res;
   } catch (error) {
     console.error('[Do followship failed]: ', error);
   }
 };
 
-export const unfollowing = async (id) => {
+export const unFollowing = async (id) => {
   try {
     const res = await axiosInstance.delete(`${baseUrl}/followships/${id}`);
-    console.log(res);
     return res;
   } catch (error) {
     console.error('[Delete followship failed]: ', error);

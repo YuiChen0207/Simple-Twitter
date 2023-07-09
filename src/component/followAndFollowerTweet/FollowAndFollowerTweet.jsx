@@ -1,5 +1,5 @@
-import './FollowAndFollowerTweet.scss';
-import { following, unfollowing } from '../../api/followship';
+import "./FollowAndFollowerTweet.scss";
+import { following, unFollowing } from "../../api/followShip";
 
 const FollowAndFollowerTweet = ({
   index,
@@ -15,7 +15,7 @@ const FollowAndFollowerTweet = ({
   const handleFollow = async () => {
     if (isFollowShip) {
       try {
-        await unfollowing(String(followerId));
+        await unFollowing(String(followerId));
         const newList = allList.map((user, i) => {
           if (index === i) {
             return tabStatus === "followers"
@@ -58,7 +58,7 @@ const FollowAndFollowerTweet = ({
             className={`whiteButton  ${isFollowShip ? "isFollow" : ""}`}
             onClick={handleFollow}
           >
-            {isFollowShip ? "正在跟隨" : "跟隨"}
+            {isFollowShip ? "Following" : "Follow"}
           </button>
         </div>
         <h4 className="tweet">{intro}</h4>

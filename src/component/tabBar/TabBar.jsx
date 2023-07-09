@@ -1,14 +1,14 @@
 import "./TabBar.scss";
 
 const tabOptions = [
-  { id: "tweets", label: "推文" },
-  { id: "replies", label: "回覆" },
-  { id: "likes", label: "喜歡的內容" },
+  { id: "tweets", label: "Tweets" },
+  { id: "replies", label: "Replies" },
+  { id: "likes", label: "Likes" },
 ];
 
 const tabOptionsFollow = [
-  { id: "followers", label: "追隨者" },
-  { id: "following", label: "正在追隨" },
+  { id: "followers", label: "Follower" },
+  { id: "following", label: "Following" },
 ];
 
 const TabBar = ({ activePage, activeTab, onTabClick }) => {

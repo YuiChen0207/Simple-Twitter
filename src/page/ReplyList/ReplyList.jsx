@@ -7,15 +7,17 @@ import { useNavigate } from "react-router-dom";
 import { getSingleTweet, getTweetReplies } from "../../api/tweets";
 import { useEffect, useState } from "react";
 import { useId } from "../../contexts/IdContext";
-import { getPopularList } from "../../api/popularlist";
+import { getPopularList } from "../../api/popularList";
 import { useAuth } from "../../contexts/AuthContext";
 import MobileMenu from "../../component/mobileMode/mobileMenu/MobileMenu";
 import { getUserPageById } from "../../api/getUserPage";
 import { useUserId } from "../../contexts/UserIdContext";
+import Skeleton from "react-loading-skeleton";
 import "./ReplyList.scss";
 
+
 const ReplyList = () => {
-  const [singleTweet, setSingleTweet] = useState({});
+  const [singleTweet, setSingleTweet] = useState("");
   const [tweetReplies, setTweetReplies] = useState([]);
   const [popularCards, setPopularCards] = useState([]);
   const [userData, setUserData] = useState("");
@@ -75,15 +77,23 @@ const ReplyList = () => {
             alt="arrow"
             onClick={handlePrevPage}
           />
-          <h4 className="medium">推文</h4>
+          <h4 className="medium">Tweet</h4>
         </div>
-        <MainReply
-          tweet={{ ...singleTweet }}
-          tweetSet={setSingleTweet}
-          repliesSet={setTweetReplies}
-          setTweet={setSingleTweet}
-          onHandleUserPage={handleUserPage}
-        />
+        {singleTweet ? (
+          <MainReply
+            tweet={{ ...singleTweet }}
+            tweetSet={setSingleTweet}
+            repliesSet={setTweetReplies}
+            setTweet={setSingleTweet}
+            onHandleUserPage={handleUserPage}
+          />
+        ) : (
+          <>
+            <Skeleton count={15} />
+            <p className="loading">Loading...</p>
+          </>
+        )}
+
         <ReplyListBox
           userData={userData}
           replies={tweetReplies}

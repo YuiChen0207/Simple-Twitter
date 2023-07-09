@@ -71,7 +71,7 @@
         font-size: 14px;
         font-weight: 400;
         &::after {
-          content: "跟隨中";
+          content: "Following";
           color: var(--Secondary);
         }
       }
@@ -80,7 +80,7 @@
         font-size: 14px;
         font-weight: 400;
         &::after {
-          content: "跟隨者";
+          content: "Follower";
           color: var(--Secondary);
         }
       }

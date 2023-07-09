@@ -61,17 +61,16 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
 
   const handleTweet = async () => {
     if (tweetText.length > 140) {
-      setErrorMessage("字數不可超過140字");
+      setErrorMessage("Exceeded maximum character limit (140)");
       return;
     }
 
     if (tweetText.length === 0) {
-      setErrorMessage("內容不可空白");
+      setErrorMessage("Content cannot be blank");
       return;
     }
     try {
       const response = await postTweet({ tweetText });
-      console.log("推文已發布:", response);
 
       setList?.((prev) => {
         return [
@@ -110,7 +109,7 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
       setErrorMessage("");
       onClose();
     } catch (error) {
-      console.error("發佈推文失败:", error);
+      console.error("Failed to post tweet:", error);
     }
   };
 
@@ -160,7 +159,7 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
             value={tweetText}
             onChange={handleTweetTextChange}
             onKeyDown={handleKeyDown}
-            placeholder="有什麼新鮮事？"
+            placeholder="What is happening？!"
           />
         </div>
         <div className="modalFooter">
@@ -169,7 +168,7 @@ const PopupModal = ({ open, onClose, setList, setTweetsList }) => {
           </div>
           {errorMessage && <p className="characterLimit">{errorMessage}</p>}
           <button className="orangeButton" onClick={handleTweet}>
-            推文
+            Tweet
           </button>
         </div>
       </div>

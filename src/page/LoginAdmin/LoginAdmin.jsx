@@ -16,10 +16,19 @@ const LoginAdmin = () => {
   const { adminLogin, isAuthenticated, currentMember } = useAuth();
 
   const handleClick = async () => {
-    if (account.length === 0) {
+    if (!account.length && !password.length) {
+      setAccountError("Please enter an account");
+      setPasswordError("Please enter a password");
       return;
     }
-    if (password.length === 0) {
+    if (!account.length) {
+      setAccountError("Please enter an account");
+      setPasswordError("");
+      return;
+    }
+    if (!password.length) {
+      setPasswordError("Please enter a password");
+      setAccountError("");
       return;
     }
     const { success, error } = await adminLogin({
@@ -32,14 +41,14 @@ const LoginAdmin = () => {
     if (success) {
       Swal.fire({
         position: "top",
-        title: "登入成功!",
+        title: "Login successful!",
         timer: 1000,
         icon: "success",
         showConfirmButton: false,
       });
     } else {
-      setAccountError("帳號或密碼不存在");
-      setPasswordError("帳號或密碼不存在");
+      setAccountError("Account or password does not exist");
+      setPasswordError("Account or password does not exist");
     }
   };
 
@@ -54,11 +63,11 @@ const LoginAdmin = () => {
       <div>
         <img className="logo" src={siteLogo} alt="logo" />
       </div>
-      <h1 className="title">後台登入</h1>
+      <h1 className="title">Admin Login</h1>
       <div className="inputContainer">
         <AuthInput
-          label="帳號"
-          placeholder="請輸入帳號"
+          label="Account"
+          placeholder="Please enter your account"
           accountError={accountError}
           value={account}
           onChange={(nameInputValue) => setAccount(nameInputValue)}
@@ -67,8 +76,8 @@ const LoginAdmin = () => {
 
         <AuthInput
           type="password"
-          label="密碼"
-          placeholder="請輸入密碼"
+          label="Password"
+          placeholder="Please enter your password"
           passwordError={passwordError}
           value={password}
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
@@ -76,11 +85,11 @@ const LoginAdmin = () => {
         {passwordError && <p className="error">{passwordError}</p>}
       </div>
       <button className="btn" onClick={handleClick}>
-        登入
+        Login
       </button>
       <div className="switchSec">
         <Link to="/login">
-          <span className="adminSwitch">前台登入</span>
+          <span className="adminSwitch">User Login</span>
         </Link>
       </div>
     </div>

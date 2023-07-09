@@ -45,9 +45,7 @@ const Tweet = ({
 
   const handleLike = async () => {
     try {
-      // if (isLiked) {
-      //   return;
-      // }
+
       if (isLiked) {
         await unlikeTweet(String(tweetId));
         setList?.((prev) => {
@@ -78,7 +76,7 @@ const Tweet = ({
         });
       }
     } catch (error) {
-      console.error("喜歡推文失败:", error);
+      console.error("like tweet successful:", error);
     }
   };
 
@@ -112,7 +110,7 @@ const Tweet = ({
 
         {replyTo && (
           <div className="replyText">
-            回覆 <span>@{replyTo}</span>
+            Replying to <span>@{replyTo}</span>
           </div>
         )}
 

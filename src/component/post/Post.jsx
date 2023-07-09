@@ -12,12 +12,8 @@ const Post = ({ setList }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const logo = await getPostTweet();
-        setUserLogo(logo);
-      } catch (error) {
-        console.error("獲取用户Logo失敗:", error);
-      }
+      const logo = await getPostTweet();
+      setUserLogo(logo);
     };
 
     fetchData();
@@ -37,17 +33,16 @@ const Post = ({ setList }) => {
 
   const handleTweet = async () => {
     if (tweetText.length > 140) {
-      setErrorMessage("字數不可超過140字");
+      setErrorMessage("Exceeded maximum character limit (140)");
       return;
     }
 
     if (tweetText.length === 0) {
-      setErrorMessage("內容不可空白");
+      setErrorMessage("Content cannot be blank");
       return;
     }
     try {
       const response = await postTweet({ tweetText });
-      console.log("推文已發布:", response);
 
       setList?.((prev) => {
         return [
@@ -66,7 +61,7 @@ const Post = ({ setList }) => {
       setTweetText("");
       setErrorMessage("");
     } catch (error) {
-      console.error("發佈推文失败:", error);
+      console.error("Failed to post tweet:", error);
     }
   };
 
@@ -79,7 +74,7 @@ const Post = ({ setList }) => {
   return (
     <div className="postContainer">
       <div className="postHeader">
-        <h4 className="medium">首頁</h4>
+        <h4 className="medium">Home</h4>
       </div>
       <hr />
       <div className="postContent">
@@ -92,7 +87,7 @@ const Post = ({ setList }) => {
           <textarea
             className="postTextInput"
             value={tweetText}
-            placeholder="有什麼新鮮事？"
+            placeholder="What is happening?!"
             onChange={handleTweetTextChange}
             onKeyDown={handleKeyDown}
           />
@@ -105,7 +100,7 @@ const Post = ({ setList }) => {
         {errorMessage && <p className="characterLimit">{errorMessage}</p>}
 
         <button className="button orangeButton" onClick={handleTweet}>
-          推文
+          Tweet
         </button>
       </div>
 

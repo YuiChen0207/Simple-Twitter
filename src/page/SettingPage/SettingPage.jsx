@@ -18,20 +18,22 @@ const SettingPage = () => {
   const { isAuthenticated, logout } = useAuth();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const userChangeData = {
-      name: userName,
-      account: account,
-      email: email,
-      password: password,
-      checkPassword: checkPassword,
-    };
+    try {
+      e.preventDefault();
+      const userChangeData = {
+        name: userName,
+        account: account,
+        email: email,
+        password: password,
+        checkPassword: checkPassword,
+      };
 
-    const res = await putUseSettingInfo(userChangeData);
-    if (res.status === 200) {
-      console.log("success");
+      await putUseSettingInfo(userChangeData);
+    } catch (error) {
+      console.error(error);
     }
   };
+
 
   const handleClick = () => {
     logout();
@@ -56,49 +58,49 @@ const SettingPage = () => {
         <Navbar />
       </div>
       <div className="settingContainer">
-        <PageTag title="帳戶設定" />
+        <PageTag title="Settings" />
         <form className="inputContainer">
           <UserSettingInput
-            label="帳號"
-            placeholder="請輸入帳號"
+            label="account"
+            placeholder="Please enter an account"
             value={account}
             onChange={(accountInputValue) => setAccount(accountInputValue)}
           />
           <UserSettingInput
-            label="名稱"
-            placeholder="請輸入使用者名稱"
+            label="name"
+            placeholder="Please enter a username"
             value={userName}
             onChange={(userNameInputValue) => setUserName(userNameInputValue)}
           />
           <UserSettingInput
             label="Email"
-            placeholder="請輸入Email"
+            placeholder="Please enter an email"
             value={email}
             onChange={(emailInputValue) => setEmail(emailInputValue)}
           />
           <UserSettingInput
             type="password"
-            label="密碼"
-            placeholder="請設定密碼"
+            label="password"
+            placeholder="Please set a password"
             value={password}
             onChange={(passwordInputValue) => setPassword(passwordInputValue)}
           />
           <UserSettingInput
             type="password"
-            label="密碼確認"
-            placeholder="請再次輸入密碼"
+            label="Confirm Password"
+            placeholder="Please enter the password again"
             value={checkPassword}
             onChange={(checkPasswordInputValue) =>
               setCheckPassword(checkPasswordInputValue)
             }
           />
           <button className="btn" onClick={handleSubmit}>
-            儲存
+            Save
           </button>
         </form>
         <div className="logoutBtn">
           <span className="logout" onClick={handleClick}>
-            登出
+            Logout
           </span>
         </div>
       </div>

@@ -20,7 +20,7 @@ const navItems = [
       default: NavbarHomeIcon,
       active: NavbarHomeIconActive,
     },
-    text: "首頁",
+    text: "Home",
   },
   {
     path: "user/self",
@@ -28,7 +28,7 @@ const navItems = [
       default: NavbarUserIcon,
       active: NavbarUserIconActive,
     },
-    text: "個人資料",
+    text: "Profile",
   },
   {
     path: "settings",
@@ -36,7 +36,7 @@ const navItems = [
       default: NavbarSettingIcon,
       active: NavbarSettingIconActive,
     },
-    text: "設定",
+    text: "Settings",
   },
 ];
 
@@ -47,7 +47,7 @@ const adminNavItems = [
       default: NavbarHomeIcon,
       active: NavbarHomeIconActive,
     },
-    text: "推文清單",
+    text: "Tweet List",
   },
   {
     path: "admin_users",
@@ -55,7 +55,7 @@ const adminNavItems = [
       default: NavbarUserIcon,
       active: NavbarUserIconActive,
     },
-    text: "使用者列表",
+    text: "User List",
   },
 ];
 
@@ -104,7 +104,7 @@ const Navbar = ({ setList, setTweetsList }) => {
       </div>
       {activeItem.includes("admin") ? null : (
         <div className="navbarItem navbarButton" onClick={handleOpenModal}>
-          <button>推文</button>
+          <button>Tweet</button>
         </div>
       )}
       {showModal && (
@@ -118,7 +118,7 @@ const Navbar = ({ setList, setTweetsList }) => {
       <div className="logoutBtn">
         <img src={NavbarLogoutIcon} alt="logout icon" />
         <h5 className="medium" onClick={handleClick}>
-          登出
+          Logout
         </h5>
       </div>
     </div>

@@ -23,41 +23,42 @@ const RegistPage = () => {
     const newErrors = {};
 
     if (!account.length) {
-      newErrors.account = "請輸入帳號";
+      newErrors.account = "Please enter an account";
     } else if (account.length < 6) {
-      newErrors.account = "帳號長度需至少為6個字符";
+      newErrors.account = "Account length must be at least 6 characters";
     } else if (!/^[a-zA-Z0-9]+$/.test(account)) {
-      newErrors.account = "帳號只能包含字母和數字";
+      newErrors.account = "Account can only contain letters and numbers";
     }
 
     if (!name.length) {
-      newErrors.name = "請輸入名稱";
+      newErrors.name = "Please enter a name";
     } else if (name.length > 50) {
-      newErrors.name = "名字不可超過50個字";
+      newErrors.name = "Name cannot exceed 50 characters";
     } else if (!/^[a-zA-Z0-9\s]+$/.test(name)) {
-      newErrors.name = "名稱只能包含字母、數字和空格";
+      newErrors.name = "Name can only contain letters, numbers, and spaces";
     }
 
     if (!email.length) {
-      newErrors.email = "請輸入Email";
+      newErrors.email = "Please enter an email";
     } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
-      newErrors.email = "請輸入有效的Email地址";
+      newErrors.email = "Please enter a valid email address";
     }
 
     if (!password.length) {
-      newErrors.password = "請輸入密碼";
+      newErrors.password = "Please enter a password";
     } else if (password.length < 8) {
-      newErrors.password = "密碼長度需至少為8個字符";
+      newErrors.password = "Password length must be at least 8 characters";
     } else if (!/(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!]).*$/.test(password)) {
-      newErrors.password = "密碼需包含字母、數字和特殊字符";
+      newErrors.password =
+        "Password must contain letters, numbers, and special characters";
     }
 
     if (!checkPassword.length) {
-      newErrors.checkPassword = "請再次輸入密碼";
+      newErrors.checkPassword = "Please enter the password again";
     } else if (checkPassword !== password) {
-      newErrors.checkPassword = "密碼不一致";
+      newErrors.checkPassword = "Passwords do not match";
     }
-    
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -75,7 +76,7 @@ const RegistPage = () => {
       if (success) {
         Swal.fire({
           position: "top",
-          title: "註冊成功!",
+          title: "Registration Successful!",
           timer: 1000,
           icon: "success",
           showConfirmButton: false,
@@ -84,16 +85,16 @@ const RegistPage = () => {
     } catch (error) {
       console.error("[Registration]:", error);
       if (error === "Account already registered!") {
-        setErrors({ account: "此帳號已註冊" });
+        setErrors({ account: "This account is already registered" });
       }
       if (error === "Name too long") {
-        setErrors({ name: "名字不可超過50個字" });
+        setErrors({ name: "Name cannot exceed 50 characters" });
       }
       if (error === "Email already exists!") {
-        setErrors({ email: "此email已註冊" });
+        setErrors({ email: "This email is already registered" });
       }
       if (error === "Password do not match") {
-        setErrors({ checkPassword: "密碼不一致" });
+        setErrors({ checkPassword: "Passwords do not match" });
       }
     }
   };
@@ -109,11 +110,11 @@ const RegistPage = () => {
       <div>
         <img className="logo" src={siteLogo} alt="logo" />
       </div>
-      <h1 className="title">建立你的帳號</h1>
+      <h1 className="title">Create Your Account</h1>
       <div className="inputContainer">
         <AuthInput
-          label="帳號"
-          placeholder="請輸入帳號"
+          label="Account"
+          placeholder="Please enter an account"
           name="account"
           value={account}
           error={errors.account}
@@ -122,8 +123,8 @@ const RegistPage = () => {
         {errors.account && <p className="error">{errors.account}</p>}
 
         <AuthInput
-          label="名稱"
-          placeholder="請輸入使用者名稱"
+          label="Name"
+          placeholder="Please enter a username"
           name="name"
           value={name}
           error={errors.name}
@@ -133,7 +134,7 @@ const RegistPage = () => {
 
         <AuthInput
           label="Email"
-          placeholder="請輸入Email"
+          placeholder="Please enter an email"
           name="email"
           value={email}
           error={errors.email}
@@ -143,8 +144,8 @@ const RegistPage = () => {
 
         <AuthInput
           type="password"
-          label="密碼"
-          placeholder="請設定密碼"
+          label="Password"
+          placeholder="Please set a password"
           name="password"
           value={password}
           error={errors.password}
@@ -154,8 +155,8 @@ const RegistPage = () => {
 
         <AuthInput
           type="password"
-          label="密碼確認"
-          placeholder="請再次輸入密碼"
+          label="Confirm Password"
+          placeholder="Please enter the password again"
           name="checkPassword"
           value={checkPassword}
           error={errors.checkPassword}
@@ -168,11 +169,11 @@ const RegistPage = () => {
         )}
       </div>
       <button className="btn" onClick={handleClick}>
-        註冊
+        Register
       </button>
       <div className="switchSec">
         <Link to="/login">
-          <span className="cancelSwitch">取消</span>
+          <span className="cancelSwitch">Cancel</span>
         </Link>
       </div>
     </div>

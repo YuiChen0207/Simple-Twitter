@@ -10,11 +10,10 @@ const PopularList = ({
   handleCardFollow,
   userData,
   setFollow,
-  //onFollowerIdChange,
 }) => {
   return (
     <div className="popularList">
-      <h4 className="medium">推薦跟隨</h4>
+      <h4 className="medium">Who to follow</h4>
       <hr />
       <div className="popularCards">
         {popularCards.map((card) => (
@@ -29,7 +28,6 @@ const PopularList = ({
             isFollowedFromUserPage={isFollowedFromUserPage}
             userData={userData}
             setFollow={setFollow}
-            //onFollowerIdChange={onFollowerIdChange}
           />
         ))}
       </div>

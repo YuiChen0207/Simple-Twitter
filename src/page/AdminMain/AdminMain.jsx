@@ -1,11 +1,11 @@
-import Navbar from '../../component/navbar/Navbar';
-import PageTag from '../../component/pageTag/PageTag';
-import AdminTweetList from '../../component/adminTweetList/AdminTweetList';
-import './AdminMain.scss';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
-import { getTweetsByAdmin } from '../../api/admin';
+import Navbar from "../../component/navbar/Navbar";
+import PageTag from "../../component/pageTag/PageTag";
+import AdminTweetList from "../../component/adminTweetList/AdminTweetList";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import { getTweetsByAdmin } from "../../api/admin";
+import "./AdminMain.scss";
 
 const AdminMain = () => {
   const [allTweets, setAllTweets] = useState([]);
@@ -15,20 +15,15 @@ const AdminMain = () => {
 
   useEffect(() => {
     const getAllTweets = async () => {
-      try {
-        const list = await getTweetsByAdmin();
-        // console.log(list);
-        setAllTweets(list);
-      } catch (error) {
-        console.error(error);
-      }
+      const list = await getTweetsByAdmin();
+      setAllTweets(list);
     };
     getAllTweets();
   }, []);
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/login_admin');
+      navigate("/login_admin");
     }
   }, [navigate, isAuthenticated]);
 
@@ -38,7 +33,7 @@ const AdminMain = () => {
         <Navbar />
       </div>
       <div className="subContainer">
-        <PageTag title="推文清單" />
+        <PageTag title="Tweet list" />
         <div className="listContainer">
           <AdminTweetList tweets={allTweets} setList={setAllTweets} />
         </div>

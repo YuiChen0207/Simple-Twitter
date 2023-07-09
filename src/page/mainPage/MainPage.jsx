@@ -3,7 +3,7 @@ import PopularList from "../../component/popularList/PopularList.jsx";
 import Post from "../../component/post/Post";
 import TweetsList from "../../component/tweets/TweetList";
 import { getTweets } from "../../api/tweets";
-import { getPopularList } from "../../api/popularlist.js";
+import { getPopularList } from "../../api/popularList.js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";

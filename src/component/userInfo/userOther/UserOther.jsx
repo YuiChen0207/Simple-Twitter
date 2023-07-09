@@ -48,11 +48,7 @@ const UserOtherItem = ({
   };
   return (
     <div className="userInfoContainer">
-      <img
-        src={defaultBanner}
-        alt="banner"
-        className="background"
-      />
+      <img src={defaultBanner} alt="banner" className="background" />
       <div className="userContext">
         <div className="upSection">
           <img
@@ -72,7 +68,7 @@ const UserOtherItem = ({
               className={`whiteButton  ${isFollow ? "isFollow" : ""}`}
               onClick={handleFollow}
             >
-              {isFollow ? "正在跟隨" : "跟隨"}
+              {isFollow ? "Following" : "Follow"}
             </button>
           </div>
         </div>
@@ -85,13 +81,13 @@ const UserOtherItem = ({
               className="count followingCount"
               onClick={handleFollowingClick}
             >
-              {followersCount}位<span>跟隨中</span>
+              {followersCount} <span>Following</span>
             </div>
             <div
               className="count followersCount"
               onClick={handleFollowersClick}
             >
-              {followingCount}位<span>跟隨者</span>
+              {followingCount} <span>Followers</span>
             </div>
           </div>
         </div>

@@ -21,18 +21,11 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
 
   useEffect(() => {
     const getTweet = async () => {
-      try {
-        const tweet = await getSingleTweet(currentId);
-        setSingleTweet(tweet);
-      } catch (error) {
-        console.error(error);
-      }
-      try {
-        const avatar = await getPostTweet();
-        setAvatar(avatar);
-      } catch (error) {
-        console.error(error);
-      }
+      const tweet = await getSingleTweet(currentId);
+      setSingleTweet(tweet);
+
+      const avatar = await getPostTweet();
+      setAvatar(avatar);
     };
     getTweet();
   }, []);
@@ -56,12 +49,11 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
 
   const handleTweet = async () => {
     if (replyMsg.length === 0) {
-      setErrorMessage("內容不可空白");
+      setErrorMessage("Content cannot be blank");
       return;
     }
     try {
       const response = await postReply({ id: currentId, comment: replyMsg });
-      console.log("推文已發布:", response);
 
       setReplyMsg("");
       setErrorMessage("");
@@ -95,7 +87,7 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
         return { ...prev, tweetReplyCount: prev.tweetReplyCount + 1 };
       });
     } catch (error) {
-      console.error("發佈推文失败:", error);
+      console.error("Failed to post tweet:", error);
     }
   };
 
@@ -164,14 +156,14 @@ const PopupReply = ({ open, onClose, repliesSet, tweetSet, setList }) => {
             value={replyMsg}
             onChange={handleTweetTextChange}
             onKeyDown={handleKeyDown}
-            placeholder="推你的回覆"
+            placeholder="Tweet your reply!"
           />
         </div>
         <div className="modalFooter">
           <div>
             {errorMessage && <p className="characterLimit">{errorMessage}</p>}
             <button className="btn" onClick={handleTweet}>
-              回覆
+              Reply
             </button>
           </div>
         </div>

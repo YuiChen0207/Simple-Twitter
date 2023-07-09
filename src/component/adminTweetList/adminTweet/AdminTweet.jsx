@@ -16,8 +16,8 @@ const AdminTweet = ({
   const handleDelete = async () => {
     try {
       await Swal.fire({
-        title: "確認刪除該則推文?",
-        text: "此動作無法還原！！！",
+        title: "Confirm Delete Tweet?",
+        text: "This action cannot be undone！！！",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -25,7 +25,7 @@ const AdminTweet = ({
         confirmButtonText: "Yes, delete it!",
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire("已刪除！", "推文已刪除", "success");
+          Swal.fire("Deleted", "The tweet has been deleted.", "success");
           DeleteTweetByAdmin(tweetId);
           setList((prev) => {
             return prev.filter((tweet) => {

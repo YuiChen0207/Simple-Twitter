@@ -72,12 +72,11 @@ const MainReply = ({
 
   const handleTweet = async () => {
     if (replyMsg.length === 0) {
-      setErrorMessage("內容不可空白");
+      setErrorMessage("Content cannot be blank");
       return;
     }
     try {
       const response = await postReply({ id: tweet.id, comment: replyMsg });
-      console.log("推文已發布:", response);
 
       setReplyMsg("");
       setErrorMessage("");
@@ -109,7 +108,7 @@ const MainReply = ({
         return { ...prev, tweetReplyCount: prev.tweetReplyCount + 1 };
       });
     } catch (error) {
-      console.error("發佈推文失败:", error);
+      console.error("Failed to post tweet:", error);
     }
   };
 
@@ -154,12 +153,12 @@ const MainReply = ({
           value={replyMsg}
           onChange={handleTweetTextChange}
           onKeyDown={handleKeyDown}
-          placeholder="推你的回覆"
+          placeholder="Tweet your reply!"
         />
 
         {errorMessage && <p className="characterLimit">{errorMessage}</p>}
         <button className="orangeButton" onClick={handleTweet}>
-          回覆
+          Reply
         </button>
       </div>
 

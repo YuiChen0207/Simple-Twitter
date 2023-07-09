@@ -25,13 +25,9 @@ const UserInfo = ({
   const id = currentMember?.id;
 
   const handleEditProfileClick = async () => {
-    try {
-      const userData = await getUserEdit(id);
-      setUserData(userData);
-      setShowModal(true);
-    } catch (error) {
-      console.error("獲取用户編輯數據失敗:", error);
-    }
+    const userData = await getUserEdit(id);
+    setUserData(userData);
+    setShowModal(true);
   };
 
   const handleClosePopup = () => {
@@ -64,7 +60,7 @@ const UserInfo = ({
             className="userAvatar"
           />
           <button className="whiteButton" onClick={handleEditProfileClick}>
-            編輯個人資料
+            Edit Profile
           </button>
         </div>
         <div className="lowerSection">
@@ -76,13 +72,13 @@ const UserInfo = ({
               className="count followingCount"
               onClick={handleFollowingClick}
             >
-              {followersCount}位<span>跟隨中</span>
+              {followersCount} <span>Following</span>
             </div>
             <div
               className="count followersCount"
               onClick={handleFollowersClick}
             >
-              {followingCount}位<span>跟隨者</span>
+              {followingCount} <span>Followers</span>
             </div>
           </div>
         </div>
