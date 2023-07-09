@@ -34,8 +34,8 @@ const UserCard = ({
         </div>
 
         <div className="subscription">
-          <p className="follow">{followingNum}</p>
-          <p className="follower">{followerNum}</p>
+          <p className="follow">{followingNum} </p>
+          <p className="follower">{followerNum} </p>
         </div>
       </div>
     </li>

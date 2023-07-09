@@ -38,7 +38,7 @@ const UsersDashboard = () => {
         <Navbar />
       </div>
       <div className="cardsContainer">
-        <PageTag title="使用者列表" />
+        <PageTag title="User List" />
         <ul className="cardList">
           {allUsersData.map((user) => {
             return (
