@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const baseUrl = "https://infinite-dawn-77240.herokuapp.com/api";
+export const baseUrl = "https://infinite-dawn-77240-7e9569f3eb3f.herokuapp.com/api";
 
 const axiosInstance = axios.create({
   baseURL: baseUrl,

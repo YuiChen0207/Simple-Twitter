@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const authURL = "https://infinite-dawn-77240.herokuapp.com/api";
+const authURL = "https://infinite-dawn-77240-7e9569f3eb3f.herokuapp.com/api";
 
 export const login = async ({ account, password }) => {
   try {
